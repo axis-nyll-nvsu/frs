@@ -1,2 +1,2 @@
-# frs
-FNVTTC Financial Reporting System
+# FNVTTC Financial Reporting System
+This is a capstone project.
