@@ -14,6 +14,7 @@ class FareController extends Connection {
     $user = $_SESSION['user_id'];
     $date = date('Y-m-d',strtotime($_POST['date']));
     $driver = $_POST['driver_id'];
+    $terminal = $_POST['terminal_id'];
     $amount = $_POST['amount'];
 
     $sql = "SELECT * FROM `frs_fares` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1'";
@@ -25,9 +26,9 @@ class FareController extends Connection {
       echo "<script>window.location.href='../admin/fares.php';</script>";
     }
     else {
-      $sqlinsert = "INSERT INTO `frs_fares`(`date`, `driver_id`, `amount`, `created_by`) VALUES (?,?,?,?)";
+      $sqlinsert = "INSERT INTO `frs_fares`(`date`, `driver_id`, `terminal_id`, `amount`, `created_by`) VALUES (?,?,?,?,?)";
       $statementinsert = $this->conn()->prepare($sqlinsert);
-      $statementinsert->execute([$date, $driver, $amount, $user]);
+      $statementinsert->execute([$date, $driver, $terminal, $amount, $user]);
 
       $description = "Added a new fare collection.";
       $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
@@ -43,7 +44,6 @@ class FareController extends Connection {
     $user = $_SESSION['user_id'];
     $fare = $_POST['fare_id'];
     $date = date('Y-m-d',strtotime($_POST['date']));
-    $driver = $_POST['driver_id'];
     $amount = $_POST['amount'];
 
     $sql = "SELECT * FROM `frs_fares` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1' AND `id` != ?";
@@ -55,9 +55,9 @@ class FareController extends Connection {
       echo "<script>window.location.href='../admin/fares.php';</script>";
     }
     else {
-      $sqlupdate = "UPDATE `frs_fares` SET `date` = ?, `driver_id` = ?, `amount` = ?, `updated_by` = ? WHERE `id` = ?";
+      $sqlupdate = "UPDATE `frs_fares` SET `date` = ?, `amount` = ?, `updated_by` = ? WHERE `id` = ?";
       $statementupdate = $this->conn()->prepare($sqlupdate);
-      $statementupdate->execute([$date, $driver, $amount, $user, $fare]);
+      $statementupdate->execute([$date, $amount, $user, $fare]);
 
       $description = "Updated fare collection.";
       $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
