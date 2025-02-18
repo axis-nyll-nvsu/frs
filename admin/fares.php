@@ -14,10 +14,12 @@
   include '../config/config.php';
   class Fare extends Connection{ 
     public function getData(){ 
-      $fare_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, a.`date`, a.`amount`, a.`driver_id` " . 
+      $fare_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, c.`name` AS `terminal_name` , a.`date`, a.`amount`, a.`driver_id`, a.`terminal_id` " . 
                     "FROM `frs_fares` AS a " .
                     "INNER JOIN `frs_drivers` AS b " .
                     "ON a.`driver_id` = b.`id` " .
+                    "INNER JOIN `frs_terminals` AS c " .
+                    "ON a.`terminal_id` = c.`id` " .
                     "WHERE a.`deleted` != b'1' " .
                     "ORDER BY a.`date` DESC";
       $fare_stmt = $this->conn()->query($fare_sql);
@@ -38,7 +40,7 @@
     <div class="content-wrapper">
       <!-- Content Header -->
       <section class="content-header">
-        <h1>Fare Collections</h1>
+        <h1>Fare Collections &mdash; Booking Fees</h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active">Fare Collections</li>
@@ -58,7 +60,8 @@
                   <thead>
                     <th style="width: 12px; max-width: 12px !important;">#</th>
                     <th>Date</th>
-                    <th>Name</th>
+                    <th>Driver</th>
+                    <th>Terminal</th>
                     <th>Amount</th>
                     <th style="width: 78px; min-width: 78px !important;">Action</th>
                   </thead>
@@ -77,6 +80,7 @@
                           echo $name;
                         ?>
                       </td>
+                      <td><?php echo $row['terminal_name']; ?></td>
                       <td style="text-align: right;">Php <?php echo number_format($row['amount'], 2); ?></td>
                       <td>
                         <button class='btn btn-success btn-sm edit btn-flat' 
@@ -84,6 +88,8 @@
                         data-edit_date='<?php echo (new DateTime($row['date']))->format('m/d/Y'); ?>'
                         data-edit_driver_id='<?php echo $row['driver_id']; ?>'
                         data-edit_driver_name='<?php echo $name; ?>'
+                        data-edit_terminal_id='<?php echo $row['terminal_id']; ?>'
+                        data-edit_terminal_name='<?php echo $row['terminal_name']; ?>'
                         data-edit_amount='<?php echo $row['amount']; ?>'> Edit</button>
                         <button class='btn btn-danger btn-sm delete btn-flat' 
                         data-delete_fare_id='<?php echo $row['id']; ?>'> Delete</button>
@@ -110,6 +116,7 @@
       $("#date").datepicker();
       $("#edit_date").datepicker();
       $("#driver_id").select2();
+      $("#terminal_id").select2();
     });
 
     $(document).on('click', '.edit', function(e){
@@ -119,11 +126,15 @@
       var edit_date = $(this).data('edit_date');
       var edit_driver_id = $(this).data('edit_driver_id');
       var edit_driver_name = $(this).data('edit_driver_name');
+      var edit_terminal_id = $(this).data('edit_terminal_id');
+      var edit_terminal_name = $(this).data('edit_terminal_name');
       var edit_amount = $(this).data('edit_amount');
       $('#edit_fare_id').val(edit_fare_id)
       $('#edit_date').datepicker('setDate', new Date(edit_date));
       $('#edit_driver_id').val(edit_driver_id)
       $('#edit_driver_name').val(edit_driver_name)
+      $('#edit_terminal_id').val(edit_terminal_id)
+      $('#edit_terminal_name').val(edit_terminal_name)
       $('#edit_amount').val(edit_amount)
     });
 

@@ -47,6 +47,25 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="terminal_id" class="col-sm-3 control-label">Terminal</label>
+            <div class="col-sm-8">
+              <select id="terminal_id" name="terminal_id" style="width: 100%;" required>
+                <option value="0">Select Terminal</option>
+                <?php
+                $sql = "SELECT * FROM `frs_terminals` WHERE `deleted` != b'1'";
+                $stmt = $this->conn()->query($sql);
+                while ($row = $stmt->fetch()) {
+                ?>
+                <option value="<?php echo $row['id'] ?>">
+                  <?php
+                    echo $row['name'];
+                  ?>
+                </option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="amount" class="col-sm-3 control-label">Amount</label>
             <div class="col-sm-8">
               <input class="form-control" id="amount" name="amount" required>
@@ -85,6 +104,13 @@
             <div class="col-sm-8">
               <input class="form-control" id="edit_driver_name" name="driver_name" readonly>
               <input type="hidden" id="edit_driver_id" name="driver_id">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="terminal_name" class="col-sm-3 control-label">Terminal</label>
+            <div class="col-sm-8">
+              <input class="form-control" id="edit_terminal_name" name="terminal_name" readonly>
+              <input type="hidden" id="edit_terminal_id" name="terminal_id">
             </div>
           </div>
           <div class="form-group">
