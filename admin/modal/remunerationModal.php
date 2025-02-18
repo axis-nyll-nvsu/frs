@@ -27,8 +27,13 @@
                 $givenDate = date('Y-m-d');
                 $date = new DateTime($givenDate);
                 $dayOfWeek = $date->format('w');
-                $daysFromSaturday = ((6 - $dayOfWeek) % 7) - 13;
-                $date->modify("{$daysFromSaturday} days");
+                if ($dayOfWeek == 6) {
+                  $date->modify("-6 days");
+                }
+                else {
+                  $daysFromSaturday = ((6 - $dayOfWeek) % 7) - 13;
+                  $date->modify("{$daysFromSaturday} days");
+                }
                 $nearestSaturday = $date->format('Y-m-d');
 
                 $count = 1;
