@@ -28,6 +28,7 @@
         <ul class="treeview-menu">
           <li><a href="income_statement.php"><i class="fa fa-angle-right"></i> Income Statement</a></li>
           <li><a href="cashflow_statement.php"><i class="fa fa-angle-right"></i> Statement of Cash Flows</a></li>
+          <li><a href="profits.php"><i class="fa fa-angle-right"></i> Daily Profits</a></li>
         </ul>
       </li>
       <li><a href="accounts.php"><i class="fa fa-users"></i> <span> Accounts</span></a></li>
@@ -46,6 +47,7 @@
         <ul class="treeview-menu">
           <li><a href="income_statement.php"><i class="fa fa-angle-right"></i> Income Statement</a></li>
           <li><a href="cashflow_statement.php"><i class="fa fa-angle-right"></i> Statement of Cash Flows</a></li>
+          <li><a href="profits.php"><i class="fa fa-angle-right"></i> Daily Profits</a></li>
         </ul>
       </li>
 <?php endif; ?>
