@@ -16,10 +16,17 @@
     public function getData(){ 
       $today = date('Y-m-d');
       
+      /* Revenue from Collections */
       $sql = "SELECT SUM(`amount`) AS `daily_revenue` FROM `frs_collections` WHERE date(`date`) = '" . $today . "' AND `deleted` != b'1'";
       $stmt = $this->conn()->query($sql);
       $row = $stmt->fetch();
       $revenue = $row['daily_revenue'];
+      
+      /* Revenue from Fares */
+      $sql = "SELECT SUM(`amount`) AS `daily_revenue` FROM `frs_fares` WHERE date(`date`) = '" . $today . "' AND `deleted` != b'1'";
+      $stmt = $this->conn()->query($sql);
+      $row = $stmt->fetch();
+      $revenue += $row['daily_revenue'];
       
       $sql = "SELECT SUM(`amount`) AS `daily_expenses` FROM `frs_expenses` WHERE date(`date`) = '" . $today . "' AND `deleted` != b'1'";
       $stmt = $this->conn()->query($sql);
