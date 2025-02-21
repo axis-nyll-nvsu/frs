@@ -105,6 +105,82 @@
         $monthlyProfits[] = $profit;     
       }
 
+      //para naman sa revenue vs expenses
+      $current_month = date('Y-m');
+
+      /* Revenue from Collections */
+      $sql = "SELECT SUM(`amount`) AS `monthly_revenue` FROM `frs_collections` WHERE DATE_FORMAT(`date`, '%Y-%m') = '" . $current_month . "' AND `deleted` != b'1'";
+      $stmt = $this->conn()->query($sql);
+      $row = $stmt->fetch();
+      $monthly_revenue = $row['monthly_revenue'];
+  
+      /* Revenue from Fares */
+      $sql = "SELECT SUM(`amount`) AS `monthly_revenue` FROM `frs_fares` WHERE DATE_FORMAT(`date`, '%Y-%m') = '" . $current_month . "' AND `deleted` != b'1'";
+      $stmt = $this->conn()->query($sql);
+      $row = $stmt->fetch();
+      $monthly_revenue += $row['monthly_revenue'];
+  
+      /* Monthly Expenses */
+      $sql = "SELECT SUM(`amount`) AS `monthly_expenses` FROM `frs_expenses` WHERE DATE_FORMAT(`date`, '%Y-%m') = '" . $current_month . "' AND `deleted` != b'1'";
+      $stmt = $this->conn()->query($sql);
+      $row = $stmt->fetch();
+      $monthly_expenses = $row['monthly_expenses'];
+  
+      /* Compute the percentages */
+      $total = $monthly_revenue + $monthly_expenses;
+      $revenue_percentage = ($total > 0) ? ($monthly_revenue / $total) * 100 : 0;
+      $expenses_percentage = ($total > 0) ? ($monthly_expenses / $total) * 100 : 0;
+
+      //Computation ng profit increase
+      $current_month = date('Y-m');
+$previous_month = date('Y-m', strtotime('-1 month'));
+
+/* Get Current Month Revenue */
+$sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_collections WHERE DATE_FORMAT(date, '%Y-%m') = '$current_month' AND deleted != b'1'";
+$stmt = $this->conn()->query($sql);
+$row = $stmt->fetch();
+$current_revenue = $row['monthly_revenue'];
+
+$sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_fares WHERE DATE_FORMAT(date, '%Y-%m') = '$current_month' AND deleted != b'1'";
+$stmt = $this->conn()->query($sql);
+$row = $stmt->fetch();
+$current_revenue += $row['monthly_revenue'];
+
+/* Get Current Month Expenses */
+$sql = "SELECT SUM(amount) AS monthly_expenses FROM frs_expenses WHERE DATE_FORMAT(date, '%Y-%m') = '$current_month' AND deleted != b'1'";
+$stmt = $this->conn()->query($sql);
+$row = $stmt->fetch();
+$current_expenses = $row['monthly_expenses'];
+
+/* Get Previous Month Revenue */
+$sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_collections WHERE DATE_FORMAT(date, '%Y-%m') = '$previous_month' AND deleted != b'1'";
+$stmt = $this->conn()->query($sql);
+$row = $stmt->fetch();
+$previous_revenue = $row['monthly_revenue'];
+
+$sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_fares WHERE DATE_FORMAT(date, '%Y-%m') = '$previous_month' AND deleted != b'1'";
+$stmt = $this->conn()->query($sql);
+$row = $stmt->fetch();
+$previous_revenue += $row['monthly_revenue'];
+
+/* Get Previous Month Expenses */
+$sql = "SELECT SUM(amount) AS monthly_expenses FROM frs_expenses WHERE DATE_FORMAT(date, '%Y-%m') = '$previous_month' AND deleted != b'1'";
+$stmt = $this->conn()->query($sql);
+$row = $stmt->fetch();
+$previous_expenses = $row['monthly_expenses'];
+
+/* Calculate Profit */
+$current_profit = $current_revenue - $current_expenses;
+$previous_profit = $previous_revenue - $previous_expenses;
+
+/* Compute Profit Increase Percentage */
+if ($previous_profit != 0) {
+    $profit_increase = (($current_profit - $previous_profit) / abs($previous_profit)) * 100;
+} else {
+    $profit_increase = ($current_profit > 0) ? 100 : 0; // If previous profit is 0, assume full increase
+}
+
+
 
 ?>
 
@@ -113,15 +189,15 @@
 <head>
 <style>
     #revenueVSexpenses {
-        width: 250px !important; 
-        height: 250px !important;
+      width: 300px !important; 
+      height: 300px !important;
         
     }
     .chart-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: -10px;
+      
         
     }
 </style>
@@ -184,13 +260,15 @@
 
     <table border="1">
     <tr style = "text-align: center;">
-        <td rowspan="2" style ="width: 600px; height: 380px;">Profit Trends
+        <td rowspan="2" style ="width: 600px; height: 380px;">
+            <h3 style = "font-weight:bold; color: #00693e;"> Profit Trend</h3>
             <div class="line-chart">
             <canvas id="profitTrend" width="400" height="300"></canvas>
             </div>
 
         </td>
-        <td style="width: 400px; height: 150px; align-items: center;">Revenue vs. Expenses
+        <td style="width: 400px; height: 150px; align-items: center;">
+            <h3> Revenue vs. Expenses: <?php echo date("F"); ?> </h3>
             <div class="chart-container">
             <canvas id="revenueVSexpenses"></canvas>
             </div>
@@ -198,8 +276,8 @@
        
     </tr>
     <tr tr style = "text-align: center; height: 80px;">
-        <td>Salary Increase from the previous month:
-            <h3 style = "font-weight:bold; color: #00693e;"> 10.00% - 10.3%</h3>
+        <td>Profit Increase from the previous month:
+            <h3 style = "font-weight:bold; color: #00693e;"> <?php echo number_format($profit_increase, 2) . "%"; ?></h3>
         </td>
      
     </tr>
@@ -220,9 +298,11 @@
         var myPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Revenue', 'Expenses'],
+                labels: [ "<?php echo number_format($revenue_percentage, 2); ?>% Revenue", 
+    "<?php echo number_format($expenses_percentage, 2); ?>% Expenses"
+],
                 datasets: [{
-                    data: [80, 20,],
+                    data:[<?php echo number_format($revenue_percentage, 2); ?>, <?php echo number_format($expenses_percentage, 2); ?>],
                     backgroundColor: ['#00693e', '#eeff36']
                 }]
             },
@@ -230,8 +310,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: true,
-                        position: 'right' 
+                        display: true 
                     }
                 }
             }
