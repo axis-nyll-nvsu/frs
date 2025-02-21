@@ -33,7 +33,79 @@
       $row = $stmt->fetch();
       $expenses = $row['daily_expenses'];
 
-      $profit = $revenue - $expenses;
+      $dailyprofit = $revenue - $expenses;
+
+      //data para sa profitTrend 
+      $monthly_sql = "
+      SELECT 
+        DATE_FORMAT(date, '%Y-%m') AS month, 
+        SUM(amount) AS total_amount
+      FROM frs_fares 
+      WHERE deleted != b'1' 
+      GROUP BY month";
+      
+      $collection_sql = "
+      SELECT 
+        DATE_FORMAT(date, '%Y-%m') AS month, 
+        SUM(amount) AS total_collection
+      FROM frs_collections 
+      WHERE deleted != b'1' 
+      GROUP BY month";
+
+      $expenses_sql = "
+      SELECT 
+        DATE_FORMAT(date, '%Y-%m') AS month, 
+        SUM(amount) AS total_expenses
+      FROM frs_expenses 
+      WHERE deleted != b'1' 
+      GROUP BY month";
+
+      $fares_stmt = $this->conn()->query($monthly_sql);
+      $collection_stmt = $this->conn()->query($collection_sql);
+      $expenses_stmt = $this->conn()->query($expenses_sql);
+
+      // Collect all unique months and amounts
+      $monthly_data = [];
+      while ($fares_row = $fares_stmt->fetch()) {
+        $month = $fares_row['month'];
+        if (!isset($monthly_data[$month])) {
+          $monthly_data[$month] = ['total_amount' => 0, 'total_collection' => 0, 'total_expenses' => 0];
+        }
+        $monthly_data[$month]['total_amount'] += $fares_row['total_amount'];
+      }
+
+      while ($collection_row = $collection_stmt->fetch()) {
+        $month = $collection_row['month'];
+        if (!isset($monthly_data[$month])) {
+          $monthly_data[$month] = ['total_amount' => 0, 'total_collection' => 0, 'total_expenses' => 0];
+        }
+        $monthly_data[$month]['total_collection'] += $collection_row['total_collection'];
+      }
+
+      while ($expenses_row = $expenses_stmt->fetch()) {
+        $month = $expenses_row['month'];
+        if (!isset($monthly_data[$month])) {
+          $monthly_data[$month] = ['total_amount' => 0, 'total_collection' => 0, 'total_expenses' => 0];
+        }
+        $monthly_data[$month]['total_expenses'] += $expenses_row['total_expenses'];
+      }
+
+      // Calculate the total amount by adding fares and collections
+      foreach ($monthly_data as $month => $amounts) {
+        $monthly_data[$month]['total_amount'] += $amounts['total_collection'];
+      }
+      ksort($monthly_data);
+
+      $months = [];
+      $monthlyProfits = [];
+      
+      foreach ($monthly_data as $month => $amounts) {
+        $profit = $amounts['total_amount'] - $amounts['total_expenses'];
+        $months[] = $month;
+        $monthlyProfits[] = $profit;     
+      }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +173,7 @@
       <div class="col-lg-4 col-12">
       <div class="small-box" style="color:#00693e;border-top: 3px solid rgba(0, 0, 0, 0.1);">
         <div class="inner">
-        <h3><?php echo ($profit < 0) ? "-" : "+"; ?> ₱<?php echo number_format($profit, 2); ?></h3>
+        <h3><?php echo ($profit < 0) ? "-" : "+"; ?> ₱<?php echo number_format($dailyprofit, 2); ?></h3>
         <p>Daily Profit</p>
         </div>
         <div class="icon"><i class="fa fa-money-check" style="color: #00693e;"></i></div>
@@ -171,10 +243,10 @@
     var myLineChart = new Chart(ctx, {
         type: 'line',  // Chart type
         data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],  // X-axis labels
+            labels: <?php echo json_encode($months); ?>,  // X-axis labels
             datasets: [{
                 label: 'Profit Over Time',
-                data: [10, 25, 40, 30, 50, 65],  // Y-axis values
+                data: <?php echo json_encode($monthlyProfits); ?>,  // Y-axis values
                 borderColor: 'green',  // Line color
                 backgroundColor: 'rgba(10, 136, 59, 0.2)', // Fill under the line
                 borderWidth: 2,  // Line thickness
