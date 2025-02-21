@@ -15,12 +15,41 @@
   class Report extends Connection{ 
     public function getData(){
       $period = date('Y');
-      if(isset($_GET['period'])) {
-        $period = $_GET['period'];
-      }
+        if (isset($_GET['period'])) {
+            $period = $_GET['period'];
+        }
 
-      $income_sql = "SELECT * FROM `frs_collections` WHERE `deleted` != b'1'  ORDER BY `date` DESC";
-      $income_stmt = $this->conn()->query($income_sql);
+        $previous_year = $period - 1; // Get the previous year
+
+        // Fetch total revenue from frs_collections for the previous year
+        $collectionLastYear_sql = "SELECT COALESCE(SUM(amount), 0) AS total_collections 
+                                   FROM frs_collections 
+                                   WHERE YEAR(date) = ? AND deleted != b'1'";
+        $collectionLastYear_stmt = $this->conn()->prepare($collectionLastYear_sql);
+        $collectionLastYear_stmt->execute([$previous_year]);
+        $collectionLastYear = $collectionLastYear_stmt->fetch(PDO::FETCH_ASSOC)['total_collections'];
+
+        // Fetch total revenue from frs_fares for the previous year
+        $fares_sql = "SELECT COALESCE(SUM(amount), 0) AS total_fares 
+                      FROM frs_fares 
+                      WHERE YEAR(date) = ? AND deleted != b'1'";  // Ensure deleted records are not counted
+        $fares_stmt = $this->conn()->prepare($fares_sql);
+        $fares_stmt->execute([$previous_year]);
+        $fares = $fares_stmt->fetch(PDO::FETCH_ASSOC)['total_fares'];
+
+        // Compute total revenue
+        $total_revenueLastYear = $collectionLastYear + $fares;
+
+        // Fetch total expenses for last year
+        $expensesLastYear_sql = "SELECT COALESCE(SUM(amount), 0) AS total_expenses 
+                                 FROM frs_expenses 
+                                 WHERE YEAR(date) = ? AND deleted != b'1'";
+        $expensesLastYear_stmt = $this->conn()->prepare($expensesLastYear_sql);
+        $expensesLastYear_stmt->execute([$previous_year]);
+        $expensesLastYear = $expensesLastYear_stmt->fetch(PDO::FETCH_ASSOC)['total_expenses'];
+
+        // Calculate Profit
+        $profitLastYear = $total_revenueLastYear - $expensesLastYear;
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +106,7 @@
                   <thead>
                   <th style="width: 30px; max-width: 30px !important;"></th>
                   <th style="text-align: right;">Cash at Beginning of Year</th>
-                  <th style="text-align: right; width: 150px; max-width: 150px !important;"><?php echo "Php " . number_format(1234.56, 2); ?></th>
+                  <th style="text-align: right; width: 150px; max-width: 150px !important;"><?php echo "Php " . number_format($profitLastYear, 2); ?></th>
                   </thead>
                   <tbody>
                   <!-- Operating Activities -->
