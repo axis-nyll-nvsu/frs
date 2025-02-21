@@ -16,11 +16,46 @@
     public function getData(){
       $period = date('Y');
       if(isset($_GET['period'])) {
-        $period = $_GET['period'];
+          $period = $_GET['period'];
       }
+  
+      // Fetch Fare Revenue Data for the selected year
+      $fare_sql = "SELECT SUM(amount) AS fare_revenue
+                     FROM `frs_fares`
+                     WHERE YEAR(date) = ? AND `deleted` != b'1'";
+      
+      $stmt = $this->conn()->prepare($fare_sql);
+      $stmt->execute([$period]);
+      $resultForFare = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      $income_sql = "SELECT * FROM `frs_collections` WHERE `deleted` != b'1'  ORDER BY `date` DESC";
-      $income_stmt = $this->conn()->query($income_sql);
+      //Fetch Other Collection Revenue for the selected year
+      $other_sql = "SELECT SUM(amount) AS other_revenue
+                     FROM `frs_collections`
+                     WHERE YEAR(date) = ? AND `deleted` != b'1'";
+      
+      $stmt = $this->conn()->prepare($other_sql);
+      $stmt->execute([$period]);
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      
+      $fare_revenue = $resultForFare['fare_revenue'] ?? 0;
+      $other_revenue = $result['other_revenue'] ?? 0;
+      $total_revenue = $fare_revenue + $other_revenue;
+
+      //Fetch na ang expenses bui
+      $expense_sql = "SELECT e.description, SUM(exp.amount) AS total_expense 
+      FROM frs_expenses exp 
+      JOIN frs_ecategories e ON exp.category_id = e.id 
+      WHERE YEAR(exp.date) = ? AND exp.deleted != b'1'
+      GROUP BY e.description";
+
+$expense_stmt = $this->conn()->prepare($expense_sql);
+$expense_stmt->execute([$period]);
+$expenses = $expense_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$total_expense = array_sum(array_column($expenses, 'total_expense'));
+$net_income = $total_revenue - $total_expense;
+
 ?>
 
 <!DOCTYPE html>
@@ -87,35 +122,40 @@
                   <tr>
                     <td></td>
                     <td>Revenue from Fares</td>
-                    <td style="text-align: right;"><?php echo number_format(1234.56, 2); ?></td>
+                    <td style="text-align: right;"><?php echo number_format($fare_revenue, 2); ?></td>
                   </tr>
                   <tr>
                     <td></td>
                     <td>Revenue from Other Collections</td>
-                    <td style="text-align: right;"><?php echo number_format(423102.88, 2); ?></td>
+                    <td style="text-align: right;"><?php echo number_format($other_revenue, 2); ?></td>
                   </tr>
                   <tr style="background-color: #fafafa; font-weight: bold;">
                     <td colspan="2">Total Revenues</td>
-                    <td style="text-align: right;"><?php echo "Php " . number_format(424337.44, 2); ?></td>
+                    <td style="text-align: right;"><?php echo "Php " . number_format($total_revenue, 2); ?></td>
                   </tr>
-                  <!-- Expenses -->
-                  <tr style="background-color: #00693e;">
-                    <td colspan="3" style="color: #fff;">Expenses</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>Salaries</td>
-                    <td style="text-align: right;"><?php echo number_format(123123.12, 2); ?></td>
-                  </tr>
-                  <tr style="background-color: #fafafa; font-weight: bold;">
-                    <td colspan="2">Total Expenses</td>
-                    <td style="text-align: right;"><?php echo "Php " . number_format(123123.12, 2); ?></td>
-                  </tr>
-                  <!-- Profit -->
-                  <tr style="background-color: #fafafa; font-weight: bold;">
-                    <td colspan="2">Net Income</td>
-                    <td style="text-align: right;"><?php echo "Php " . number_format(301214.32, 2); ?></td>
-                  </tr>
+                  <!-- Expenses Section -->
+<tr style="background-color: #00693e;">
+    <td colspan="3" style="color: #fff;">Expenses</td>
+</tr>
+
+<?php foreach ($expenses as $expense): ?>
+<tr>
+    <td></td>
+    <td><?php echo htmlspecialchars($expense['description']); ?></td>
+    <td style="text-align: right;"><?php echo number_format($expense['total_expense'], 2); ?></td>
+</tr>
+<?php endforeach; ?>
+
+<tr style="background-color: #fafafa; font-weight: bold;">
+    <td colspan="2">Total Expenses</td>
+    <td style="text-align: right;"><?php echo "Php " . number_format($total_expense, 2); ?></td>
+</tr>
+                  
+                  <!-- Net Income -->
+<tr style="background-color: #fafafa; font-weight: bold;">
+    <td colspan="2">Net Income</td>
+    <td style="text-align: right;"><?php echo "Php " . number_format($net_income, 2); ?></td>
+</tr>
                   </tbody>
                 </table><br>
                 <p>

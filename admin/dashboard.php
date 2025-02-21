@@ -133,7 +133,7 @@
 
       //Computation ng profit increase
       $current_month = date('Y-m');
-$previous_month = date('Y-m', strtotime('-1 month'));
+      $previous_month = date('Y-m', strtotime('-1 month'));
 
 /* Get Current Month Revenue */
 $sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_collections WHERE DATE_FORMAT(date, '%Y-%m') = '$current_month' AND deleted != b'1'";
@@ -189,8 +189,8 @@ if ($previous_profit != 0) {
 <head>
 <style>
     #revenueVSexpenses {
-      width: 300px !important; 
-      height: 300px !important;
+      width: 250px !important; 
+      height: 250px !important;
         
     }
     .chart-container {
@@ -200,6 +200,7 @@ if ($previous_profit != 0) {
       
         
     }
+    
 </style>
 <?php include './head.php'; ?>
 </head>
@@ -242,7 +243,7 @@ if ($previous_profit != 0) {
         <p>Daily Expenses</p>
         </div>
         <div class="icon"><i class="fa fa-money-check" style="color: #00693e;"></i></div>
-        <a href="dashboard.php?dailyincome=1" class="small-box-footer" style="background-color: #00693e;"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Add Expense</a>
+        <a href="expenses.php" class="small-box-footer" style="background-color: #00693e;"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Add Expense</a>
       </div>
       </div>
       <!-- Profit Card -->
@@ -268,7 +269,8 @@ if ($previous_profit != 0) {
 
         </td>
         <td style="width: 400px; height: 150px; align-items: center;">
-            <h3> Revenue vs. Expenses: <?php echo date("F"); ?> </h3>
+            <h4 style ="display: inline;"> Revenue vs. Expenses: </h4>
+            <h3 style = "font-weight:bold; color: #00693e; display: inline;"> <?php echo date("F"); ?> </h3> 
             <div class="chart-container">
             <canvas id="revenueVSexpenses"></canvas>
             </div>
@@ -276,7 +278,8 @@ if ($previous_profit != 0) {
        
     </tr>
     <tr tr style = "text-align: center; height: 80px;">
-        <td>Profit Increase from the previous month:
+        <td style = "vertical-align: middle;">
+          <p>Profit Increase from the previous month:</p>
             <h3 style = "font-weight:bold; color: #00693e;"> <?php echo number_format($profit_increase, 2) . "%"; ?></h3>
         </td>
      
