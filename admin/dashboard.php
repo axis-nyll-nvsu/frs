@@ -200,6 +200,9 @@ if ($previous_profit != 0) {
       
         
     }
+    .small-box .icon i {
+    font-size: 70px !important; 
+}
     
 </style>
 <?php include './head.php'; ?>
@@ -216,7 +219,7 @@ if ($previous_profit != 0) {
     <section class="content-header">
     <h1>Dashboard</h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#"><i class="bi bi-speedometer2"></i> Home</a></li>
       <li class="active">Dashboard</li>
     </ol>
     </section>
@@ -231,7 +234,7 @@ if ($previous_profit != 0) {
         <h3>₱<?php echo number_format($revenue, 2); ?></h3>
         <p>Daily Revenue</p>
         </div>
-        <div class="icon"><i class="fa fa-money-check" style="color: #00693e;"></i></div>
+        <div class="icon"><i class="bi bi-cash-stack" style="color: #00693e;"></i></div>
         <a href="dashboard.php?dailyexpenses=1" class="small-box-footer" style="background-color: #00693e;"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
       </div>
       </div>
@@ -242,7 +245,7 @@ if ($previous_profit != 0) {
         <h3>₱<?php echo number_format($expenses, 2); ?></h3>
         <p>Daily Expenses</p>
         </div>
-        <div class="icon"><i class="fa fa-money-check" style="color: #00693e;"></i></div>
+        <div class="icon"><i class="bi bi-credit-card" style="color: #00693e;"></i></div>
         <a href="expenses.php" class="small-box-footer" style="background-color: #00693e;"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Add Expense</a>
       </div>
       </div>
@@ -253,7 +256,7 @@ if ($previous_profit != 0) {
         <h3><?php echo ($profit < 0) ? "-" : "+"; ?> ₱<?php echo number_format($dailyprofit, 2); ?></h3>
         <p>Daily Profit</p>
         </div>
-        <div class="icon"><i class="fa fa-money-check" style="color: #00693e;"></i></div>
+        <div class="icon"><i class="bi bi-cash-coin" style="color: #00693e;"></i></div>
         <a href="profits.php" class="small-box-footer" style="background-color: #00693e;">More Info<i class="fa fa-arrow-circle-right" style="margin-left: 5px;"></i></a>
       </div>
       </div>
