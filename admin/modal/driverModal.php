@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-flat axis-btn-green" name="add"><i class="fa fa-save"></i> Save</button>
+          <button type="submit" class="btn btn-flat axis-btn-green" name="add"><i class="bi bi-floppy"></i> Save</button>
         </div>
       </form>
     </div>
@@ -103,7 +103,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-flat axis-btn-green" name="edit"><i class="fa fa-save"></i> Update</button>
+          <button type="submit" class="btn btn-flat axis-btn-green" name="edit"><i class="bi bi-floppy"></i> Update</button>
         </div>
       </form>
     </div>
@@ -128,7 +128,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-flat axis-btn-red" name="delete"><i class="fa fa-trash"></i> Delete</button>
+          <button type="submit" class="btn btn-flat axis-btn-red" name="delete"><i class="bi bi-trash3"></i> Delete</button>
         </div>
       </form>
     </div>

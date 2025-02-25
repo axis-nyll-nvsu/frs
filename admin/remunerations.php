@@ -39,7 +39,7 @@
       <section class="content-header">
         <h1>Remunerations</h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="#"><i class="bi bi-speedometer2"></i> Home</a></li>
           <li class="active">Remunerations</li>
         </ol>
       </section>
@@ -88,9 +88,9 @@
                       <td style="text-align: right;">Php <?php echo number_format($row['amount'], 2); ?></td>
                       <td>
                       <?php if ($row['paid'] == 1) { ?>
-                        <small><i class="fa fa-circle" style="color: #33a073;"></i>&nbsp;&nbsp;&nbsp;PAID</small>
+                        <small><i class="bi bi-circle-fill" style="color: #33a073;"></i>&nbsp;&nbsp;&nbsp;PAID</small>
                       <?php } else { ?>
-                        <small><i class="fa fa-circle" style="color: #cc483b;"></i>&nbsp;&nbsp;&nbsp;UNPAID</small>
+                        <small><i class="bi bi-circle-fill" style="color: #cc483b;"></i>&nbsp;&nbsp;&nbsp;UNPAID</small>
                       <?php } ?>
                       </td>
                       <td>

@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-flat axis-btn-green" name="edit"><i class="fa fa-save"></i> Update</button>
+          <button type="submit" class="btn btn-flat axis-btn-green" name="edit"><i class="bi bi-floppy"></i> Update</button>
         </div>
       </form>
     </div>

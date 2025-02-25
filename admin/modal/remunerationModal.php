@@ -57,7 +57,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-flat axis-btn-green" name="compute"><i class="fa fa-check"></i> Compute</button>
+          <button type="submit" class="btn btn-flat axis-btn-green" name="compute"><i class="bi bi-check2-circle"></i> Compute</button>
         </div>
       </form>
     </div>
@@ -82,7 +82,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-flat axis-btn-green" name="recomp"><i class="fa fa-check"></i> Recompute</button>
+          <button type="submit" class="btn btn-flat axis-btn-green" name="recomp"><i class="bi bi-check2-circle"></i> Recompute</button>
         </div>
       </form>
     </div>
@@ -108,7 +108,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-flat axis-btn-green" name="pay"><i class="fa fa-check"></i> Pay</button>
+          <button type="submit" class="btn btn-flat axis-btn-green" name="pay"><i class="bi bi-check2-circle"></i> Pay</button>
         </div>
       </form>
     </div>
