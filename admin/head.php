@@ -34,7 +34,7 @@
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="../images/logo.png">
 
-<title>Financial Reporting System v1.0</title>
+<title>FNVTTC Financial Reporting System v1.0</title>
 
 <!-- Static Styles -->
 <style type="text/css">
@@ -285,7 +285,16 @@
     border-radius: 0 0 30px 30px;
   }
   .sidebar-collapse .sidebar-menu li {
-    margin-left: -5px;
+    margin-left: 0;
+  }
+  .sidebar-collapse .sidebar-menu li a i {
+    padding-left: 5px;
+  }
+  .sidebar-collapse .axis-header img {
+    margin-left: 10px;
+  }
+  .sidebar-menu li i {
+    margin-right: 10px;
   }
   .navbar-nav>.user-menu>.dropdown-menu>li.user-header {
     height: 150px;

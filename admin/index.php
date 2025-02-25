@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <link rel="stylesheet" href="../asset/css/bootstrap.min.css">
   <link rel="icon" type="image/x-icon" href="../images/logo.png">
-  <title>Financial Reporting System v1.0</title>
+  <title>FNVTTC Financial Reporting System v1.0</title>
 </head>
 <body>
   <div class="container-fluid p-0">
@@ -31,7 +31,7 @@
           <form style="margin: auto;width: 400px;max-width: 100%;border: 1px solid rgba(0, 0, 0, 0.2);padding: 20px;border-radius: 10px;" method="POST" action="../controller/loginController.php">
             <div style="display: flex; margin-bottom: 10px; place-items: center;">
               <img src="../images/logo.png" style="height: 80px;">
-              <h3 style="margin: 10px; color: #00693e;">Financial Reporting System</div>
+              <h3 style="margin: 10px; color: #00693e; font-size: 1em;">First Novo Vizcayano Travellers Transport Cooperative &mdash;<br />Financial Reporting System</div>
             <div class="form-group">
               <label>Email</label>
               <div class="form-control pl-2 pr-2 p-0 d-flex" style="place-items:center;border: 2px solid rgba(0, 0, 0, 0.2);border-radius: 8px;">

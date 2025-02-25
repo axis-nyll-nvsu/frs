@@ -4,7 +4,7 @@
   <section class="sidebar">
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header" style="color: #fff;font-size: 26px;display: flex;place-items: center;margin-left: 15px;">
-        <img src="../images/logo.png" width="50px"> <h4 style="margin-left: 10px;">Financial Reporting <br>Management System</h4>
+        <img src="../images/logo.png" width="50px"> <h4 style="margin-left: 10px;">FNVTTC<br>Financial Reporting<br>Management System</h4>
       </li>
       <li class="axis-header"><img src="../images/logo.png" width="50px"></li>
 

@@ -146,7 +146,7 @@ $net_income = $total_revenue - $total_expense;
                   <tbody>
                   <!-- Revenues -->
                   <tr style="background-color: #00693e;">
-                    <td colspan="3" style="color: #fff;">Revenues</td>
+                    <th colspan="3" style="color: #fff;">Revenues</th>
                   </tr>
                   <tr>
                     <td></td>
@@ -163,28 +163,28 @@ $net_income = $total_revenue - $total_expense;
                     <td style="text-align: right;"><?php echo "Php " . number_format($total_revenue, 2); ?></td>
                   </tr>
                   <!-- Expenses Section -->
-<tr style="background-color: #00693e;">
-    <td colspan="3" style="color: #fff;">Expenses</td>
-</tr>
+                  <tr style="background-color: #00693e;">
+                      <th colspan="3" style="color: #fff;">Expenses</td>
+                  </tr>
 
-<?php foreach ($expenses as $expense): ?>
-<tr>
-    <td></td>
-    <td><?php echo htmlspecialchars($expense['description']); ?></td>
-    <td style="text-align: right;"><?php echo number_format($expense['total_expense'], 2); ?></td>
-</tr>
-<?php endforeach; ?>
+                  <?php foreach ($expenses as $expense): ?>
+                  <tr>
+                      <td></td>
+                      <td><?php echo htmlspecialchars($expense['description']); ?></td>
+                      <td style="text-align: right;"><?php echo number_format($expense['total_expense'], 2); ?></td>
+                  </tr>
+                  <?php endforeach; ?>
 
-<tr style="background-color: #fafafa; font-weight: bold;">
-    <td colspan="2">Total Expenses</td>
-    <td style="text-align: right;"><?php echo "Php " . number_format($total_expense, 2); ?></td>
-</tr>
-                  
-                  <!-- Net Income -->
-<tr style="background-color: #fafafa; font-weight: bold;">
-    <td colspan="2">Net Income</td>
-    <td style="text-align: right;"><?php echo "Php " . number_format($net_income, 2); ?></td>
-</tr>
+                  <tr style="background-color: #fafafa; font-weight: bold;">
+                      <td colspan="2">Total Expenses</td>
+                      <td style="text-align: right;"><?php echo "Php " . number_format($total_expense, 2); ?></td>
+                  </tr>
+                                    
+                                    <!-- Net Income -->
+                  <tr style="background-color: #fafafa; font-weight: bold;">
+                      <td colspan="2">Net Income</td>
+                      <td style="text-align: right;"><?php echo "Php " . number_format($net_income, 2); ?></td>
+                  </tr>
                   </tbody>
                 </table><br>
                 <p>
