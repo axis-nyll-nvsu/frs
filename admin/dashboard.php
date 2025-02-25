@@ -261,33 +261,34 @@ if ($previous_profit != 0) {
       </div>
       </div>
     </div>
-
-    <table border="1">
-    <tr style = "text-align: center;">
-        <td rowspan="2" style ="width: 600px; height: 380px;">
+    <div>
+    <table border="1" style="width: 100%">
+    <tr style="text-align: center;">
+        <td rowspan="2" style ="width: 60%; height: 380px;">
             <h3 style = "font-weight:bold; color: #00693e;"> Profit Trend</h3>
             <div class="line-chart">
             <canvas id="profitTrend" width="400" height="300"></canvas>
             </div>
 
         </td>
-        <td style="width: 400px; height: 150px; align-items: center;">
+        <td style="width: 40%; height: 150px; align-items: center;">
             <h4 style ="display: inline;"> Revenue vs. Expenses: </h4>
             <h3 style = "font-weight:bold; color: #00693e; display: inline;"> <?php echo date("F"); ?> </h3> 
             <div class="chart-container">
             <canvas id="revenueVSexpenses"></canvas>
             </div>
         </td>
-       
-    </tr>
-    <tr tr style = "text-align: center; height: 80px;">
-        <td style = "vertical-align: middle;">
-          <p>Profit Increase from the previous month:</p>
-            <h3 style = "font-weight:bold; color: #00693e;"> <?php echo number_format($profit_increase, 2) . "%"; ?></h3>
-        </td>
-     
-    </tr>
-</table>
+        
+      </tr>
+      <tr style="text-align: center; height: 80px;">
+          <td style = "vertical-align: middle;">
+            <p>Profit Increase from the previous month:</p>
+              <h3 style = "font-weight:bold; color: #00693e;"> <?php echo number_format($profit_increase, 2) . "%"; ?></h3>
+          </td>
+      
+      </tr>
+  </table>
+  </div>
 
     </section>
   </div>
