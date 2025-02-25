@@ -231,7 +231,7 @@
                     <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
                   </form>
                   <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Statement of Cash Flow</h3>
-                  <a href="#addnew" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;"><i class="fa fa-print"></i> Print Statement of Cash Flows</a>
+                  <a href="cashflow_statement_pdf.php" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;"><i class="fa fa-print"></i> Print Statement of Cash Flows</a>
                   <h4 style="text-align: center; font-size: 1em;">For the Year Ending <?php echo "Dec 31, " . $period; ?></h4>
                 </div>
               </div>
@@ -244,7 +244,7 @@
                   </thead>
                   <tbody>
                   <!-- Operating Activities -->
-                  <tr style="background-color: #00693e;">
+                  <tr style="background-color: #00693e; font-weight: bold;">
                     <td colspan="3" style="color: #fff;">Operating Activities</td>
                   </tr>
                   <tr>
@@ -325,7 +325,7 @@
                     </td>
                   </tr>
                   <!-- Investing Activities -->
-                  <tr style="background-color: #00693e;">
+                  <tr style="background-color: #00693e; font-weight: bold;">
                     <td colspan="3" style="color: #fff;">Investing Activities</td>
                   </tr>
                   <tr>
@@ -356,7 +356,7 @@
                     </td>
                   </tr>
                   <!-- Financing Activities -->
-                  <tr style="background-color: #00693e;">
+                  <tr style="background-color: #00693e; font-weight: bold;">
                     <td colspan="3" style="color: #fff;">Financing Activities</td>
                   </tr>
                   <tr>
@@ -432,11 +432,5 @@
 }
 $report = new Report(); $report->getData();
 ?>
-
-  <script>
-    $(document).ready(function() {
-      $('#tabs').tabs();
-    });
-  </script>
 </body>
 </html>
