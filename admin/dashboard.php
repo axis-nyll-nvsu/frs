@@ -231,7 +231,7 @@ if ($previous_profit != 0) {
       <div class="col-lg-4 col-12">
       <div class="small-box" style="color:#00693e;border-top: 3px solid rgba(0, 0, 0, 0.1);">
         <div class="inner">
-        <h3>₱<?php echo number_format($revenue, 2); ?></h3>
+        <h3>₱ <?php echo number_format($revenue, 2); ?></h3>
         <p>Daily Revenue</p>
         </div>
         <div class="icon"><i class="bi bi-cash-stack" style="color: #00693e;"></i></div>
@@ -242,7 +242,7 @@ if ($previous_profit != 0) {
       <div class="col-lg-4 col-12">
       <div class="small-box" style="color:#00693e;border-top: 3px solid rgba(0, 0, 0, 0.1);">
         <div class="inner">
-        <h3>₱<?php echo number_format($expenses, 2); ?></h3>
+        <h3>₱ <?php echo number_format($expenses, 2); ?></h3>
         <p>Daily Expenses</p>
         </div>
         <div class="icon"><i class="bi bi-credit-card" style="color: #00693e;"></i></div>
@@ -253,7 +253,14 @@ if ($previous_profit != 0) {
       <div class="col-lg-4 col-12">
       <div class="small-box" style="color:#00693e;border-top: 3px solid rgba(0, 0, 0, 0.1);">
         <div class="inner">
-        <h3><?php echo ($profit < 0) ? "-" : "+"; ?> ₱<?php echo number_format($dailyprofit, 2); ?></h3>
+        <h3>
+          <?php
+            if($dailyprofit < 0)
+              echo "( ₱ " . number_format(abs($dailyprofit), 2) . " )";
+            else
+              echo "₱ " . number_format($dailyprofit, 2); 
+          ?>
+        </h3>
         <p>Daily Profit</p>
         </div>
         <div class="icon"><i class="bi bi-cash-coin" style="color: #00693e;"></i></div>
