@@ -59,7 +59,7 @@ $net_income = $total_revenue - $total_expense;
 ?>
 
 <!DOCTYPE html>
-<html>
+<html style="background-color: #ecf0f5;">
 <head>
 <?php include './head.php'; ?>
 <style>
