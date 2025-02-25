@@ -235,7 +235,7 @@ if ($previous_profit != 0) {
         <p>Daily Revenue</p>
         </div>
         <div class="icon"><i class="bi bi-cash-stack" style="color: #00693e;"></i></div>
-        <a href="dashboard.php?dailyexpenses=1" class="small-box-footer" style="background-color: #00693e;"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
+        <a href="#addCollection" data-toggle="modal" class="small-box-footer" style="background-color: #00693e;"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
       </div>
       </div>
       <!-- Expenses Card -->
@@ -297,6 +297,7 @@ if ($previous_profit != 0) {
 
 <?php include 'footer.php'; ?>
 <?php include 'modal/profileModal.php'; ?>
+<?php include 'modal/dashboardModal.php'; ?>
 
   <!-- Active Script -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
