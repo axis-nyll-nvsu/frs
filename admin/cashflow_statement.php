@@ -203,7 +203,7 @@
       <section class="content-header">
         <h1>Financial Reports &mdash; Statement of Cash Flows</h1>
         <ol class="breadcrumb">
-          <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> Home</a></li>
           <li>Financial Reports</li>
           <li class="active">Statement of Cash Flows</li>
         </ol>
@@ -231,7 +231,7 @@
                     <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
                   </form>
                   <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Statement of Cash Flow</h3>
-                  <a href="cashflow_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="fa fa-print"></i> Print Statement of Cash Flows</a>
+                  <a href="cashflow_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Statement of Cash Flows</a>
                   <h4 style="text-align: center; font-size: 1em;">For the Year Ending <?php echo "Dec 31, " . $period; ?></h4>
                 </div>
               </div>

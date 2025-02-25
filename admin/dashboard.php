@@ -179,9 +179,6 @@ if ($previous_profit != 0) {
 } else {
     $profit_increase = ($current_profit > 0) ? 100 : 0; // If previous profit is 0, assume full increase
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -191,19 +188,15 @@ if ($previous_profit != 0) {
     #revenueVSexpenses {
       width: 250px !important; 
       height: 250px !important;
-        
     }
     .chart-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      
-        
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .small-box .icon i {
-    font-size: 70px !important; 
-}
-    
+      font-size: 70px !important; 
+    }
 </style>
 <?php include './head.php'; ?>
 </head>
@@ -229,29 +222,29 @@ if ($previous_profit != 0) {
     <div class="row">
       <!-- Revenue Card -->
       <div class="col-lg-4 col-12">
-      <div class="small-box" style="color:#00693e;border-top: 3px solid rgba(0, 0, 0, 0.1);">
+      <div class="small-box" style="color:#00693e; border-top: 3px solid rgba(0, 0, 0, 0.1); background-color: #fff;">
         <div class="inner">
         <h3>₱ <?php echo number_format($revenue, 2); ?></h3>
         <p>Daily Revenue</p>
         </div>
         <div class="icon"><i class="bi bi-cash-stack" style="color: #00693e;"></i></div>
-        <a href="#addCollection" data-toggle="modal" class="small-box-footer" style="background-color: #00693e;"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
+        <a href="#addCollection" data-toggle="modal" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
       </div>
       </div>
       <!-- Expenses Card -->
       <div class="col-lg-4 col-12">
-      <div class="small-box" style="color:#00693e;border-top: 3px solid rgba(0, 0, 0, 0.1);">
+      <div class="small-box" style="color:#00693e; border-top: 3px solid rgba(0, 0, 0, 0.1); background-color: #fff;">
         <div class="inner">
         <h3>₱ <?php echo number_format($expenses, 2); ?></h3>
         <p>Daily Expenses</p>
         </div>
         <div class="icon"><i class="bi bi-credit-card" style="color: #00693e;"></i></div>
-        <a href="expenses.php" class="small-box-footer" style="background-color: #00693e;"><i class="fa fa-plus-circle" style="margin-right: 5px;"></i>Add Expense</a>
+        <a href="expenses.php" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Expense</a>
       </div>
       </div>
       <!-- Profit Card -->
       <div class="col-lg-4 col-12">
-      <div class="small-box" style="color:#00693e;border-top: 3px solid rgba(0, 0, 0, 0.1);">
+      <div class="small-box" style="color:#00693e; border-top: 3px solid rgba(0, 0, 0, 0.1); background-color: #fff;">
         <div class="inner">
         <h3>
           <?php
@@ -264,12 +257,12 @@ if ($previous_profit != 0) {
         <p>Daily Profit</p>
         </div>
         <div class="icon"><i class="bi bi-cash-coin" style="color: #00693e;"></i></div>
-        <a href="profits.php" class="small-box-footer" style="background-color: #00693e;">More Info<i class="fa fa-arrow-circle-right" style="margin-left: 5px;"></i></a>
+        <a href="profits.php" class="small-box-footer" style="background-color: #00693e;">More Info<i class="bi bi-arrow-right-circle" style="margin-left: 5px;"></i></a>
       </div>
       </div>
     </div>
     <div>
-    <table border="1" style="width: 100%">
+    <table border="1" style="width: 100%; background-color: #fff;">
     <tr style="text-align: center;">
         <td rowspan="2" style ="width: 60%; height: 380px;">
             <h3 style = "font-weight:bold; color: #00693e;"> Profit Trend</h3>
@@ -292,7 +285,6 @@ if ($previous_profit != 0) {
             <p>Profit Increase from the previous month:</p>
               <h3 style = "font-weight:bold; color: #00693e;"> <?php echo number_format($profit_increase, 2) . "%"; ?></h3>
           </td>
-      
       </tr>
   </table>
   </div>
