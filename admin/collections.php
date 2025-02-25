@@ -14,7 +14,7 @@
   include '../config/config.php';
   class Collection extends Connection{ 
     public function getData(){ 
-      $collection_sql = "SELECT a.`id`, b.`description` AS `category`, a.`date`, a.`amount`, a.`category_id` " . 
+      $collection_sql = "SELECT a.`id`, a.`receipt`, b.`description` AS `category`, a.`date`, a.`amount`, a.`category_id` " . 
                     "FROM `frs_collections` AS a " .
                     "INNER JOIN `frs_categories` AS b " .
                     "ON a.`category_id` = b.`id` " .
@@ -58,6 +58,7 @@
                   <thead>
                     <th style="width: 12px; max-width: 12px !important;">#</th>
                     <th>Date</th>
+                    <th>OR Number</th>
                     <th>Collection</th>
                     <th>Amount</th>
                     <th style="width: 78px; min-width: 78px !important;">Action</th>
@@ -69,12 +70,14 @@
                     <tr>
                       <td><?php echo $id; ?></td>
                       <td><?php echo $row['date']; ?></td>
+                      <td><?php echo $row['receipt']; ?></td>
                       <td><?php echo $row['category']; ?></td>
                       <td style="text-align: right;">Php <?php echo number_format($row['amount'], 2); ?></td>
                       <td>
                         <button class='btn btn-success btn-sm edit btn-flat' 
                         data-edit_collection_id='<?php echo $row['id']; ?>'
                         data-edit_date='<?php echo (new DateTime($row['date']))->format('m/d/Y'); ?>'
+                        data-edit_receipt='<?php echo $row['receipt']; ?>'
                         data-edit_category_id='<?php echo $row['category_id']; ?>'
                         data-edit_category_name='<?php echo $row['category']; ?>'
                         data-edit_amount='<?php echo $row['amount']; ?>'> Edit</button>
@@ -110,11 +113,13 @@
       $('#edit').modal('show');
       var edit_collection_id = $(this).data('edit_collection_id');
       var edit_date = $(this).data('edit_date');
+      var edit_receipt = $(this).data('edit_receipt');
       var edit_category_id = $(this).data('edit_category_id');
       var edit_category_name = $(this).data('edit_category_name');
       var edit_amount = $(this).data('edit_amount');
       $('#edit_collection_id').val(edit_collection_id)
-      $('#edit_date').datepicker('setDate', new Date(edit_date));
+      $('#edit_date').datepicker('setDate', new Date(edit_date))
+      $('#edit_receipt').val(edit_receipt)
       $('#edit_category_id').val(edit_category_id)
       $('#edit_category_name').val(edit_category_name)
       $('#edit_amount').val(edit_amount)

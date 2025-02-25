@@ -22,7 +22,13 @@
           <div class="form-group">
             <label for="date" class="col-sm-3 control-label">Date</label>
             <div class="col-sm-8">
-              <input class="form-control" id="date" name="date" required>
+              <input class="form-control" id="date" name="date" value="<?php echo date("m/d/Y"); ?>" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="receipt" class="col-sm-3 control-label">OR Number</label>
+            <div class="col-sm-8">
+              <input class="form-control" id="receipt" name="receipt" required>
             </div>
           </div>
           <div class="form-group">
@@ -31,7 +37,7 @@
               <select id="category_id" name="category_id" style="width: 100%;" required>
                 <option value="0">Select Collection</option>
                 <?php
-                $sql = "SELECT * FROM `frs_categories` WHERE `deleted` != b'1'";
+                $sql = "SELECT * FROM `frs_categories` WHERE `id` > 6 AND `deleted` != b'1'";
                 $stmt = $this->conn()->query($sql);
                 while ($row = $stmt->fetch()) {
                 ?>
@@ -43,7 +49,7 @@
           <div class="form-group">
             <label for="amount" class="col-sm-3 control-label">Amount</label>
             <div class="col-sm-8">
-              <input class="form-control" id="amount" name="amount" required>
+              <input type="number" class="form-control" id="amount" name="amount" required>
             </div>
           </div>
         </div>
@@ -75,6 +81,12 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="receipt" class="col-sm-3 control-label">OR Number</label>
+            <div class="col-sm-8">
+              <input class="form-control" id="edit_receipt" name="receipt" required>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="category_name" class="col-sm-3 control-label">Collection</label>
             <div class="col-sm-8">
               <input class="form-control" id="edit_category_name" name="category_name" readonly>
@@ -84,7 +96,7 @@
           <div class="form-group">
             <label for="amount" class="col-sm-3 control-label">Amount</label>
             <div class="col-sm-8">
-              <input class="form-control" id="edit_amount" name="amount" required>
+              <input type="number" class="form-control" id="edit_amount" name="amount" required>
             </div>
           </div>
         </div>

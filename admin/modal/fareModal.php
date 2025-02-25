@@ -68,7 +68,7 @@
           <div class="form-group">
             <label for="amount" class="col-sm-3 control-label">Amount</label>
             <div class="col-sm-8">
-              <input class="form-control" id="amount" name="amount" required>
+              <input type="number" class="form-control" id="amount" name="amount" required>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@
           <div class="form-group">
             <label for="amount" class="col-sm-3 control-label">Amount</label>
             <div class="col-sm-8">
-              <input class="form-control" id="edit_amount" name="amount" required>
+              <input type="number" class="form-control" id="edit_amount" name="amount" required>
             </div>
           </div>
         </div>
