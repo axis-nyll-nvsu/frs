@@ -273,7 +273,7 @@
                   <tbody>
                   <!-- Operating Activities -->
                   <tr style="background-color: #00693e;" class="green">
-                    <td colspan="3" style="color: #fff;">Operating Activities</td>
+                    <th colspan="3" style="color: #fff;">Operating Activities</th>
                   </tr>
                   <tr>
                     <td colspan="3">Cash receipts from</td>
@@ -354,7 +354,7 @@
                   </tr>
                   <!-- Investing Activities -->
                   <tr style="background-color: #00693e;" class="green">
-                    <td colspan="3" style="color: #fff;">Investing Activities</td>
+                    <th colspan="3" style="color: #fff;">Investing Activities</th>
                   </tr>
                   <tr>
                     <td colspan="3">Cash receipts from</td>
@@ -385,7 +385,7 @@
                   </tr>
                   <!-- Financing Activities -->
                   <tr style="background-color: #00693e;" class="green">
-                    <td colspan="3" style="color: #fff;">Financing Activities</td>
+                    <th colspan="3" style="color: #fff;">Financing Activities</th>
                   </tr>
                   <tr>
                     <td colspan="3">Cash receipts from</td>
