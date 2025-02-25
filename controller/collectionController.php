@@ -13,6 +13,7 @@ class CollectionController extends Connection {
   public function addOtherCollection() {
     $user = $_SESSION['user_id'];
     $date = date('Y-m-d',strtotime($_POST['date']));
+    $receipt = $_POST['receipt'];
     $category = $_POST['category_id'];
     $amount = $_POST['amount'];
 
@@ -25,9 +26,9 @@ class CollectionController extends Connection {
       echo "<script>window.location.href='../admin/collections.php';</script>";
     }
     else {
-      $sqlinsert = "INSERT INTO `frs_collections`(`date`, `category_id`, `amount`, `created_by`) VALUES (?,?,?,?)";
+      $sqlinsert = "INSERT INTO `frs_collections`(`date`, `receipt`, `category_id`, `amount`, `created_by`) VALUES (?,?,?,?,?)";
       $statementinsert = $this->conn()->prepare($sqlinsert);
-      $statementinsert->execute([$date, $category, $amount, $user]);
+      $statementinsert->execute([$date, $receipt, $category, $amount, $user]);
 
       $description = "Added a new other collection.";
       $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
@@ -43,6 +44,7 @@ class CollectionController extends Connection {
     $user = $_SESSION['user_id'];
     $collection = $_POST['collection_id'];
     $date = date('Y-m-d',strtotime($_POST['date']));
+    $receipt = $_POST['receipt'];
     $category = $_POST['category_id'];
     $amount = $_POST['amount'];
 
@@ -55,9 +57,9 @@ class CollectionController extends Connection {
       echo "<script>window.location.href='../admin/collections.php';</script>";
     }
     else {
-      $sqlupdate = "UPDATE `frs_collections` SET `date` = ?, `category_id` = ?, `amount` = ?, `updated_by` = ? WHERE `id` = ?";
+      $sqlupdate = "UPDATE `frs_collections` SET `date` = ?, `receipt` = ?, `category_id` = ?, `amount` = ?, `updated_by` = ? WHERE `id` = ?";
       $statementupdate = $this->conn()->prepare($sqlupdate);
-      $statementupdate->execute([$date, $category, $amount, $user, $collection]);
+      $statementupdate->execute([$date, $receipt, $category, $amount, $user, $collection]);
 
       $description = "Updated other collection.";
       $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
