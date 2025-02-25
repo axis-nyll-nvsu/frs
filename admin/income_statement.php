@@ -103,7 +103,7 @@ $net_income = $total_revenue - $total_expense;
                     <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
                   </form>
                   <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Income Statement</h3>
-                  <a href="#addnew" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;"><i class="fa fa-print"></i> Print Income Statement</a>
+                  <a href="income_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;"><i class="fa fa-print"></i> Print Income Statement</a>
                   <h4 style="text-align: center; font-size: 1em;">For the Year Ending <?php echo "Dec 31, " . $period; ?></h4>
                 </div>
               </div>

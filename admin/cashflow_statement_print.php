@@ -187,7 +187,7 @@
 ?>
 
 <!DOCTYPE html>
-<html style="background-color: #00693e;">
+<html>
 <head>
 <?php include './head.php'; ?>
 <style>
@@ -199,18 +199,10 @@
         }
     
         .box {
-            border: 1px solid #000;
+            border: 0.5px solid #000;
             margin: 0;
             width: 100%;
             box-shadow: none;
-        }
-    
-        .box-header {
-            border-bottom: 1px solid #000;
-        }
-    
-        .box-body {
-            border-bottom: 1px solid #000;
         }
     
         .table {
@@ -256,6 +248,15 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
+              <div class="box-header">
+                <div style="position: relative">
+                  <div style="text-align: center; font-weight: bold; margin-top: 0;">
+                    <img src="../images/logo.png" alt="" style="display: inline-block; width: 100px; margin: 20px;" />
+                    <p style="font-size: 1.2em;">First Novo Vizcayano Travellers Transport Cooperative</p>
+                  </div>
+                  <h4 style="text-align: center; font-size: 1em;">Solano, Nueva Vizcaya</h4>
+                </div>
+              </div>
               <div class="box-header with-border">
                 <div style="position: relative">
                   <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Statement of Cash Flow</h3>
