@@ -19,6 +19,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no, user-scalable=no">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../asset/css/bootstrap.min.css">
   <link rel="icon" type="image/x-icon" href="../images/logo.png">
   <title>FNVTTC Financial Reporting System v1.0</title>
@@ -42,7 +43,6 @@
               <label>Password</label>
               <div class="form-control pl-2 pr-2 p-0 d-flex" style="place-items:center;border: 2px solid rgba(0, 0, 0, 0.2);border-radius: 8px;">
                 <input id="password-field" type="password" name="password" placeholder="Password" class="rounded w-100 h-100 border-0 bg-transparent" style="outline: none;">
-                <i toggle="#password-field" class="fas fa-eye text-muted toggle-password"></i>
               </div>
             </div>
             <p><a href="forgotpassword.php" class="axis-link">Forgot Password?</a></p>
@@ -60,18 +60,5 @@
   <!-- Scripts -->
   <script src="../asset/js/jquery.slim.min.js"></script>
   <script src="../asset/js/bootstrap.bundle.min.js"></script>
-  <script src="../asset/js/fontawesome.js"></script>
-  <script type="text/javascript">
-    $(".toggle-password").click(function() {
-      $(this).toggleClass("fa-eye fa-eye-slash");
-      var input = $($(this).attr("toggle"));
-      if (input.attr("type") == "password") {
-          input.attr("type", "text");
-      }
-      else{
-        input.attr("type", "password");
-      }
-    });
-  </script>>
 </body>
 </html>
