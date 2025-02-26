@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
 <aside class="main-sidebar" style="overflow-y: auto; position: fixed; top: 0;">
   <section class="sidebar">
     <ul class="sidebar-menu" data-widget="tree">
