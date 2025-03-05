@@ -8,6 +8,7 @@
 
 <?php if ($_SESSION['type'] == 0): // Administrator ?>
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> <span> Dashboard</span></a></li>
+      <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i> <span> E-Jeepneys</span></a></li>
       <li><a href="drivers.php"><i class="bi bi-car-front"></i> <span> Drivers</span></a></li>
       <li><a href="remunerations.php"><i class="bi bi-cash-stack"></i> <span> Remunerations</span></a></li>
       <li><a href="fares.php"><i class="bi bi-cash-stack"></i> <span> Fare Collections</span></a></li>
@@ -27,6 +28,7 @@
 
 <?php if ($_SESSION['type'] == 1): // Manager ?>
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> <span> Dashboard</span></a></li>
+      <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i> <span> E-Jeepneys</span></a></li>
       <li><a href="drivers.php"><i class="bi bi-car-front"></i> <span> Drivers</span></a></li>
       <li><a href="remunerations.php"><i class="bi bi-cash-stack"></i> <span> Remunerations</span></a></li>
       <li><a href="fares.php"><i class="bi bi-cash-stack"></i> <span> Fare Collections</span></a></li>
