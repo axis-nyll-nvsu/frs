@@ -9,13 +9,12 @@
 <?php if ($_SESSION['type'] == 0): // Administrator ?>
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> <span> Dashboard</span></a></li>
       <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i> <span> E-Jeepneys</span></a></li>
-      <li><a href="drivers.php"><i class="bi bi-car-front"></i> <span> Drivers</span></a></li>
-      <li><a href="remunerations.php"><i class="bi bi-cash-stack"></i> <span> Remunerations</span></a></li>
-      <li><a href="fares.php"><i class="bi bi-cash-stack"></i> <span> Fare Collections</span></a></li>
-      <li><a href="collections.php"><i class="bi bi-wallet2"></i> <span> Other Collections</span></a></li>
+      <li><a href="drivers.php"><i class="bi bi-person-circle"></i> <span> Drivers</span></a></li>
+      <li><a href="fares.php"><i class="bi bi-cash-stack"></i> <span> Collections</span></a></li>
+      <li><a href="salaries.php"><i class="bi bi-wallet2"></i> <span> Salaries</span></a></li>
       <li><a href="expenses.php"><i class="bi bi-receipt"></i> <span> Expenses</span></a></li>
       <li class="treeview">
-        <a href="#"><i class="bi bi-file-earmark-pdf"></i> <span> Financial Reports</span><span class="pull-right-container"><i class="bi bi-chevron-down pull-right"></i></span></a>
+        <a href="#"><i class="bi bi-file-earmark-pdf"></i> <span> Reports</span><span class="pull-right-container"><i class="bi bi-chevron-down pull-right"></i></span></a>
         <ul class="treeview-menu">
           <li><a href="income_statement.php"><i class="bi bi-chevron-right"></i> Income Statement</a></li>
           <li><a href="cashflow_statement.php"><i class="bi bi-chevron-right"></i> Statement of Cash Flows</a></li>
@@ -29,13 +28,12 @@
 <?php if ($_SESSION['type'] == 1): // Manager ?>
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> <span> Dashboard</span></a></li>
       <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i> <span> E-Jeepneys</span></a></li>
-      <li><a href="drivers.php"><i class="bi bi-car-front"></i> <span> Drivers</span></a></li>
-      <li><a href="remunerations.php"><i class="bi bi-cash-stack"></i> <span> Remunerations</span></a></li>
-      <li><a href="fares.php"><i class="bi bi-cash-stack"></i> <span> Fare Collections</span></a></li>
-      <li><a href="collections.php"><i class="bi bi-wallet2"></i> <span> Other Collections</span></a></li>
+      <li><a href="drivers.php"><i class="bi bi-person-circle"></i> <span> Drivers</span></a></li>
+      <li><a href="fares.php"><i class="bi bi-cash-stack"></i> <span> Collections</span></a></li>
+      <li><a href="salaries.php"><i class="bi bi-wallet2"></i> <span> Salaries</span></a></li>
       <li><a href="expenses.php"><i class="bi bi-receipt"></i> <span> Expenses</span></a></li>
       <li class="treeview">
-        <a href="#"><i class="bi bi-file-earmark-pdf"></i> <span> Financial Reports</span><span class="pull-right-container"><i class="bi bi-chevron-down pull-right"></i></span></a>
+        <a href="#"><i class="bi bi-file-earmark-pdf"></i> <span> Reports</span><span class="pull-right-container"><i class="bi bi-chevron-down pull-right"></i></span></a>
         <ul class="treeview-menu">
           <li><a href="income_statement.php"><i class="bi bi-chevron-right"></i> Income Statement</a></li>
           <li><a href="cashflow_statement.php"><i class="bi bi-chevron-right"></i> Statement of Cash Flows</a></li>
