@@ -24,13 +24,20 @@ $sql = "SELECT * FROM frs_users WHERE id = '".$_SESSION['user_id']."'";
 $stmt = $db->query($sql);
 $row = $stmt->fetch();
 ?>
-
+                        <?php if(file_exists('../images/' . $row['image'])) { ?>
                         <img src="../images/<?php echo $row['image']; ?>" class="user-image" alt="User Image">
+                        <?php } else { ?>
+                        <img src="../images/default.png" class="user-image" alt="User Image">
+                        <?php } ?>
                         <span class="hidden-xs"><?php echo $row['first_name'] . " " . $row['last_name']; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
+                            <?php if(file_exists('../images/' . $row['image'])) { ?>
                             <img src="../images/<?php echo $row['image']; ?>" class="img-circle" alt="User Image">
+                            <?php } else { ?>
+                            <img src="../images/default.png" class="img-circle" alt="User Image">
+                            <?php } ?>
                             <p><?php echo $row['first_name'] . " " . $row['last_name']; ?></p>
                         </li>
                         <li class="user-footer">
