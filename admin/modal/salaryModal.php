@@ -6,6 +6,7 @@
  */
 ?>
 
+
 <!-- Compute Salary -->
 <div class="modal fade" id="compute">
   <div class="modal-dialog">

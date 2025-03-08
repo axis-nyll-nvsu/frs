@@ -6,6 +6,7 @@
  */
 ?>
 
+
 <!-- Update Profile -->
 <div class="modal fade" id="profile">
   <div class="modal-dialog">

@@ -7,6 +7,7 @@
  */
 ?>
 
+
 <!-- Compute Remuneration -->
 <div class="modal fade" id="compute">
   <div class="modal-dialog">

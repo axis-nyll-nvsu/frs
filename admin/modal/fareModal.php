@@ -6,6 +6,7 @@
  */
 ?>
 
+
 <!-- Add Fare Collection -->
 <div class="modal fade" id="addnew">
   <div class="modal-dialog">

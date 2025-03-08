@@ -6,6 +6,7 @@
  */
 ?>
 
+
 <!-- Add Collection -->
 <div class="modal fade" id="addCollection">
   <div class="modal-dialog">
