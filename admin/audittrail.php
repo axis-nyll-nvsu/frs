@@ -23,7 +23,6 @@
       $trail_sql = "SELECT * FROM `frs_audittrail` AS a JOIN `frs_users` AS b ON a.`user_id` = b.`id` ORDER BY a.`date` DESC";
       $trail_stmt = $this->db->query($trail_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>

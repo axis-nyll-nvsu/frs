@@ -63,7 +63,6 @@ $total_expense = array_sum(array_column($expenses, 'total_expense'));
 $net_income = $total_revenue - $total_expense;
 
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #ecf0f5;">
 <head>

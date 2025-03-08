@@ -28,7 +28,6 @@
                     "ORDER BY a.`date` DESC, b.`id` ASC";
       $collection_stmt = $this->db->query($collection_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>

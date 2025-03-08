@@ -185,8 +185,8 @@ if ($previous_profit != 0) {
 } else {
     $profit_increase = ($current_profit > 0) ? 100 : 0; // If previous profit is 0, assume full increase
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>

@@ -191,7 +191,6 @@
 
         $profitThisYear = $profitLastYear + $net_increase;
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #ecf0f5;">
 <head>

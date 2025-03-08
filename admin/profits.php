@@ -103,8 +103,8 @@ if (!isset($_SESSION['type'])) {
 
 $profit = new Profit();
 $fares = $profit->getData();
-?>
 
+?>
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>

@@ -20,14 +20,13 @@
     }
 
     public function getData(){ 
-      $remu_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, a.`start_date`, a.`end_date`, a.`collection`, a.`amount`, a.`paid`, a.`driver_id` " . 
+      $salary_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, a.`start_date`, a.`end_date`, a.`collection`, a.`amount`, a.`paid`, a.`driver_id` " .
                     "FROM `frs_salaries` AS a " .
                     "INNER JOIN `frs_drivers` AS b " .
                     "ON a.`driver_id` = b.`id` " .
                     "ORDER BY a.`start_date` DESC, b.`first_name` ASC";
-      $remu_stmt = $this->db->query($remu_sql);
+      $salary_stmt = $this->db->query($salary_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
@@ -72,7 +71,7 @@
                   <tbody>
       <?php
       $id = 1;
-      while ($row = $remu_stmt->fetch()) { ?>
+      while ($row = $salary_stmt->fetch()) { ?>
                     <tr>
                       <td><?php echo $id; ?></td>
                       <td>

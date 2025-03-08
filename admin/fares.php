@@ -30,7 +30,6 @@
                     "ORDER BY a.`date` DESC";
       $fare_stmt = $this->db->query($fare_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>

@@ -23,7 +23,6 @@
       $ejeep_sql = "SELECT * FROM `frs_ejeeps` WHERE `deleted` != b'1'";
       $ejeep_stmt = $this->db->query($ejeep_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>

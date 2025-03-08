@@ -28,7 +28,6 @@
                     "ORDER BY a.`date` DESC, b.`id` ASC";
       $expense_stmt = $this->db->query($expense_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>

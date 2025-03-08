@@ -23,7 +23,6 @@
       $account_sql = "SELECT * FROM `frs_users` WHERE `id` != 1 AND `deleted` != b'1'";
       $account_stmt = $this->db->query($account_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>

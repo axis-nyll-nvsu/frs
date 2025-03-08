@@ -23,7 +23,6 @@
       $driver_sql = "SELECT * FROM `frs_drivers` WHERE `deleted` != b'1'";
       $driver_stmt = $this->db->query($driver_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
