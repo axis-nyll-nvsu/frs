@@ -26,8 +26,6 @@
 <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins -->
 <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-<!-- Other CSS -->  
-<link rel="stylesheet" href="../asset/css/login.css">
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <!-- Bootstrap Icons -->

@@ -31,7 +31,7 @@
                 <option value="0">Select Driver</option>
                 <?php
                 $sql = "SELECT * FROM `frs_drivers` WHERE `deleted` != b'1'";
-                $stmt = $this->conn()->query($sql);
+                $stmt = $this->db->query($sql);
                 while ($row = $stmt->fetch()) {
                 ?>
                 <option value="<?php echo $row['id'] ?>">
@@ -52,7 +52,7 @@
                 <option value="0">Select Terminal</option>
                 <?php
                 $sql = "SELECT * FROM `frs_terminals` WHERE `deleted` != b'1'";
-                $stmt = $this->conn()->query($sql);
+                $stmt = $this->db->query($sql);
                 while ($row = $stmt->fetch()) {
                 ?>
                 <option value="<?php echo $row['id'] ?>">
