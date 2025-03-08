@@ -37,7 +37,7 @@
                 <option value="0">Select Collection</option>
                 <?php
                 $sql = "SELECT * FROM `frs_categories` WHERE `id` > 6 AND `deleted` != b'1'";
-                $stmt = $this->conn()->query($sql);
+                $stmt = $this->db->query($sql);
                 while ($row = $stmt->fetch()) {
                 ?>
                 <option value="<?php echo $row['id'] ?>"><?php echo $row['description']; ?></option>
