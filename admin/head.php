@@ -65,7 +65,6 @@
     from {opacity: 1.0;}
     to {opacity: 0.0;}
 }
-
 .mobile_name{
     margin-top: 10px;
     margin-left: 5px;
@@ -80,7 +79,6 @@
     display: none;
     z-index: 1;
 }
-
 @media screen and (max-width: 768px){
     .holdleft:hover .mobile_name{
         display: block;
@@ -89,7 +87,6 @@
         display: none;
     }
 }
-
 .chat{
     background-color: #edf0f5;
     width: 100%;
