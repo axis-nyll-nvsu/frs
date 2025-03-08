@@ -1,9 +1,8 @@
 <?php
 /*
- * salaries.php
- * Description: Salaries Page
+ * Salary View
+ * Description: Salaries View
  * Author: Vernyll Jan P. Asis
- * Modified: 03-05-2025
  */
 
   session_start();
@@ -126,7 +125,7 @@
 
 <?php include 'footer.php'; ?>
 <?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/remunerationModal.php'; ?>
+<?php include 'modal/salaryModal.php'; ?>
 <?php include 'modal/message2Modal.php'; ?>
 
   <script>

@@ -1,9 +1,8 @@
 <?php
 /*
- * index.php
- * Description: Login Page
- * Author: 
- * Modified: 11-23-2024
+ * Index
+ * Description: Index / Login View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

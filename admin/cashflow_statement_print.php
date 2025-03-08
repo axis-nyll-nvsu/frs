@@ -1,9 +1,8 @@
 <?php
 /*
- * reports.php
- * Description: Reports Page
- * Author: 
- * Modified: 12-27-2024
+ * Cashflow Statement Print
+ * Description: Cashflow Statement Print
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

@@ -1,9 +1,8 @@
 <?php
 /*
- * navbar.php
- * Description: Global HTML Navigation Bar
- * Author: 
- * Modified: 11-23-2024
+ * Navigation Bar
+ * Description: Common Navigation Bar Template
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

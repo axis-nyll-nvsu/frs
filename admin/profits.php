@@ -1,4 +1,9 @@
 <?php
+/*
+ * Profits
+ * Description: Profits View
+ * Author: Charlene B. Dela Cruz
+ */
 
 session_start();
 if (!isset($_SESSION['type'])) {

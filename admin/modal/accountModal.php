@@ -1,9 +1,8 @@
 <?php
 /*
- * accountModal.php
+ * Account Modal
  * Description: Account Modal
- * Author: 
- * Modified: 12-27-2024
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

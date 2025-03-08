@@ -1,9 +1,8 @@
 <?php
 /*
- * dashboard.php
- * Description: Dashboard Page
- * Author: 
- * Modified: 11-23-2024
+ * Dashboard
+ * Description: Dashboard View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

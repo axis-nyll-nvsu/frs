@@ -1,9 +1,8 @@
 <?php
 /*
- * expenseController.php
+ * Expense Controller
  * Description: Expense Controller
- * Author: 
- * Modified: 12-27-2024
+ * Author: Vernyll Jan P. Asis
  */
 
 session_start();

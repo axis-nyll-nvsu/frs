@@ -1,9 +1,8 @@
 <?php
 /*
- * dashboardModal.php
+ * Dashboard Modal
  * Description: Dashboard Modal
- * Author: 
- * Modified: 02-25-2025
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

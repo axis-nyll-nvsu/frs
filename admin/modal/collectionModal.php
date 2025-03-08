@@ -1,9 +1,8 @@
 <?php
 /*
- * collectionModal.php
- * Description: Other Collections Modal
- * Author: 
- * Modified: 12-26-2024
+ * Collection Modal
+ * Description: Collection Modal
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

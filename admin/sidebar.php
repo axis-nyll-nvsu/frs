@@ -1,3 +1,11 @@
+<?php
+/*
+ * Side Bar
+ * Description: Common Side Bar Template
+ * Author: Vernyll Jan P. Asis
+ */
+?>
+
 <aside class="main-sidebar" style="overflow-y: auto; position: fixed; top: 0;">
   <section class="sidebar">
     <ul class="sidebar-menu" data-widget="tree">

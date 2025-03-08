@@ -5,6 +5,7 @@
  * Author: Vernyll Jan P. Asis
  * Modified: 03-08-2025
  */
+
 require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;

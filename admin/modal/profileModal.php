@@ -1,9 +1,8 @@
 <?php
 /*
- * profileModal.php
+ * Profile Modal
  * Description: Profile Modal
- * Author: 
- * Modified: 11-24-2024
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

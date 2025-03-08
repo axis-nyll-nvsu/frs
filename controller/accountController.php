@@ -1,9 +1,8 @@
 <?php
 /*
- * accountController.php
- * Description: Driver Controller
- * Author: 
- * Modified: 12-27-2024
+ * Account Controller
+ * Description: Account Controller
+ * Author: Vernyll Jan P. Asis
  */
 
 session_start();

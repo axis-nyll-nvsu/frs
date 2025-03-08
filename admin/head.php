@@ -1,9 +1,8 @@
 <?php
 /*
- * head.php
- * Description: Global HTML Head
- * Author: 
- * Modified: 11-23-2024
+ * Head
+ * Description: Common Head Template
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

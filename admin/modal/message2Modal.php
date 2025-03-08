@@ -1,9 +1,8 @@
 <?php
 /*
- * message2Modal.php
+ * Message Modal v2
  * Description: Message Modal v2
- * Author: 
- * Modified: 11-24-2024
+ * Author: Vernyll Jan P. Asis
  */
  ?>
 

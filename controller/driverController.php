@@ -1,9 +1,8 @@
 <?php
 /*
- * driverController.php
+ * Driver Controller
  * Description: Driver Controller
- * Author: 
- * Modified: 11-23-2024
+ * Author: Vernyll Jan P. Asis
  */
 
 session_start();

@@ -1,9 +1,8 @@
 <?php
 /*
- * expenseModal.php
+ * Expense Modal
  * Description: Expense Modal
- * Author: 
- * Modified: 11-28-2024
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

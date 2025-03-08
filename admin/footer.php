@@ -1,9 +1,8 @@
 <?php
 /*
- * footer.php
- * Description: Global HTML Footer
- * Author: 
- * Modified: 11-23-2024
+ * Footer
+ * Description: Common Footer Template
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

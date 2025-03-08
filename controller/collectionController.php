@@ -1,9 +1,8 @@
 <?php
 /*
- * collectionController.php
- * Description: Other Collection Controller
- * Author: 
- * Modified: 12-26-2024
+ * Collection Controller
+ * Description: Collection Controller
+ * Author: Vernyll Jan P. Asis
  */
 
 session_start();

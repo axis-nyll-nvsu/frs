@@ -1,9 +1,8 @@
 <?php
 /*
- * reports.php
- * Description: Reports Page
- * Author: 
- * Modified: 12-27-2024
+ * Income Statement Print
+ * Description: Income Statement Print
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

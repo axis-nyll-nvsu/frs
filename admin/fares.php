@@ -1,9 +1,8 @@
 <?php
 /*
- * fares.php
- * Description: Fare Collections Page
- * Author: 
- * Modified: 12-26-2024
+ * Fares
+ * Description: Fares View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

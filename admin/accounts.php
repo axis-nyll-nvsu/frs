@@ -1,9 +1,8 @@
 <?php
 /*
- * accounts.php
- * Description: Accounts Page
- * Author: 
- * Modified: 12-27-2024
+ * Accounts
+ * Description: Accounts View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

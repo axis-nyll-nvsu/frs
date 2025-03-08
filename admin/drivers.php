@@ -1,9 +1,8 @@
 <?php
 /*
- * drivers.php
- * Description: Drivers Page
- * Author: 
- * Modified: 11-28-2024
+ * Drivers
+ * Description: Drivers View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

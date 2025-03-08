@@ -1,9 +1,8 @@
 <?php
 /*
- * loginController.php
+ * Login Controller
  * Description: Login Controller
- * Author: 
- * Modified: 11-28-2024
+ * Author: Vernyll Jan P. Asis
  */
 
 session_start();

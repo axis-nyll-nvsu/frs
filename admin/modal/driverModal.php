@@ -1,9 +1,8 @@
 <?php
 /*
- * driverModal.php
+ * Driver Modal
  * Description: Driver Modal
- * Author: 
- * Modified: 11-23-2024
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 

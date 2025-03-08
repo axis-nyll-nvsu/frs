@@ -1,9 +1,8 @@
 <?php
 /*
- * ejeeps.php
- * Description: E-Jeepneys Page
+ * E-Jeepneys
+ * Description: E-Jeepneys View
  * Author: Vernyll Jan P. Asis
- * Modified: 03-05-2025
  */
 
   session_start();

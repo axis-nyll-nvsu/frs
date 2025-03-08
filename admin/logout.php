@@ -1,9 +1,8 @@
 <?php
 /*
- * logout.php
- * Description: Logout Processor
- * Author: 
- * Modified: 11-23-2024
+ * Logout
+ * Description: Logout
+ * Author: Vernyll Jan P. Asis
  */
 
 session_start();

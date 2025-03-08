@@ -1,9 +1,8 @@
 <?php
 /*
- * fareController.php
- * Description: Fare Collection Controller
- * Author: 
- * Modified: 12-26-2024
+ * Fare Controller
+ * Description: Fare Controller
+ * Author: Vernyll Jan P. Asis
  */
 
 session_start();

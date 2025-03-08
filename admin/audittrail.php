@@ -1,9 +1,8 @@
 <?php
 /*
- * audittrail.php
- * Description: Audit Trail Page
- * Author: 
- * Modified: 12-27-2024
+ * Audit Trail
+ * Description: Audit Trail View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

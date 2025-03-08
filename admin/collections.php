@@ -1,9 +1,8 @@
 <?php
 /*
- * collections.php
- * Description: Other Collections Page
- * Author: 
- * Modified: 12-26-2024
+ * Collections
+ * Description: Collections View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();

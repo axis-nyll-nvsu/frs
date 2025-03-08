@@ -1,9 +1,8 @@
 <?php
 /*
- * fareModal.php
- * Description: Fare Collections Modal
- * Author: 
- * Modified: 12-26-2024
+ * Fare Modal
+ * Description: Fare Modal
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 
