@@ -5,31 +5,14 @@
  * Author: Vernyll Jan P. Asis
  */
 ?>
-<!-- jQuery 3 -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
 <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Select2 -->
 <script src="../bower_components/select2/dist/js/select2.full.min.js"></script>
-<!-- Moment JS -->
-<script src="../bower_components/moment/moment.js"></script>
-<!-- Data Tables -->
 <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- ChartJS -->
-<script src="../bower_components/chart.js/Chart.js"></script>
-<!-- Date Range Picker -->
-<script src="../bower_components/moment/min/moment.min.js"></script>
-<script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- Date Picker -->
 <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<!-- Slimscroll -->
-<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
+<script src="../bower_components/chart.js/Chart.js"></script>
 <script src="../dist/js/adminlte.min.js"></script>
 <script>
   $(document).on('click', '#admin_profile', function(e){
