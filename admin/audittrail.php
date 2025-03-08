@@ -11,11 +11,18 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Trail extends Connection{ 
-    public function getData(){ 
+ require_once '../config/config.php';
+  class Trail {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
+    public function getData(){
       $trail_sql = "SELECT * FROM `frs_audittrail` AS a JOIN `frs_users` AS b ON a.`user_id` = b.`id` ORDER BY a.`date` DESC";
-      $trail_stmt = $this->conn()->query($trail_sql);
+      $trail_stmt = $this->db->query($trail_sql);
 ?>
 
 <!DOCTYPE html>

@@ -11,11 +11,18 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Driver extends Connection{ 
+ require_once '../config/config.php';
+  class Driver {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $driver_sql = "SELECT * FROM `frs_drivers` WHERE `deleted` != b'1'";
-      $driver_stmt = $this->conn()->query($driver_sql);
+      $driver_stmt = $this->db->query($driver_sql);
 ?>
 
 <!DOCTYPE html>

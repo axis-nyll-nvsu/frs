@@ -11,8 +11,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Fare extends Connection{ 
+ require_once '../config/config.php';
+  class Fare {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $fare_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, c.`name` AS `terminal_name` , a.`date`, a.`amount`, a.`driver_id`, a.`terminal_id` " . 
                     "FROM `frs_fares` AS a " .
@@ -22,7 +29,7 @@
                     "ON a.`terminal_id` = c.`id` " .
                     "WHERE a.`deleted` != b'1' " .
                     "ORDER BY a.`date` DESC";
-      $fare_stmt = $this->conn()->query($fare_sql);
+      $fare_stmt = $this->db->query($fare_sql);
 ?>
 
 <!DOCTYPE html>

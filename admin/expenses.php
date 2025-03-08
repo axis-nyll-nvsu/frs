@@ -11,8 +11,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Expense extends Connection{ 
+ require_once '../config/config.php';
+  class Expense {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){       
       $expense_sql = "SELECT a.`id`, b.`description` AS `category`, a.`date`, a.`description`, a.`amount`, a.`category_id` " . 
                     "FROM `frs_expenses` AS a " .
@@ -20,7 +27,7 @@
                     "ON a.`category_id` = b.`id` " .
                     "WHERE a.`deleted` != b'1' " .
                     "ORDER BY a.`date` DESC, b.`id` ASC";
-      $expense_stmt = $this->conn()->query($expense_sql);
+      $expense_stmt = $this->db->query($expense_sql);
 ?>
 
 <!DOCTYPE html>

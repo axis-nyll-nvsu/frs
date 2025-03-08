@@ -5,9 +5,15 @@ if (!isset($_SESSION['type'])) {
     header('location: ./');
 }
 
-include '../config/config.php';
+ require_once '../config/config.php';
+  class Profit {
+    private $db;
 
-class Profit extends Connection {
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData() {
       // SQL query to get total amount from frs_fares
       $fares_sql = "
@@ -51,9 +57,9 @@ class Profit extends Connection {
       ORDER BY 
         e.date DESC";
 
-      $fares_stmt = $this->conn()->query($fares_sql);
-      $collection_stmt = $this->conn()->query($collection_sql);
-      $expenses_stmt = $this->conn()->query($expenses_sql);
+      $fares_stmt = $this->db->query($fares_sql);
+      $collection_stmt = $this->db->query($collection_sql);
+      $expenses_stmt = $this->db->query($expenses_sql);
 
       // Collect all unique dates and amounts
       $data = [];

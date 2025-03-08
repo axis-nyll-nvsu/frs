@@ -17,7 +17,7 @@
 
 <?php
 $sql = "SELECT * FROM frs_users WHERE id = '".$_SESSION['user_id']."'";
-$stmt = $this->conn()->query($sql);
+$stmt = $this->db->query($sql);
 $row = $stmt->fetch();
 ?>
 

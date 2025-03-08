@@ -11,8 +11,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Collection extends Connection{ 
+ require_once '../config/config.php';
+  class Collection {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $collection_sql = "SELECT a.`id`, a.`receipt`, b.`description` AS `category`, a.`date`, a.`amount`, a.`category_id` " . 
                     "FROM `frs_collections` AS a " .
@@ -20,7 +27,7 @@
                     "ON a.`category_id` = b.`id` " .
                     "WHERE a.`deleted` != b'1' " .
                     "ORDER BY a.`date` DESC, b.`id` ASC";
-      $collection_stmt = $this->conn()->query($collection_sql);
+      $collection_stmt = $this->db->query($collection_sql);
 ?>
 
 <!DOCTYPE html>

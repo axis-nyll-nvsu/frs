@@ -11,11 +11,18 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Account extends Connection{ 
+ require_once '../config/config.php';
+  class Account {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $account_sql = "SELECT * FROM `frs_users` WHERE `id` != 1 AND `deleted` != b'1'";
-      $account_stmt = $this->conn()->query($account_sql);
+      $account_stmt = $this->db->query($account_sql);
 ?>
 
 <!DOCTYPE html>

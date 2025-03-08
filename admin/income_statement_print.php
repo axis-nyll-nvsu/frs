@@ -11,8 +11,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Report extends Connection{ 
+ require_once '../config/config.php';
+  class Report {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){
       $period = date('Y');
       if(isset($_GET['period'])) {
@@ -24,7 +31,7 @@
                      FROM `frs_fares`
                      WHERE YEAR(date) = ? AND `deleted` != b'1'";
       
-      $stmt = $this->conn()->prepare($fare_sql);
+      $stmt = $this->db->prepare($fare_sql);
       $stmt->execute([$period]);
       $resultForFare = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -33,7 +40,7 @@
                      FROM `frs_collections`
                      WHERE YEAR(date) = ? AND `deleted` != b'1'";
       
-      $stmt = $this->conn()->prepare($other_sql);
+      $stmt = $this->db->prepare($other_sql);
       $stmt->execute([$period]);
       $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -49,7 +56,7 @@
       WHERE YEAR(exp.date) = ? AND exp.deleted != b'1'
       GROUP BY e.description";
 
-$expense_stmt = $this->conn()->prepare($expense_sql);
+$expense_stmt = $this->db->prepare($expense_sql);
 $expense_stmt->execute([$period]);
 $expenses = $expense_stmt->fetchAll(PDO::FETCH_ASSOC);
 

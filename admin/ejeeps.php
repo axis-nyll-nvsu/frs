@@ -11,11 +11,18 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Ejeep extends Connection{ 
+ require_once '../config/config.php';
+  class Ejeep {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $ejeep_sql = "SELECT * FROM `frs_ejeeps` WHERE `deleted` != b'1'";
-      $ejeep_stmt = $this->conn()->query($ejeep_sql);
+      $ejeep_stmt = $this->db->query($ejeep_sql);
 ?>
 
 <!DOCTYPE html>

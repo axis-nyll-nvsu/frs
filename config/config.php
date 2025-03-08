@@ -1,9 +1,9 @@
 <?php
 /*
- * PDO Connection
+ * Connection
  * Description: Returns a PHP Database Object
- * Author: 
- * Modified: 11-23-2024
+ * Author: Vernyll Jan P. Asis
+ * Modified: 03-08-2025
  */
 require '../vendor/autoload.php';
 
@@ -17,8 +17,7 @@ class Connection {
 	private $dbHost;
 	private $dbUser;
 	private $dbPass;
-	private $dbUser;
-	private $pdo;
+	private $dbName;
 
     public function __construct() {
         $this->dbHost = $_ENV['DB_HOST'];
@@ -27,12 +26,12 @@ class Connection {
         $this->dbName = $_ENV['DB_NAME'];
     }
 
-	public function conn() {
+	public function getConnection() {
 		try {
-			$this->pdo = new PDO("mysql:host=" . $this->dbHost . ";dbname=" . $this->dbName, $this->dbUser, $this->dbPass);
-			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-			return $this->pdo;			
+			$pdo = new PDO("mysql:host=" . $this->dbHost . ";dbname=" . $this->dbName, $this->dbUser, $this->dbPass);
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+			return $pdo;
 		}
 		catch (Exception $e) {
 			echo 'Error: ' . $e->getmessage();
