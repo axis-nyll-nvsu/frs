@@ -1,0 +1,7 @@
+.courses,.track,.track1,.track2,.track3{
+	overflow: hidden;
+	height: 0;
+}
+.courses_show,.track_show,.track1_show,.track2_show,.track3_show{
+	height: 100%;
+}
