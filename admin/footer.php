@@ -32,8 +32,6 @@
 <script src="../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
-<script src="../asset/js/fontawesome.js"></script>
-
 <script>
   $(document).on('click', '#admin_profile', function(e){
     e.preventDefault();
