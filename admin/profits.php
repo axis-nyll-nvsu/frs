@@ -113,6 +113,7 @@ $fares = $profit->getData();
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
+<?php include './navbar.php'; ?>
 <?php include './sidebar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
