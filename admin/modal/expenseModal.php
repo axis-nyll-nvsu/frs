@@ -30,7 +30,7 @@
               <select class="form-control" id="category_id" name="category_id" style="width: 100%;" required>
               <?php
               $sql = "SELECT * FROM `frs_ecategories`";
-              $stmt = $this->conn()->query($sql);
+              $stmt = $this->db->query($sql);
               while ($row = $stmt->fetch()) {
               ?>
                 <option value="<?php echo $row['id'] ?>"><?php echo $row['description'] ?></option>
