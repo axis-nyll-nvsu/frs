@@ -5,7 +5,6 @@
  * Author: Vernyll Jan P. Asis
  */
 ?>
-
 <!-- jQuery 3 -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

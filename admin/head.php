@@ -73,12 +73,12 @@
 </style>
 
 <style type="text/css">
-  @-webkit-keyframes blinker {
+@-webkit-keyframes blinker {
     from {opacity: 1.0;}
     to {opacity: 0.0;}
-  }
+}
 
-  .mobile_name{
+.mobile_name{
     margin-top: 10px;
     margin-left: 5px;
     font-weight: bold;
@@ -91,76 +91,73 @@
     border-radius: 5px;
     display: none;
     z-index: 1;
-  }
+}
 
-  @media screen and (max-width: 768px){
+@media screen and (max-width: 768px){
     .holdleft:hover .mobile_name{
-      display: block;
+    display: block;
     }
     .desktop_name{
-      display: none;
-    }
-  }
+    display: none;
+}
+}
 
-  .chat{
+.chat{
     background-color: #edf0f5;
     width: 100%;
     height: 100%;
     border-radius: 10px;
     padding: 0px;
-  }
-  .box_data_wrapper,.box_data_wrapper2{
-  height: 70vh;
+}
+.box_data_wrapper,.box_data_wrapper2{
+    height: 70vh;
     overflow-y: auto;
-  }
-  .box_data,.box_data2{
-  
+}
+.box_data,.box_data2{
     padding: 10px;
-  }
-  .conversation__view__bubbles {
-      margin-bottom: 50px;
-  }
-  .conversation__view__bubbles::before{
+}
+.conversation__view__bubbles {
+    margin-bottom: 50px;
+}
+.conversation__view__bubbles::before{
     content: '';
-      display: table;
-      clear: both;
-  }
-  .chat__right__bubble {
-      float: right;
-      position: relative;
-      border-bottom-right-radius: 0;
-      color: hsl(342, 100%, 95%);font-size: 0.9em;
-      padding: 8px;
-      border-radius: 50px;
-      word-break: break-all;
-  }
-  .chat__right__bubble:after{
-    content: '';
-    display: block;
-  }
-
-
-  .conversation__view__bubbles2 {
-      margin-bottom: 50px;
-  }
-  .conversation__view__bubbles2::before{
-    content: '';
-      display: table;
-      clear: both;
-  }
-  .chat__right__bubble2 {
-      float: left;
-      position: relative;
-      border-bottom-right-radius: 0;
-      padding: 8px;
-      border-radius: 50px;
-      word-break: break-all;
-  }
-  .chat__right__bubble2:after{
+    display: table;
+    clear: both;
+}
+.chat__right__bubble {
+    float: right;
+    position: relative;
+    border-bottom-right-radius: 0;
+    color: hsl(342, 100%, 95%);font-size: 0.9em;
+    padding: 8px;
+    border-radius: 50px;
+    word-break: break-all;
+}
+.chat__right__bubble:after{
     content: '';
     display: block;
-  }
-  .messages_count,.customers_info_count{
+}
+.conversation__view__bubbles2 {
+    margin-bottom: 50px;
+}
+.conversation__view__bubbles2::before{
+    content: '';
+    display: table;
+    clear: both;
+}
+.chat__right__bubble2 {
+    float: left;
+    position: relative;
+    border-bottom-right-radius: 0;
+    padding: 8px;
+    border-radius: 50px;
+    word-break: break-all;
+}
+.chat__right__bubble2:after{
+    content: '';
+    display: block;
+}
+.messages_count,.customers_info_count{
     position: absolute;
     right: 20px;
     top: 50%;
@@ -172,16 +169,14 @@
     font-weight: bold;
     background-color: red;
     border-radius: 50%;
-  }
-
-  .downpayment,.date_harvest,.downpayment2,.date_harvest2,.MonthlyChart,.WeeklyChart,.DailyChart{
+}
+.downpayment,.date_harvest,.downpayment2,.date_harvest2,.MonthlyChart,.WeeklyChart,.DailyChart{
     display: none;
-  }
-  .date_harvest_show,.date_harvest2_show,.DailyChart_show,.MonthlyChart_show,.WeeklyChart_show{
+}
+.date_harvest_show,.date_harvest2_show,.DailyChart_show,.MonthlyChart_show,.WeeklyChart_show{
     display: block;
-  }
-
-  .notif{
+}
+.notif{
     position: absolute;
     top: 18px;
     left: 23px;
@@ -189,9 +184,8 @@
     height: 5px;
     border-radius: 50%;
     background-color: red;
-  }
-
-  .cardnotif{
+}
+.cardnotif{
     position: absolute;
     right: 0px;
     top: 50px;
@@ -201,10 +195,10 @@
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     background-color: #fff;
     display: none;
-  }
-  .cardnotif_show{
+}
+.cardnotif_show{
     display: block;
-  }
+}
 </style>
 
 <style type="text/css">
