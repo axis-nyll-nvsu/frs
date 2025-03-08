@@ -83,11 +83,11 @@
 
 @media screen and (max-width: 768px){
     .holdleft:hover .mobile_name{
-    display: block;
+        display: block;
     }
     .desktop_name{
-    display: none;
-}
+        display: none;
+    }
 }
 
 .chat{
