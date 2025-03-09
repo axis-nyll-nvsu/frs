@@ -57,6 +57,14 @@ CREATE TABLE `frs_expenses` (
     `updated_by` int(11) DEFAULT NULL
 );
 
+CREATE TABLE `frs_routes` (
+    `id` int(11) NOT NULL,
+    `description` varchar(50) NOT NULL,
+    `deleted` bit(1) NOT NULL DEFAULT b'0',
+    `created_by` int(11) NOT NULL,
+    `updated_by` int(11) NOT NULL
+);
+
 CREATE TABLE `frs_salaries` (
     `id` int(11) NOT NULL,
     `driver_id` int(11) NOT NULL,
@@ -114,6 +122,11 @@ ALTER TABLE `frs_expenses`
     ADD KEY `fk_expenses_updatedby` (`updated_by`),
     ADD KEY `fk_expenses_categoryid` (`category_id`);
 
+ALTER TABLE `frs_routes`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `fk_routes_createdby` (`created_by`),
+    ADD KEY `fk_routes_updatedby` (`updated_by`);
+
 ALTER TABLE `frs_salaries`
     ADD PRIMARY KEY (`id`),
     ADD KEY `fk_salaries_createdby` (`created_by`),
@@ -139,6 +152,9 @@ ALTER TABLE `frs_drivers`
 ALTER TABLE `frs_expenses`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `frs_routes`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `frs_salaries`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
@@ -155,7 +171,7 @@ ALTER TABLE `frs_categories`
 ALTER TABLE `frs_collections`
     ADD CONSTRAINT `fk_collections_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_collections_driverid` FOREIGN KEY (`driver_id`) REFERENCES `frs_drivers` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-    ADD CONSTRAINT `fk_collections_routeid` FOREIGN KEY (`category_id`) REFERENCES `frs_categories` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+    ADD CONSTRAINT `fk_collections_routeid` FOREIGN KEY (`route_id`) REFERENCES `frs_routes` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_collections_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 ALTER TABLE `frs_drivers`
@@ -166,6 +182,10 @@ ALTER TABLE `frs_expenses`
     ADD CONSTRAINT `fk_expenses_categoryid` FOREIGN KEY (`category_id`) REFERENCES `frs_categories` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_expenses_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_expenses_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+ALTER TABLE `frs_routes`
+    ADD CONSTRAINT `fk_routes_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+    ADD CONSTRAINT `fk_routes_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 ALTER TABLE `frs_salaries`
     ADD CONSTRAINT `fk_salaries_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
