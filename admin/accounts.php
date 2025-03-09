@@ -73,7 +73,7 @@ $accounts = $account->getData();
                                     <tbody>
 <?php
 $id = 1;
-foreach($accounts as $row) { ?>
+foreach ($accounts as $row) { ?>
 <tr>
     <td><?php echo $id; ?></td>
     <?php
