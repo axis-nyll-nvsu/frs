@@ -33,13 +33,13 @@
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -111,10 +111,10 @@
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/fareModal.php'; ?>
-<?php include 'modal/messageModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/fareModal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
 
   <script>
     $(document).ready(function() {

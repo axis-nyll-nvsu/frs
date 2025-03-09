@@ -66,7 +66,7 @@ $net_income = $total_revenue - $total_expense;
 <!DOCTYPE html>
 <html style="background-color: #ecf0f5;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 <style>
     @media print {
         .content-wrapper {
@@ -206,8 +206,8 @@ $net_income = $total_revenue - $total_expense;
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
 <?php
   }
 }

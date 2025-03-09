@@ -204,13 +204,13 @@ if ($previous_profit != 0) {
       font-size: 70px !important; 
     }
 </style>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -300,9 +300,9 @@ if ($previous_profit != 0) {
 </div>
 
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/dashboardModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/dashboardModal.php'; ?>
 
   <!-- Active Script -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
