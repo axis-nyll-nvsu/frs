@@ -1,9 +1,8 @@
 <?php
 /*
- * fares.php
- * Description: Fare Collections Page
- * Author: 
- * Modified: 12-26-2024
+ * Fares
+ * Description: Fares View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();
@@ -11,8 +10,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Fare extends Connection{ 
+ require_once '../config/config.php';
+  class Fare {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $fare_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, c.`name` AS `terminal_name` , a.`date`, a.`amount`, a.`driver_id`, a.`terminal_id` " . 
                     "FROM `frs_fares` AS a " .
@@ -22,19 +28,18 @@
                     "ON a.`terminal_id` = c.`id` " .
                     "WHERE a.`deleted` != b'1' " .
                     "ORDER BY a.`date` DESC";
-      $fare_stmt = $this->conn()->query($fare_sql);
+      $fare_stmt = $this->db->query($fare_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -106,10 +111,10 @@
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/fareModal.php'; ?>
-<?php include 'modal/messageModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/fareModal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
 
   <script>
     $(document).ready(function() {

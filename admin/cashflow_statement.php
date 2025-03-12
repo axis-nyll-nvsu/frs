@@ -1,9 +1,8 @@
 <?php
 /*
- * reports.php
- * Description: Reports Page
- * Author: 
- * Modified: 12-27-2024
+ * Cashflow Statement
+ * Description: Cashflow Statement View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();
@@ -11,8 +10,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Report extends Connection{ 
+ require_once '../config/config.php';
+  class Report {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){
       $period = date('Y');
         if (isset($_GET['period'])) {
@@ -25,7 +31,7 @@
         $collectionLastYear_sql = "SELECT COALESCE(SUM(amount), 0) AS total_collections 
                                    FROM frs_collections 
                                    WHERE YEAR(date) = ? AND deleted != b'1'";
-        $collectionLastYear_stmt = $this->conn()->prepare($collectionLastYear_sql);
+        $collectionLastYear_stmt = $this->db->prepare($collectionLastYear_sql);
         $collectionLastYear_stmt->execute([$previous_year]);
         $collectionLastYear = $collectionLastYear_stmt->fetch(PDO::FETCH_ASSOC)['total_collections'];
 
@@ -33,7 +39,7 @@
         $fares_sql = "SELECT COALESCE(SUM(amount), 0) AS total_fares 
                       FROM frs_fares 
                       WHERE YEAR(date) = ? AND deleted != b'1'";  // Ensure deleted records are not counted
-        $fares_stmt = $this->conn()->prepare($fares_sql);
+        $fares_stmt = $this->db->prepare($fares_sql);
         $fares_stmt->execute([$previous_year]);
         $fares = $fares_stmt->fetch(PDO::FETCH_ASSOC)['total_fares'];
 
@@ -44,7 +50,7 @@
         $expensesLastYear_sql = "SELECT COALESCE(SUM(amount), 0) AS total_expenses 
                                  FROM frs_expenses 
                                  WHERE YEAR(date) = ? AND deleted != b'1'";
-        $expensesLastYear_stmt = $this->conn()->prepare($expensesLastYear_sql);
+        $expensesLastYear_stmt = $this->db->prepare($expensesLastYear_sql);
         $expensesLastYear_stmt->execute([$previous_year]);
         $expensesLastYear = $expensesLastYear_stmt->fetch(PDO::FETCH_ASSOC)['total_expenses'];
 
@@ -56,7 +62,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_fares 
                   WHERE YEAR(date) = ? AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_fares = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -64,7 +70,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_collections 
                   WHERE YEAR(date) = ? AND (category_id BETWEEN 7 AND 18) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_fees = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -72,7 +78,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_collections 
                   WHERE YEAR(date) = ? AND (category_id = 20) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_otherCollections = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -80,7 +86,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 1) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_salaries = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -88,7 +94,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 2) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_incentives = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -96,7 +102,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 3) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_benefits = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -104,7 +110,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 4) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_utilities = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -112,7 +118,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 5) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_supplies = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -120,7 +126,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 7) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_meals = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -128,7 +134,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 8) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_maintenance = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -136,7 +142,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 9) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_legal = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -144,7 +150,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 10) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $operating_otherExpenses = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -157,7 +163,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_collections
                   WHERE YEAR(date) = ? AND (category_id = 19) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $investing_shareCapital = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -165,7 +171,7 @@
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total 
                   FROM frs_expenses
                   WHERE YEAR(date) = ? AND (category_id = 6) AND deleted != b'1'";
-        $q_stmt = $this->conn()->prepare($q_sql);
+        $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
         $investing_equipment = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
@@ -185,17 +191,16 @@
 
         $profitThisYear = $profitLastYear + $net_increase;
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -425,8 +430,8 @@
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
 <?php
   }
 }

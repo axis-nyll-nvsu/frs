@@ -1,4 +1,4 @@
-# TODO List
+# TODO
 
 ## March 5, 2025
 
@@ -35,7 +35,7 @@ Daily Computation:
 
 ### Reports
 
-Income Statement and Cashflow Statement
+Income Statement and Cash Flow Statement
 
 - Include: Month Option
 
@@ -57,6 +57,6 @@ E-Jeep: 13 running, at the moment.
 - add expenses: include a button where users can add new category.
 - add a function where users can modify the computation. `Is this ADHOC change? what parts of the computation can be changed?`
 - add a function that allows data to be backed-up to Google Drive. `Is this automatic?`
-- remove recompute, it should automatically recomputed if data is updated.
+- remove recompute, it should automatically be recomputed if data is updated.
 - label profits as "Net Income" or "Net Loss" if negative.
 - add collection: include a button where users can add new driver.

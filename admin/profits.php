@@ -1,59 +1,70 @@
 <?php
+/*
+ * Profits
+ * Description: Profits View
+ * Author: Charlene B. Dela Cruz
+ */
 
 session_start();
 if (!isset($_SESSION['type'])) {
     header('location: ./');
 }
 
-include '../config/config.php';
+ require_once '../config/config.php';
+  class Profit {
+    private $db;
 
-class Profit extends Connection {
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData() {
       // SQL query to get total amount from frs_fares
       $fares_sql = "
-      SELECT 
-        f.date, 
+      SELECT
+        f.date,
         SUM(f.amount) AS total_amount
-      FROM 
+      FROM
         frs_fares f
-      WHERE 
+      WHERE
         f.deleted != b'1'
-      GROUP BY 
+      GROUP BY
         f.date
-      ORDER BY 
+      ORDER BY
         f.date DESC";
-      
+
       // SQL query to get total amount from frs_collections
       $collection_sql = "
-      SELECT 
-        c.date, 
+      SELECT
+        c.date,
         SUM(c.amount) AS total_collection
-      FROM 
+      FROM
         frs_collections c
-      WHERE 
+      WHERE
         c.deleted != b'1'
-      GROUP BY 
+      GROUP BY
         c.date
-      ORDER BY 
+      ORDER BY
         c.date DESC";
 
       // SQL query to get total amount from frs_expenses
       $expenses_sql = "
-      SELECT 
-        e.date, 
+      SELECT
+        e.date,
         SUM(e.amount) AS total_expenses
-      FROM 
+      FROM
         frs_expenses e
-      WHERE 
+      WHERE
         e.deleted != b'1'
-      GROUP BY 
+      GROUP BY
         e.date
-      ORDER BY 
+      ORDER BY
         e.date DESC";
 
-      $fares_stmt = $this->conn()->query($fares_sql);
-      $collection_stmt = $this->conn()->query($collection_sql);
-      $expenses_stmt = $this->conn()->query($expenses_sql);
+      $fares_stmt = $this->db->query($fares_sql);
+      $collection_stmt = $this->db->query($collection_sql);
+      $expenses_stmt = $this->db->query($expenses_sql);
 
       // Collect all unique dates and amounts
       $data = [];
@@ -92,17 +103,18 @@ class Profit extends Connection {
 
 $profit = new Profit();
 $fares = $profit->getData();
-?>
 
+?>
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -155,9 +167,9 @@ $fares = $profit->getData();
   </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/messageModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
 
 
   <script>

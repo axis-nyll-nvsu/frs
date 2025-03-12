@@ -1,9 +1,8 @@
 <?php
 /*
- * expenses.php
- * Description: Expenses Page
- * Author: 
- * Modified: 11-28-2024
+ * Expenses
+ * Description: Expenses View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();
@@ -11,8 +10,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Expense extends Connection{ 
+ require_once '../config/config.php';
+  class Expense {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){       
       $expense_sql = "SELECT a.`id`, b.`description` AS `category`, a.`date`, a.`description`, a.`amount`, a.`category_id` " . 
                     "FROM `frs_expenses` AS a " .
@@ -20,19 +26,18 @@
                     "ON a.`category_id` = b.`id` " .
                     "WHERE a.`deleted` != b'1' " .
                     "ORDER BY a.`date` DESC, b.`id` ASC";
-      $expense_stmt = $this->conn()->query($expense_sql);
+      $expense_stmt = $this->db->query($expense_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -96,10 +101,10 @@
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/expenseModal.php'; ?>
-<?php include 'modal/messageModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/expenseModal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
 
   <script>
     $(document).ready(function() {

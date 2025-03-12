@@ -1,9 +1,8 @@
 <?php
 /*
- * salaries.php
- * Description: Salaries Page
+ * Salary View
+ * Description: Salaries View
  * Author: Vernyll Jan P. Asis
- * Modified: 03-05-2025
  */
 
   session_start();
@@ -11,27 +10,33 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Salary extends Connection { 
+ require_once '../config/config.php';
+  class Salary {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
-      $remu_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, a.`start_date`, a.`end_date`, a.`collection`, a.`amount`, a.`paid`, a.`driver_id` " . 
+      $salary_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, a.`start_date`, a.`end_date`, a.`collection`, a.`amount`, a.`paid`, a.`driver_id` " .
                     "FROM `frs_salaries` AS a " .
                     "INNER JOIN `frs_drivers` AS b " .
                     "ON a.`driver_id` = b.`id` " .
                     "ORDER BY a.`start_date` DESC, b.`first_name` ASC";
-      $remu_stmt = $this->conn()->query($remu_sql);
+      $salary_stmt = $this->db->query($salary_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -66,7 +71,7 @@
                   <tbody>
       <?php
       $id = 1;
-      while ($row = $remu_stmt->fetch()) { ?>
+      while ($row = $salary_stmt->fetch()) { ?>
                     <tr>
                       <td><?php echo $id; ?></td>
                       <td>
@@ -117,10 +122,10 @@
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/remunerationModal.php'; ?>
-<?php include 'modal/message2Modal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/salaryModal.php'; ?>
+<?php include '../modal/message2Modal.php'; ?>
 
   <script>
     $(document).ready(function() {

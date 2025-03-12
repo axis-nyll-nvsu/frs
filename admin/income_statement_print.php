@@ -1,9 +1,8 @@
 <?php
 /*
- * reports.php
- * Description: Reports Page
- * Author: 
- * Modified: 12-27-2024
+ * Income Statement Print
+ * Description: Income Statement Print
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();
@@ -11,8 +10,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Report extends Connection{ 
+ require_once '../config/config.php';
+  class Report {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){
       $period = date('Y');
       if(isset($_GET['period'])) {
@@ -24,7 +30,7 @@
                      FROM `frs_fares`
                      WHERE YEAR(date) = ? AND `deleted` != b'1'";
       
-      $stmt = $this->conn()->prepare($fare_sql);
+      $stmt = $this->db->prepare($fare_sql);
       $stmt->execute([$period]);
       $resultForFare = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -33,7 +39,7 @@
                      FROM `frs_collections`
                      WHERE YEAR(date) = ? AND `deleted` != b'1'";
       
-      $stmt = $this->conn()->prepare($other_sql);
+      $stmt = $this->db->prepare($other_sql);
       $stmt->execute([$period]);
       $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -49,7 +55,7 @@
       WHERE YEAR(exp.date) = ? AND exp.deleted != b'1'
       GROUP BY e.description";
 
-$expense_stmt = $this->conn()->prepare($expense_sql);
+$expense_stmt = $this->db->prepare($expense_sql);
 $expense_stmt->execute([$period]);
 $expenses = $expense_stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -57,11 +63,10 @@ $total_expense = array_sum(array_column($expenses, 'total_expense'));
 $net_income = $total_revenue - $total_expense;
 
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #ecf0f5;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 <style>
     @media print {
         .content-wrapper {
@@ -201,8 +206,8 @@ $net_income = $total_revenue - $total_expense;
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
 <?php
   }
 }

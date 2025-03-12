@@ -1,9 +1,8 @@
 <?php
 /*
- * drivers.php
- * Description: Drivers Page
- * Author: 
- * Modified: 11-28-2024
+ * Drivers
+ * Description: Drivers View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();
@@ -11,23 +10,29 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Driver extends Connection{ 
+ require_once '../config/config.php';
+  class Driver {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $driver_sql = "SELECT * FROM `frs_drivers` WHERE `deleted` != b'1'";
-      $driver_stmt = $this->conn()->query($driver_sql);
+      $driver_stmt = $this->db->query($driver_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -95,10 +100,10 @@
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/driverModal.php'; ?>
-<?php include 'modal/messageModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/driverModal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
 
   <script>
     $(document).on('click', '.edit', function(e){

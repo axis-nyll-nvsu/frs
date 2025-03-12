@@ -1,9 +1,8 @@
 <?php
 /*
- * collections.php
- * Description: Other Collections Page
- * Author: 
- * Modified: 12-26-2024
+ * Collections
+ * Description: Collections View
+ * Author: Vernyll Jan P. Asis
  */
 
   session_start();
@@ -11,8 +10,15 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Collection extends Connection{ 
+ require_once '../config/config.php';
+  class Collection {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $collection_sql = "SELECT a.`id`, a.`receipt`, b.`description` AS `category`, a.`date`, a.`amount`, a.`category_id` " . 
                     "FROM `frs_collections` AS a " .
@@ -20,19 +26,18 @@
                     "ON a.`category_id` = b.`id` " .
                     "WHERE a.`deleted` != b'1' " .
                     "ORDER BY a.`date` DESC, b.`id` ASC";
-      $collection_stmt = $this->conn()->query($collection_sql);
+      $collection_stmt = $this->db->query($collection_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -96,10 +101,10 @@
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/collectionModal.php'; ?>
-<?php include 'modal/messageModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/collectionModal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
 
   <script>
     $(document).ready(function() {

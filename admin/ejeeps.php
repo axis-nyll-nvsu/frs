@@ -1,9 +1,8 @@
 <?php
 /*
- * ejeeps.php
- * Description: E-Jeepneys Page
+ * E-Jeepneys
+ * Description: E-Jeepneys View
  * Author: Vernyll Jan P. Asis
- * Modified: 03-05-2025
  */
 
   session_start();
@@ -11,23 +10,29 @@
     header('location: ./');
   }
 
-  include '../config/config.php';
-  class Ejeep extends Connection{ 
+ require_once '../config/config.php';
+  class Ejeep {
+    private $db;
+
+    public function __construct() {
+        $conn = new Connection();
+        $this->db = $conn->getConnection();
+    }
+
     public function getData(){ 
       $ejeep_sql = "SELECT * FROM `frs_ejeeps` WHERE `deleted` != b'1'";
-      $ejeep_stmt = $this->conn()->query($ejeep_sql);
+      $ejeep_stmt = $this->db->query($ejeep_sql);
 ?>
-
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include './head.php'; ?>
+<?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
 
-<?php include './navbar.php'; ?>
-<?php include './sidebar.php'; ?>
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -81,10 +86,10 @@
     </div>
   </div>
 
-<?php include 'footer.php'; ?>
-<?php include 'modal/profileModal.php'; ?>
-<?php include 'modal/ejeepModal.php'; ?>
-<?php include 'modal/messageModal.php'; ?>
+<?php include '../common/footer.php'; ?>
+<?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/ejeepModal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
 
   <script>
     $(document).on('click', '.edit', function(e){

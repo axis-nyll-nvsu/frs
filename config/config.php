@@ -1,26 +1,38 @@
 <?php
 /*
- * PDO Connection
+ * Connection
  * Description: Returns a PHP Database Object
- * Author: 
- * Modified: 11-23-2024
+ * Author: Vernyll Jan P. Asis
+ * Modified: 03-08-2025
  */
 
-class Connection {
-	private $servername = "localhost";
-	private $username = "root";
-	private $password = "";
-	private $dbname = "frs";
-	private $dsn;
-	private $pdo;
+require '../vendor/autoload.php';
 
-	public function conn() {
+use Dotenv\Dotenv;
+
+// Load the .env file from the parent folder
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+class Connection {
+	private $dbHost;
+	private $dbUser;
+	private $dbPass;
+	private $dbName;
+
+    public function __construct() {
+        $this->dbHost = $_ENV['DB_HOST'];
+        $this->dbUser = $_ENV['DB_USER'];
+        $this->dbPass = $_ENV['DB_PASS'];
+        $this->dbName = $_ENV['DB_NAME'];
+    }
+
+	public function getConnection() {
 		try {
-			$this->dsn = "mysql:host=" . $this->servername . ";dbname=" . $this->dbname;
-			$this->pdo = new PDO($this->dsn, $this->username, $this->password);
-			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-			return $this->pdo;			
+			$pdo = new PDO("mysql:host=" . $this->dbHost . ";dbname=" . $this->dbName, $this->dbUser, $this->dbPass);
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+			return $pdo;
 		}
 		catch (Exception $e) {
 			echo 'Error: ' . $e->getmessage();
