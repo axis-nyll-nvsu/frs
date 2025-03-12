@@ -69,7 +69,6 @@ $trails = $trail->getData();
                                     <tbody>
 <?php
 $id = 1;
-/* TODO: Continue */
 foreach ($trails as $row) { ?>
 <tr>
     <td><?php echo $id; ?></td>
