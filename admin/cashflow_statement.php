@@ -5,6 +5,9 @@
  * Author: Vernyll Jan P. Asis
  */
 
+/* TODO: Fix Module */
+header('location: index.php');
+
 session_start();
 if(!isset($_SESSION['type'])) {
     header('location: ./');
