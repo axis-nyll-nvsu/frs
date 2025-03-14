@@ -18,7 +18,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <p>Success: Record saved!</p>
+                    <p><?php echo $_SESSION['success']; ?></p>
                 </div>
             </div>
             <div class="modal-footer" style="text-align: center;">
@@ -39,7 +39,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <p>Success: Record updated!</p>
+                    <p><?php echo $_SESSION['updated']; ?></p>
                 </div>
             </div>
             <div class="modal-footer" style="text-align: center;">
@@ -60,7 +60,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <p>Success: Record deleted!</p>
+                    <p><?php echo $_SESSION['deleted']; ?></p>
                 </div>
             </div>
             <div class="modal-footer" style="text-align: center;">
@@ -81,7 +81,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <p>Error: Record already exists!</p>
+                    <p><?php echo $_SESSION['error']; ?></p>
                 </div>
             </div>
             <div class="modal-footer" style="text-align: center;">
