@@ -1,22 +1,22 @@
 <?php
 /*
- * Fare Modal
- * Description: Fare Modal
+ * Collection Modal
+ * Description: Collection Modal
  * Author: Vernyll Jan P. Asis
  */
 ?>
 
 
-<!-- Add Fare Collection -->
+<!-- Add Collection -->
 <div class="modal fade" id="addnew">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" method="POST" action="../controller/fareController.php">
+      <form class="form-horizontal" method="POST" action="../controller/collectionController.php">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h3 class="modal-title" style="color: #00693e;">Add Fare Collection</h3>
+          <h3 class="modal-title" style="color: #00693e;">Add Collection</h3>
         </div>
         <div class="modal-body">
           <div class="form-group">
@@ -80,19 +80,19 @@
   </div>
 </div>
 
-<!-- Edit Fare Collection -->
+<!-- Edit Collection -->
 <div class="modal fade" id="edit">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" method="POST" action="../controller/fareController.php">
+      <form class="form-horizontal" method="POST" action="../controller/collectionController.php">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h3 class="modal-title" style="color: #00693e;">Edit Fare Collection</h3>
+          <h3 class="modal-title" style="color: #00693e;">Edit Collection</h3>
         </div>
         <div class="modal-body">
-          <input type="hidden" id="edit_fare_id" name="fare_id">
+          <input type="hidden" id="edit_collection_id" name="collection_id">
           <div class="form-group">
             <label for="date" class="col-sm-3 control-label">Date</label>
             <div class="col-sm-8">
@@ -128,21 +128,21 @@
   </div>
 </div>
 
-<!-- Delete Fare Collection -->
+<!-- Delete Collection -->
 <div class="modal fade" id="delete">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form class="form-horizontal" method="POST" action="../controller/fareController.php">
+      <form class="form-horizontal" method="POST" action="../controller/collectionController.php">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h3 class="modal-title" style="color: #00693e;">Delete Fare Collection</h3>
+          <h3 class="modal-title" style="color: #00693e;">Delete Collection</h3>
         </div>
         <div class="modal-body">
-          <input type="hidden" id="delete_fare_id" name="fare_id">
+          <input type="hidden" id="delete_collection_id" name="collection_id">
           <div class="text-center">
-            <p>Are you sure you want to delete fare collection?</p>
+            <p>Are you sure you want to delete collection?</p>
           </div>
         </div>
         <div class="modal-footer">
