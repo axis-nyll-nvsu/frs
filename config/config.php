@@ -15,10 +15,10 @@ $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
 class Connection {
-	private $dbHost;
-	private $dbUser;
-	private $dbPass;
-	private $dbName;
+    private $dbHost;
+    private $dbUser;
+    private $dbPass;
+    private $dbName;
 
     public function __construct() {
         $this->dbHost = $_ENV['DB_HOST'];
@@ -27,15 +27,15 @@ class Connection {
         $this->dbName = $_ENV['DB_NAME'];
     }
 
-	public function getConnection() {
-		try {
-			$pdo = new PDO("mysql:host=" . $this->dbHost . ";dbname=" . $this->dbName, $this->dbUser, $this->dbPass);
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-			return $pdo;
-		}
-		catch (Exception $e) {
-			echo 'Error: ' . $e->getmessage();
-		}
-	}
+    public function getConnection() {
+        try {
+            $pdo = new PDO("mysql:host=" . $this->dbHost . ";dbname=" . $this->dbName, $this->dbUser, $this->dbPass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            return $pdo;
+        }
+        catch (Exception $e) {
+            echo 'Error: ' . $e->getmessage();
+        }
+    }
 }
