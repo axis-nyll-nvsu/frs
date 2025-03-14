@@ -1,3 +1,5 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
 CREATE TABLE `frs_categories` (
     `id` int(11) NOT NULL,
     `description` varchar(50) NOT NULL,
@@ -19,6 +21,7 @@ INSERT INTO `frs_categories` (`id`, `description`, `deleted`, `created_by`, `upd
 CREATE TABLE `frs_collections` (
     `id` int(11) NOT NULL,
     `driver_id` int(11) NOT NULL,
+    `ejeep_id` int(11) NOT NULL,
     `route_id` int(11) NOT NULL,
     `date` date NOT NULL,
     `amount` double(10,0) NOT NULL,
@@ -110,6 +113,7 @@ ALTER TABLE `frs_categories`
 
 ALTER TABLE `frs_collections`
     ADD PRIMARY KEY (`id`),
+    ADD KEY `fk_collections_ejeepid` (`ejeep_id`),
     ADD KEY `fk_collections_routeid` (`route_id`),
     ADD KEY `fk_collections_createdby` (`created_by`),
     ADD KEY `fk_collections_updatedby` (`updated_by`);
@@ -118,6 +122,11 @@ ALTER TABLE `frs_drivers`
     ADD PRIMARY KEY (`id`),
     ADD KEY `fk_drivers_createdby` (`created_by`),
     ADD KEY `fk_drivers_updatedby` (`updated_by`);
+
+ALTER TABLE `frs_ejeeps`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `fk_ejeeps_createdby` (`created_by`),
+    ADD KEY `fk_ejeeps_updatedby` (`updated_by`);
 
 ALTER TABLE `frs_expenses`
     ADD PRIMARY KEY (`id`),
@@ -152,6 +161,9 @@ ALTER TABLE `frs_collections`
 ALTER TABLE `frs_drivers`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `frs_ejeeps`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `frs_expenses`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
@@ -174,12 +186,17 @@ ALTER TABLE `frs_categories`
 ALTER TABLE `frs_collections`
     ADD CONSTRAINT `fk_collections_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_collections_driverid` FOREIGN KEY (`driver_id`) REFERENCES `frs_drivers` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+    ADD CONSTRAINT `fk_collections_ejeepid` FOREIGN KEY (`ejeep_id`) REFERENCES `frs_ejeeps` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_collections_routeid` FOREIGN KEY (`route_id`) REFERENCES `frs_routes` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_collections_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 ALTER TABLE `frs_drivers`
     ADD CONSTRAINT `fk_drivers_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_drivers_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+ALTER TABLE `frs_ejeeps`
+    ADD CONSTRAINT `fk_ejeeps_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+    ADD CONSTRAINT `fk_ejeeps_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 ALTER TABLE `frs_expenses`
     ADD CONSTRAINT `fk_expenses_categoryid` FOREIGN KEY (`category_id`) REFERENCES `frs_categories` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
