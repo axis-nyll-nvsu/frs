@@ -62,7 +62,7 @@ CREATE TABLE `frs_routes` (
     `description` varchar(50) NOT NULL,
     `deleted` bit(1) NOT NULL DEFAULT b'0',
     `created_by` int(11) NOT NULL,
-    `updated_by` int(11) NOT NULL
+    `updated_by` int(11) DEFAULT NULL
 );
 
 INSERT INTO `frs_routes` (`id`, `description`, `deleted`, `created_by`) VALUES
