@@ -29,10 +29,11 @@
         </ul>
       </li>
       <li><a href="accounts.php"><i class="bi bi-people"></i><span>Accounts</span></a></li>
+      <li><a href="route.php"><i class="bi bi-sign-turn-slight-right-fill"></i><span>Routes</span></a></li>
       <li><a href="audittrail.php"><i class="bi bi-list-check"></i><span>Audit Trail</span></a></li>
 <?php elseif ($_SESSION['type'] == 1): // Manager ?>
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
-      <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i><span>E-Jeepneys</span></a></li>
+      <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i><span>E-Jeeps</span></a></li>
       <li><a href="drivers.php"><i class="bi bi-person-circle"></i><span>Drivers</span></a></li>
       <li><a href="collections.php"><i class="bi bi-cash-stack"></i><span>Collections</span></a></li>
       <li><a href="salaries.php"><i class="bi bi-wallet2"></i><span>Salaries</span></a></li>
