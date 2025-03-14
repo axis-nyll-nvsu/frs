@@ -1,28 +1,28 @@
 <?php
 /*
- * E-jeep Modal
- * Description: Driver Modal
+ * E-Jeep Modal
+ * Description: E-Jeep Modal
  * Author: Vernyll Jan P. Asis
  */
 ?>
 
 
-<!-- Add E-jeep -->
+<!-- Add E-Jeep -->
 <div class="modal fade" id="addnew">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="../controller/driverController.php">
+            <form class="form-horizontal" method="POST" action="../controller/ejeepController.php">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">Add E-jeep</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Add E-Jeep</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="plate_number" class="col-sm-3 control-label">Plate No.</label>
+                        <label for="plate" class="col-sm-3 control-label">Plate No.</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="plate_number" name="plate_number" required>
+                            <input type="text" class="form-control" id="plate" name="plate" required>
                         </div>
                     </div>
                 </div>
@@ -36,25 +36,23 @@
     </div>
 </div>
 
-
-
-<!-- Edit E-jeep -->
+<!-- Edit E-Jeep -->
 <div class="modal fade" id="edit">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="../controller/driverController.php">
+            <form class="form-horizontal" method="POST" action="../controller/ejeepController.php">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">Edit E-jeep</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Edit E-Jeep</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="edit_driver_id" name="driver_id">
+                    <input type="hidden" id="edit_ejeep_id" name="ejeep_id">
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">Plate No.</label>
+                        <label for="edit_plate" class="col-sm-3 control-label">Plate No.</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="edit_firstname" name="firstname" required>
+                            <input class="form-control" id="edit_plate" name="plate" required>
                         </div>
                     </div>
                 </div>
@@ -66,21 +64,21 @@
     </div>
 </div>
 
-<!-- Delete E-jeep -->
-<div class="modal fade" id="delete">
+<!-- Delete E-Jeep -->
+<div class="modal fade id="delete">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="../controller/driverController.php">
+            <form class="form-horizontal" method="POST" action="../controller/ejeepController.php">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">Delete E-jeep</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Delete E-Jeep</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="delete_driver_id" name="driver_id">
+                    <input type="hidden" id="delete_ejeep_id" name="ejeep_id">
                     <div class="text-center">
-                        <p>Are you sure you want to delete E-jeep?</p>
+                        <p>Are you sure you want to delete e-jeep?</p>
                     </div>
                 </div>
                 <div class="modal-footer">
