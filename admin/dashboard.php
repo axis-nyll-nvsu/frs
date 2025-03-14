@@ -192,7 +192,7 @@ if ($previous_profit != 0) {
         <p>Daily Revenue</p>
         </div>
         <div class="icon"><i class="bi bi-cash-stack" style="color: #00693e;"></i></div>
-        <a href="collections.php" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
+        <a href="#addNewCollection" data-toggle="modal" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
       </div>
       </div>
       <!-- Expenses Card -->
@@ -203,7 +203,7 @@ if ($previous_profit != 0) {
         <p>Daily Expenses</p>
         </div>
         <div class="icon"><i class="bi bi-credit-card" style="color: #00693e;"></i></div>
-        <a href="expenses.php" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Expense</a>
+        <a href="#addNewExpense" data-toggle="modal" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Expense</a>
       </div>
       </div>
       <!-- Profit Card -->
@@ -256,11 +256,22 @@ if ($previous_profit != 0) {
     </section>
   </div>
 </div>
-
-
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
 <?php include '../modal/dashboardModal.php'; ?>
+<?php include '../modal/collectionModal.php'; ?>
+<?php include '../modal/expenseModal.php'; ?>
+<script>
+$(document).ready(function() {
+    $("#date").datepicker();
+    $("#edit_date").datepicker();
+    $("#driver_id").select2();
+    $("#ejeep_id").select2();
+    $("#route_id").select2();
+    $("#category_id").select2();
+});
+
+</script>
 
   <!-- Active Script -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

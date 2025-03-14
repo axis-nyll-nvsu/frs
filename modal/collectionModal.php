@@ -8,7 +8,7 @@
 
 
 <!-- Add Collection -->
-<div class="modal fade" id="addnew">
+<div class="modal fade" id="addNewCollection">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="../controller/collectionController.php">
@@ -29,7 +29,6 @@
                         <label for="driver_id" class="col-sm-3 control-label">Driver</label>
                         <div class="col-sm-8">
                             <select id="driver_id" name="driver_id" style="width: 100%;" required>
-                                <option value="0">Select Driver</option>
                                 <?php
                                 $sql = "SELECT * FROM `frs_drivers` WHERE `deleted` != b'1'";
                                 $stmt = $this->db->query($sql);
@@ -43,10 +42,25 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="ejeep_id" class="col-sm-3 control-label">E-Jeep</label>
+                        <div class="col-sm-8">
+                            <select id="ejeep_id" name="ejeep_id" style="width: 100%;" required>
+                                <?php
+                                $sql = "SELECT * FROM `frs_ejeeps` WHERE `deleted` != b'1'";
+                                $stmt = $this->db->query($sql);
+                                while ($row = $stmt->fetch()) {
+                                ?>
+                                <option value="<?php echo $row['id'] ?>">
+                                    <?php echo $row['plate']; ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="route_id" class="col-sm-3 control-label">Route</label>
                         <div class="col-sm-8">
                             <select id="route_id" name="route_id" style="width: 100%;" required>
-                                <option value="0">Select Route</option>
                                 <?php
                                 $sql = "SELECT * FROM `frs_routes` WHERE `deleted` != b'1'";
                                 $stmt = $this->db->query($sql);
@@ -98,6 +112,13 @@
                         <div class="col-sm-8">
                             <input class="form-control" id="edit_driver_name" name="driver_name" readonly>
                             <input type="hidden" id="edit_driver_id" name="driver_id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ejeep_plate" class="col-sm-3 control-label">E-Jeep</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="edit_ejeep_plate" name="ejeep_plate" readonly>
+                            <input type="hidden" id="edit_ejeep_id" name="ejeep_id">
                         </div>
                     </div>
                     <div class="form-group">

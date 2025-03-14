@@ -20,12 +20,14 @@
         }
 
         public function getData(){ 
-            $collection_sql = "SELECT a.`id`, b.`first_name`, b.`last_name`, c.`description`, a.`date`, a.`amount`, a.`driver_id`, a.`route_id` " .
+            $collection_sql = "SELECT a.`id`, b.`first_name`, b.`last_name`, c.`plate`, d.`description`, a.`date`, a.`amount`, a.`driver_id`, a.`ejeep_id`, a.`route_id` " .
                                         "FROM `frs_collections` AS a " .
                                         "INNER JOIN `frs_drivers` AS b " .
                                         "ON a.`driver_id` = b.`id` " .
-                                        "INNER JOIN `frs_routes` AS c " .
-                                        "ON a.`route_id` = c.`id` " .
+                                        "INNER JOIN `frs_ejeeps` AS c " .
+                                        "ON a.`ejeep_id` = c.`id` " .
+                                        "INNER JOIN `frs_routes` AS d " .
+                                        "ON a.`route_id` = d.`id` " .
                                         "WHERE a.`deleted` != b'1' " .
                                         "ORDER BY a.`date` DESC";
             $collection_stmt = $this->db->query($collection_sql);
@@ -58,7 +60,7 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <a href="#addnew" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Collection</a>
+                                <a href="#addNewCollection" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Collection</a>
                             </div>
                             <div class="box-body table-responsive">
                                 <table id="example1" class="table table-bordered">
@@ -66,6 +68,7 @@
                                         <th style="width: 12px; max-width: 12px !important;">#</th>
                                         <th>Date</th>
                                         <th>Driver</th>
+                                        <th>E-Jeep</th>
                                         <th>Route</th>
                                         <th>Amount</th>
                                         <th style="width: 78px; min-width: 78px !important;">Action</th>
@@ -79,6 +82,7 @@
                                             <td><?php echo $row['date']; ?></td>
                                             <td><?php $name = $row['first_name'] . " " . $row['last_name']; echo $name; ?>
                                             </td>
+                                            <td><?php echo $row['plate']; ?></td>
                                             <td><?php echo $row['description']; ?></td>
                                             <td style="text-align: right;">Php <?php echo number_format($row['amount'], 2); ?></td>
                                             <td>
@@ -87,6 +91,8 @@
                                                 data-edit_date='<?php echo (new DateTime($row['date']))->format('m/d/Y'); ?>'
                                                 data-edit_driver_id='<?php echo $row['driver_id']; ?>'
                                                 data-edit_driver_name='<?php echo $name; ?>'
+                                                data-edit_ejeep_id='<?php echo $row['ejeep_id']; ?>'
+                                                data-edit_ejeep_plate='<?php echo $row['plate']; ?>'
                                                 data-edit_route_id='<?php echo $row['route_id']; ?>'
                                                 data-edit_route_description='<?php echo $row['description']; ?>'
                                                 data-edit_amount='<?php echo $row['amount']; ?>'> Edit</button>
@@ -113,6 +119,7 @@ $(document).ready(function() {
     $("#date").datepicker();
     $("#edit_date").datepicker();
     $("#driver_id").select2();
+    $("#ejeep_id").select2();
     $("#route_id").select2();
 });
 
@@ -123,6 +130,8 @@ $(document).on('click', '.edit', function(e){
     var edit_date = $(this).data('edit_date');
     var edit_driver_id = $(this).data('edit_driver_id');
     var edit_driver_name = $(this).data('edit_driver_name');
+    var edit_ejeep_id = $(this).data('edit_ejeep_id');
+    var edit_ejeep_plate = $(this).data('edit_ejeep_plate');
     var edit_route_id = $(this).data('edit_route_id');
     var edit_route_description = $(this).data('edit_route_description');
     var edit_amount = $(this).data('edit_amount');
@@ -130,6 +139,8 @@ $(document).on('click', '.edit', function(e){
     $('#edit_date').datepicker('setDate', new Date(edit_date));
     $('#edit_driver_id').val(edit_driver_id)
     $('#edit_driver_name').val(edit_driver_name)
+    $('#edit_ejeep_id').val(edit_ejeep_id)
+    $('#edit_ejeep_plate').val(edit_ejeep_plate)
     $('#edit_route_id').val(edit_route_id)
     $('#edit_route_description').val(edit_route_description)
     $('#edit_amount').val(edit_amount)
