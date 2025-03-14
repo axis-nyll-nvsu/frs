@@ -21,9 +21,9 @@ Income Statement and Cash Flow Statement
 
 ### Others
 
-1. add fare collection / add booking collection  
-  Columns:  
-  Date | Driver | Unit # | Route | Amount
+1. ~~add fare collection / add booking collection~~  
+  ~~Columns:~~  
+  ~~Date | Driver | Unit # | Route | Amount~~ *Done: 03-14-25 @ #d7b863*
 2. add option wherein users can add no. of E-Jeep.
 3. add a table that shows monthly expenses, revenue, and profit. `Is this per category or per driver?`
 4. add expenses: include a button where users can add new category.

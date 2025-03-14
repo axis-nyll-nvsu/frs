@@ -60,7 +60,7 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <a href="#addNewCollection" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Collection</a>
+                                <a href="#addCollection" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Collection</a>
                             </div>
                             <div class="box-body table-responsive">
                                 <table id="example1" class="table table-bordered">
@@ -125,7 +125,7 @@ $(document).ready(function() {
 
 $(document).on('click', '.edit', function(e){
     e.preventDefault();
-    $('#edit').modal('show');
+    $('#editCollection').modal('show');
     var edit_collection_id = $(this).data('edit_collection_id');
     var edit_date = $(this).data('edit_date');
     var edit_driver_id = $(this).data('edit_driver_id');
@@ -148,7 +148,7 @@ $(document).on('click', '.edit', function(e){
 
 $(document).on('click', '.delete', function(e){
     e.preventDefault();
-    $('#delete').modal('show');
+    $('#deleteCollection').modal('show');
     var delete_collection_id = $(this).data('delete_collection_id');
     $('#delete_collection_id').val(delete_collection_id)
 });

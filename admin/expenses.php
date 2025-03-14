@@ -56,7 +56,7 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <a href="#addNewExpense" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Expense</a>
+                                <a href="#addExpense" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Expense</a>
                             </div>
                             <div class="box-body table-responsive">
                                 <table id="example1" class="table table-bordered">
@@ -115,7 +115,7 @@
         
         $(document).on('click', '.edit', function(e){
             e.preventDefault();
-            $('#edit').modal('show');
+            $('#editExpense').modal('show');
             var edit_expense_id = $(this).data('edit_expense_id');
             var edit_date = $(this).data('edit_date');
             var edit_category_id = $(this).data('edit_category_id');
@@ -132,7 +132,7 @@
 
         $(document).on('click', '.delete', function(e){
             e.preventDefault();
-            $('#delete').modal('show');
+            $('#deleteExpense').modal('show');
             var delete_expense_id = $(this).data('delete_expense_id');
             $('#delete_expense_id').val(delete_expense_id)
         });

@@ -8,7 +8,7 @@
 
 
 <!-- Add Collection -->
-<div class="modal fade" id="addNewCollection">
+<div class="modal fade" id="addCollection">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="../controller/collectionController.php">
@@ -27,8 +27,8 @@
                     </div>
                     <div class="form-group">
                         <label for="driver_id" class="col-sm-3 control-label">Driver</label>
-                        <div class="col-sm-8">
-                            <select id="driver_id" name="driver_id" style="width: 100%;" required>
+                        <div class="col-sm-8" style="display: flex;">
+                            <select id="driver_id" name="driver_id" style="width: 90%;" required>
                                 <?php
                                 $sql = "SELECT * FROM `frs_drivers` WHERE `deleted` != b'1'";
                                 $stmt = $this->db->query($sql);
@@ -39,12 +39,13 @@
                                 </option>
                                 <?php } ?>
                             </select>
+                            <a href="#addDriver" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="ejeep_id" class="col-sm-3 control-label">E-Jeep</label>
-                        <div class="col-sm-8">
-                            <select id="ejeep_id" name="ejeep_id" style="width: 100%;" required>
+                        <div class="col-sm-8" style="display: flex;">
+                            <select id="ejeep_id" name="ejeep_id" style="width: 90%;" required>
                                 <?php
                                 $sql = "SELECT * FROM `frs_ejeeps` WHERE `deleted` != b'1'";
                                 $stmt = $this->db->query($sql);
@@ -55,12 +56,13 @@
                                 </option>
                                 <?php } ?>
                             </select>
+                            <a href="#addEjeep" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="route_id" class="col-sm-3 control-label">Route</label>
-                        <div class="col-sm-8">
-                            <select id="route_id" name="route_id" style="width: 100%;" required>
+                        <div class="col-sm-8" style="display: flex;">
+                            <select id="route_id" name="route_id" style="width: 90%;" required>
                                 <?php
                                 $sql = "SELECT * FROM `frs_routes` WHERE `deleted` != b'1'";
                                 $stmt = $this->db->query($sql);
@@ -71,6 +73,7 @@
                                 </option>
                                 <?php } ?>
                             </select>
+                            <a href="#addRoute" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -89,7 +92,7 @@
 </div>
 
 <!-- Edit Collection -->
-<div class="modal fade" id="edit">
+<div class="modal fade" id="editCollection">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="../controller/collectionController.php">
@@ -144,7 +147,7 @@
 </div>
 
 <!-- Delete Collection -->
-<div class="modal fade" id="delete">
+<div class="modal fade" id="deleteCollection">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="../controller/collectionController.php">
