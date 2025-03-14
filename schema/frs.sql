@@ -65,6 +65,9 @@ CREATE TABLE `frs_routes` (
     `updated_by` int(11) NOT NULL
 );
 
+INSERT INTO `frs_routes` (`id`, `description`, `deleted`, `created_by`) VALUES
+    (1, 'Bayombong - Solano', b'0', 1);
+
 CREATE TABLE `frs_salaries` (
     `id` int(11) NOT NULL,
     `driver_id` int(11) NOT NULL,
@@ -153,7 +156,7 @@ ALTER TABLE `frs_expenses`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `frs_routes`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `frs_salaries`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
