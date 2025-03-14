@@ -70,12 +70,7 @@ $id = 1;
 foreach ($accounts as $row) { ?>
 <tr>
     <td><?php echo $id; ?></td>
-    <?php
-    echo "<td>" . $row['first_name'] . " ";
-    echo ($row['middle_name'] != "") ? $row['middle_name'] . " " : "";
-    echo $row['last_name'] . "</td>";
-    ?>
-
+    <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
     <td><?php echo $row['email']; ?></td>
     <?php
     switch($row['type']) {
@@ -91,7 +86,6 @@ foreach ($accounts as $row) { ?>
         data-edit_type="<?php echo $row['type']; ?>"
         data-edit_email="<?php echo $row['email']; ?>"
         data-edit_firstname="<?php echo $row['first_name']; ?>"
-        data-edit_middlename="<?php echo $row['middle_name']; ?>"
         data-edit_lastname="<?php echo $row['last_name']; ?>"
         data-edit_address="<?php echo $row['address']; ?>"
         data-edit_contact="<?php echo $row['contact']; ?>"> Edit</button>
@@ -126,7 +120,6 @@ $(document).on('click', '.edit', function(e){
     var edit_type = $(this).data('edit_type');
     var edit_email = $(this).data('edit_email');
     var edit_firstname = $(this).data('edit_firstname');
-    var edit_middlename = $(this).data('edit_middlename');
     var edit_lastname = $(this).data('edit_lastname');
     var edit_address = $(this).data('edit_address');
     var edit_contact = $(this).data('edit_contact');
@@ -134,7 +127,6 @@ $(document).on('click', '.edit', function(e){
     $('#edit_type').val(edit_type);
     $('#edit_email').val(edit_email);
     $('#edit_firstname').val(edit_firstname);
-    $('#edit_middlename').val(edit_middlename);
     $('#edit_lastname').val(edit_lastname);
     $('#edit_address').val(edit_address);
     $('#edit_contact').val(edit_contact);

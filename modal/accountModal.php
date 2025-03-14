@@ -48,12 +48,6 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="middlename" class="col-sm-3 control-label">Middle Name</label>
-            <div class="col-sm-8">
-              <input class="form-control" id="middlename" name="middlename" required>
-            </div>
-          </div>
-          <div class="form-group">
             <label for="lastname" class="col-sm-3 control-label">Last Name</label>
             <div class="col-sm-8">
               <input class="form-control" id="lastname" name="lastname" required>
@@ -125,12 +119,6 @@
             <label for="firstname" class="col-sm-3 control-label">First Name</label>
             <div class="col-sm-8">
               <input class="form-control" id="edit_firstname" name="firstname" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="middlename" class="col-sm-3 control-label">Middle Name</label>
-            <div class="col-sm-8">
-              <input class="form-control" id="edit_middlename" name="middlename" required>
             </div>
           </div>
           <div class="form-group">
