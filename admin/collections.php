@@ -66,7 +66,7 @@
                     <th style="width: 12px; max-width: 12px !important;">#</th>
                     <th>Date</th>
                     <th>Driver</th>
-                    <th>route</th>
+                    <th>Route</th>
                     <th>Amount</th>
                     <th style="width: 78px; min-width: 78px !important;">Action</th>
                   </thead>

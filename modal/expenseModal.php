@@ -30,7 +30,7 @@
             <div class="col-sm-8">
               <select class="form-control" id="category_id" name="category_id" style="width: 100%;" required>
               <?php
-              $sql = "SELECT * FROM `frs_ecategories`";
+              $sql = "SELECT * FROM `frs_categories`";
               $stmt = $this->db->query($sql);
               while ($row = $stmt->fetch()) {
               ?>

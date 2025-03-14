@@ -192,7 +192,7 @@ if ($previous_profit != 0) {
         <p>Daily Revenue</p>
         </div>
         <div class="icon"><i class="bi bi-cash-stack" style="color: #00693e;"></i></div>
-        <a href="#addCollection" data-toggle="modal" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
+        <a href="collections.php" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
       </div>
       </div>
       <!-- Expenses Card -->
