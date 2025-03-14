@@ -67,12 +67,7 @@ foreach ($trails as $row) { ?>
 <tr>
     <td><?php echo $id; ?></td>
     <td><?php echo (new DateTime($row['date']))->format('M d, Y h:iA'); ?></td>
-    <?php
-    echo "<td>" . $row['first_name'] . " ";
-    echo ($row['middle_name'] != "") ? $row['middle_name'] . " " : "";
-    echo $row['last_name'] . "</td>";
-    ?>
-
+    <td><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
     <td><?php echo $row['description']; ?></td>
 </tr>
 <?php $id++; } ?>
