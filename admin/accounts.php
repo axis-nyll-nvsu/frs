@@ -36,13 +36,9 @@ $accounts = $account->getData();
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-        <!-- Content Wrapper. Contains page content -->
-
 <?php include '../common/navbar.php'; ?>
 <?php include '../common/sidebar.php'; ?>
-
         <div class="content-wrapper">
-            <!-- Content Header -->
             <section class="content-header">
                 <h1>Accounts</h1>
                 <ol class="breadcrumb">
@@ -50,8 +46,6 @@ $accounts = $account->getData();
                     <li class="active">Accounts</li>
                 </ol>
             </section>
-
-            <!-- Main Content -->
             <section class="content">
                 <div class="row">
                     <div class="col-xs-12">
@@ -115,12 +109,10 @@ foreach ($accounts as $row) { ?>
             </section>
         </div>
     </div>
-
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
 <?php include '../modal/accountModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
-
 <script>
 $(document).ready(function() {
     $('#type').select2();

@@ -191,8 +191,38 @@ class Report {
 
         $profitThisYear = $profitLastYear + $net_increase;
 
-        $data = array(
-        );
+        $data = [
+            'period' => $period,
+            'profitLastYear' => $profitLastYear,
+            'operating_fares' => $operating_fares,
+            'operating_fees' => $operating_fees,
+            'operating_otherCollections' => $operating_otherCollections,
+            'operating_salaries' => $operating_salaries,
+            'operating_incentives' => $operating_incentives,
+            'operating_benefits' => $operating_benefits,
+            'operating_utilities' => $operating_utilities,
+            'operating_supplies' => $operating_supplies,
+            'operating_meals' => $operating_meals,
+            'operating_maintenance' => $operating_maintenance,
+            'operating_legal' => $operating_legal,
+            'operating_otherExpenses' => $operating_otherExpenses,
+            'net_operating' => $net_operating,
+            'investing_shareCapital' => $investing_shareCapital,
+            'investing_equipment' => $investing_equipment,
+            'net_investing' => $net_investing,
+            'financing_borrowing' => $financing_borrowing,
+            'financing_dividends' => $financing_dividends,
+            'net_financing' => $net_financing,
+            'net_increase' => $net_increase,
+            'profitThisYear' => $profitThisYear
+        ];
+
+        return $data;
+    }
+}
+
+$report = new Report();
+$reports = $report->getData();
 ?>
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
@@ -200,245 +230,233 @@ class Report {
 <?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
+    <div class="wrapper">
 <?php include '../common/navbar.php'; ?>
 <?php include '../common/sidebar.php'; ?>
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-<!-- Content Header -->
-<section class="content-header">
-<h1>Financial Reports &mdash; Statement of Cash Flows</h1>
-<ol class="breadcrumb">
-<li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> Home</a></li>
-<li>Financial Reports</li>
-<li class="active">Statement of Cash Flows</li>
-</ol>
-</section>
-
-<!-- Main Content -->
-<section class="content">
-<div class="row">
-<div class="col-xs-12">
-<div class="box">
-<div class="box-header with-border">
-<div style="position: relative">
-<form method="GET" action="" style="display: flex; width: 245px; position: absolute; top: 0; left: 0; z-index: 10;">
-<select name="period" class="form-control axis-form-control" style="margin-right: 3px">
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>Financial Reports &mdash; Statement of Cash Flows</h1>
+                <ol class="breadcrumb">
+                    <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> Home</a></li>
+                    <li>Financial Reports</li>
+                    <li class="active">Statement of Cash Flows</li>
+                </ol>
+            </section>
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <div style="position: relative">
+                                    <form method="GET" action="" style="display: flex; width: 245px; position: absolute; top: 0; left: 0; z-index: 10;">
+                                        <select name="period" class="form-control axis-form-control" style="margin-right: 3px">
 <?php
 $year = date('Y');
 for($i = 1; $i <= 5; $i++) {
-echo '<option value="' . $year . '" ';
-if($year == $period) echo 'selected';
-echo '>Fiscal Year: ' . $year . '</option>';
-$year--;
+    echo '<option value="' . $year . '" ';
+    if($year == $period) echo 'selected';
+    echo '>Fiscal Year: ' . $year . '</option>';
+    $year--;
 }
 ?>
-</select>
-<button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
-</form>
-<h3 style="text-align: center; font-weight: bold; margin-top: 0;">Statement of Cash Flow</h3>
-<a href="cashflow_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Statement of Cash Flows</a>
-<h4 style="text-align: center; font-size: 1em;">For the Year Ending <?php echo "Dec 31, " . $period; ?></h4>
-</div>
-</div>
-<div class="box-body table-responsive">
-<table class="table">
-<thead>
-<th style="width: 30px; max-width: 30px !important;"></th>
-<th style="text-align: right;">Cash at Beginning of Year</th>
-<th style="text-align: right; width: 150px; max-width: 150px !important;"><?php echo "Php " . number_format($profitLastYear, 2); ?></th>
-</thead>
-<tbody>
-<!-- Operating Activities -->
-<tr style="background-color: #00693e; font-weight: bold;">
-<td colspan="3" style="color: #fff;">Operating Activities</td>
-</tr>
-<tr>
-<td colspan="3">Cash receipts from</td>
-</tr>
-<tr>
-<td></td>
-<td>Driver Collections</td>
-<td style="text-align: right;"><?php echo number_format($operating_fares, 2); ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Miscellaneous Fees</td>
-<td style="text-align: right;"><?php echo number_format($operating_fees, 2); ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Other Collections</td>
-<td style="text-align: right;"><?php echo number_format($operating_otherCollections, 2); ?></td>
-</tr>
-<tr>
-<td colspan="3">Cash paid for</td>
-</tr>
-<tr>
-<td></td>
-<td>Driver Salaries</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_salaries, 2) . " )"; ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Driver Incentives</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_incentives, 2) . " )"; ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Driver Benefits</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_benefits, 2) . " )"; ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Utilities</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_utilities, 2) . " )"; ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Office Supplies</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_supplies, 2) . " )"; ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Meals & Snacks</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_meals, 2) . " )"; ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Maintenance Fees</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_maintenance, 2) . " )"; ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Legal Fees</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_legal, 2) . " )"; ?></td>
-</tr>
-<tr>
-<td></td>
-<td>Other Expenses</td>
-<td style="text-align: right;"><?php echo "( " . number_format($operating_otherExpenses, 2) . " )"; ?></td>
-</tr>
-<tr style="background-color: #fafafa; font-weight: bold;">
-<td colspan="2">Net Cash Flow from Operating Activities</td>
-<td style="text-align: right;">
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
+                                    </form>
+                                    <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Statement of Cash Flow</h3>
+                                    <a href="cashflow_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Statement of Cash Flows</a>
+                                    <h4 style="text-align: center; font-size: 1em;">For the Year Ending <?php echo "Dec 31, " . $reports['period']; ?></h4>
+                                </div>
+                            </div>
+                            <div class="box-body table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <th style="width: 30px; max-width: 30px !important;"></th>
+                                        <th style="text-align: right;">Cash at Beginning of Year</th>
+                                        <th style="text-align: right; width: 150px; max-width: 150px !important;"><?php echo "Php " . number_format($reports['profitLastYear'], 2); ?></th>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Operating Activities -->
+                                        <tr style="background-color: #00693e; font-weight: bold;">
+                                            <td colspan="3" style="color: #fff;">Operating Activities</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">Cash receipts from</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Driver Collections</td>
+                                            <td style="text-align: right;"><?php echo number_format($reports['operating_fares'], 2); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Miscellaneous Fees</td>
+                                            <td style="text-align: right;"><?php echo number_format($reports['operating_fees'], 2); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Other Collections</td>
+                                            <td style="text-align: right;"><?php echo number_format($reports['operating_otherCollections'], 2); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">Cash paid for</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Driver Salaries</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_salaries'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Driver Incentives</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_incentives'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Driver Benefits</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_benefits'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Utilities</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_utilities'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Office Supplies</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_supplies'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Meals & Snacks</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_meals'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr>
+                                        <td></td>
+                                            <td>Maintenance Fees</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_maintenance'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Legal Fees</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_legal'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Other Expenses</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_otherExpenses'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr style="background-color: #fafafa; font-weight: bold;">
+                                            <td colspan="2">Net Cash Flow from Operating Activities</td>
+                                            <td style="text-align: right;">
 <?php
-if($net_operating < 0)
-echo "( Php " . number_format(abs($net_operating), 2) . " )";
+if($reports['net_operating'] < 0)
+    echo "( Php " . number_format(abs($reports['net_operating']), 2) . " )";
 else
-echo "Php " . number_format($net_operating, 2);
+    echo "Php " . number_format($reports['net_operating'], 2);
 ?>
-</td>
-</tr>
-<!-- Investing Activities -->
-<tr style="background-color: #00693e; font-weight: bold;">
-<td colspan="3" style="color: #fff;">Investing Activities</td>
-</tr>
-<tr>
-<td colspan="3">Cash receipts from</td>
-</tr>
-<tr>
-<td></td>
-<td>Share Capital</td>
-<td style="text-align: right;"><?php echo number_format($investing_shareCapital, 2); ?></td>
-</tr>
-<tr>
-<td colspan="3">Cash paid for</td>
-</tr>
-<tr>
-<td></td>
-<td>Equipment</td>
-<td style="text-align: right;"><?php echo "( " . number_format($investing_equipment, 2) . " )"; ?></td>
-</tr>
-<tr style="background-color: #fafafa; font-weight: bold;">
-<td colspan="2">Net Cash Flow from Investing Activities</td>
-<td style="text-align: right;">
+                                            </td>
+                                        </tr>
+                                        <!-- Investing Activities -->
+                                        <tr style="background-color: #00693e; font-weight: bold;">
+                                            <td colspan="3" style="color: #fff;">Investing Activities</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">Cash receipts from</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Share Capital</td>
+                                            <td style="text-align: right;"><?php echo number_format($reports['investing_shareCapital'], 2); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">Cash paid for</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Equipment</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['investing_equipment'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr style="background-color: #fafafa; font-weight: bold;">
+                                            <td colspan="2">Net Cash Flow from Investing Activities</td>
+                                            <td style="text-align: right;">
 <?php
-if($net_investing < 0)
-echo "( Php " . number_format(abs($net_investing), 2) . " )";
+if($reports['net_investing'] < 0)
+    echo "( Php " . number_format(abs($reports['net_investing']), 2) . " )";
 else
-echo "Php " . number_format($net_investing, 2);
+    echo "Php " . number_format($reports['net_investing'], 2);
 ?>
-</td>
-</tr>
-<!-- Financing Activities -->
-<tr style="background-color: #00693e; font-weight: bold;">
-<td colspan="3" style="color: #fff;">Financing Activities</td>
-</tr>
-<tr>
-<td colspan="3">Cash receipts from</td>
-</tr>
-<tr>
-<td></td>
-<td>Borrowing</td>
-<td style="text-align: right;"><?php echo number_format($financing_borrowing, 2); ?></td>
-</tr>
-<tr>
-<td colspan="3">Cash paid for</td>
-</tr>
-<tr>
-<td></td>
-<td>Dividends</td>
-<td style="text-align: right;"><?php echo "( " . number_format($financing_dividends, 2) . " )"; ?></td>
-</tr>
-<tr style="background-color: #fafafa; font-weight: bold;">
-<td colspan="2">Net Cash Flow from Financing Activities</td>
-<td style="text-align: right;">
+                                            </td>
+                                        </tr>
+                                        <!-- Financing Activities -->
+                                        <tr style="background-color: #00693e; font-weight: bold;">
+                                            <td colspan="3" style="color: #fff;">Financing Activities</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">Cash receipts from</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Borrowing</td>
+                                            <td style="text-align: right;"><?php echo number_format($reports['financing_borrowing'], 2); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">Cash paid for</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Dividends</td>
+                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['financing_dividends'], 2) . " )"; ?></td>
+                                        </tr>
+                                        <tr style="background-color: #fafafa; font-weight: bold;">
+                                            <td colspan="2">Net Cash Flow from Financing Activities</td>
+                                            <td style="text-align: right;">
 <?php
-if($net_financing < 0)
-echo "( Php " . number_format(abs($net_financing), 2) . " )";
+if($reports['net_financing'] < 0)
+    echo "( Php " . number_format(abs($reports['net_financing']), 2) . " )";
 else
-echo "Php " . number_format($net_financing, 2);
+    echo "Php " . number_format($reports['net_financing'], 2);
 ?>
-</td>
-</tr>
-<!-- Net Increase in Cash -->
-<tr style="background-color: #fafafa; font-weight: bold;">
-<td colspan="2">Net Increase in Cash</td>
-<td style="text-align: right;">
+                                            </td>
+                                        </tr>
+                                        <!-- Net Increase in Cash -->
+                                        <tr style="background-color: #fafafa; font-weight: bold;">
+                                            <td colspan="2">Net Increase in Cash</td>
+                                            <td style="text-align: right;">
 <?php
-if($net_increase < 0)
-echo "( Php " . number_format(abs($net_increase), 2) . " )";
+if($reports['net_increase'] < 0)
+    echo "( Php " . number_format(abs($reports['net_increase']), 2) . " )";
 else
-echo "Php " . number_format($net_increase, 2);
+    echo "Php " . number_format($reports['net_increase'], 2);
 ?>
-</td>
-</tr>
-<tr style="text-align: right; font-weight: bold;">
-<td colspan="2">Cash at End of Year</td>
-<td style="text-align: right;">
+                                            </td>
+                                        </tr>
+                                        <tr style="text-align: right; font-weight: bold;">
+                                            <td colspan="2">Cash at End of Year</td>
+                                            <td style="text-align: right;">
 <?php
-if($profitThisYear < 0)
-echo "( Php " . number_format(abs($profitThisYear), 2) . " )";
+if($reports['profitThisYear'] < 0)
+    echo "( Php " . number_format(abs($reports['profitThisYear']), 2) . " )";
 else
-echo "Php " . number_format($profitThisYear, 2);
+    echo "Php " . number_format($reports['profitThisYear'], 2);
 ?>
-</td>
-</tr>
-</tbody>
-</table><br>
-<p>
-<small>
-Report generated on <?php echo date('M d, Y h:iA', strtotime(date('Y-m-d h:iA') . ' +7 hours')); ?>.<br>
-Disclaimer: The data presented is based on the information available in the system at the time of generation and may be subject to change.
-</small><br>
-</p>
-</div>
-</div> <!-- /.box -->
-</div>
-</div>
-</section>
-</div>
-</div>
-
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>
+                                    <small>
+                                    Report generated on <?php echo date('M d, Y h:iA', strtotime(date('Y-m-d h:iA') . ' +7 hours')); ?>.<br>
+                                    Disclaimer: The data presented is based on the information available in the system at the time of generation and may be subject to change.
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
-<?php
-}
-}
-$report = new Report(); $report->getData();
-?>
 </body>
 </html>
