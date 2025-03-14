@@ -15,7 +15,7 @@
       <li class="axis-header"><img src="../images/logo.png" width="50px"></li>
 <?php if ($_SESSION['type'] == 0): // Administrator ?>
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
-      <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i><span>E-Jeepneys</span></a></li>
+      <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i><span>E-Jeeps</span></a></li>
       <li><a href="drivers.php"><i class="bi bi-person-circle"></i><span>Drivers</span></a></li>
       <li><a href="collections.php"><i class="bi bi-cash-stack"></i><span>Collections</span></a></li>
       <li><a href="salaries.php"><i class="bi bi-wallet2"></i><span>Salaries</span></a></li>
