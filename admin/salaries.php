@@ -119,7 +119,7 @@
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
 <?php include '../modal/salaryModal.php'; ?>
-<?php include '../modal/message2Modal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
 
   <script>
     $(document).ready(function() {

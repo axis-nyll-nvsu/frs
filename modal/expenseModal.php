@@ -22,7 +22,7 @@
           <div class="form-group">
             <label for="date" class="col-sm-3 control-label">Date</label>
             <div class="col-sm-8">
-              <input class="form-control" id="date" name="date" value="<?php echo date("m/d/Y"); ?>" required>
+              <input class="form-control" id="date" name="date" value="<?php echo date('m/d/Y'); ?>" required>
             </div>
           </div>
           <div class="form-group">

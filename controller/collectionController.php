@@ -20,7 +20,7 @@ class CollectionController {
         $user = $_SESSION['user_id'];
         $date = date('Y-m-d',strtotime($_POST['date']));
         $driver = $_POST['driver_id'];
-        $terminal = $_POST['terminal_id'];
+        $route = $_POST['route_id'];
         $amount = $_POST['amount'];
 
         $sql = "SELECT * FROM `frs_collections` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1'";
@@ -32,16 +32,16 @@ class CollectionController {
             echo "<script>window.location.href='../admin/collections.php';</script>";
         }
         else {
-            $sqlinsert = "INSERT INTO `frs_collections`(`date`, `driver_id`, `terminal_id`, `amount`, `created_by`) VALUES (?,?,?,?,?)";
+            $sqlinsert = "INSERT INTO `frs_collections`(`date`, `driver_id`, `route_id`, `amount`, `created_by`) VALUES (?,?,?,?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
-            $statementinsert->execute([$date, $driver, $terminal, $amount, $user]);
+            $statementinsert->execute([$date, $driver, $route, $amount, $user]);
 
             $description = "Added a new collection.";
-            $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+            $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
-            $_SESSION['success'] = 'success';
+            $_SESSION['success'] = 'Success: Collection added!';
             echo "<script>window.location.href='../admin/collections.php';</script>";
         }
     }
@@ -49,6 +49,7 @@ class CollectionController {
     public function editCollection() {
         $user = $_SESSION['user_id'];
         $collection = $_POST['collection_id'];
+        $driver = $_POST['driver_id'];
         $date = date('Y-m-d',strtotime($_POST['date']));
         $amount = $_POST['amount'];
 
@@ -66,11 +67,11 @@ class CollectionController {
             $statementupdate->execute([$date, $amount, $user, $collection]);
 
             $description = "Updated collection collection.";
-            $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+            $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
-            $_SESSION['updated'] = 'updated';
+            $_SESSION['updated'] = 'Success: Collection updated!';
             echo "<script>window.location.href='../admin/collections.php';</script>";
         }
     }
@@ -84,11 +85,11 @@ class CollectionController {
         $statementupdate->execute([$user, $collection]);
 
         $description = "Deleted collection.";
-        $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+        $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
-        $_SESSION['deleted'] = 'deleted';
+        $_SESSION['deleted'] = 'Success: Collection deleted!';
         echo "<script>window.location.href='../admin/collections.php';</script>";
     }
 }
