@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label for="description" class="col-sm-3 control-label">Route</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="description" name="route_description" required>
+                            <input class="form-control" id="description" name="description" required>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                     <h3 class="modal-title" style="color: #00693e;">Delete Route</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="delete_driver_id" name="driver_id">
+                    <input type="hidden" id="delete_route_id" name="route_id">
                     <div class="text-center">
                         <p>Are you sure you want to delete Route?</p>
                     </div>

@@ -50,7 +50,7 @@ class RouteController {
 
         $sql = "SELECT * FROM `frs_routes` WHERE `description` = ? AND `deleted` != b'1' AND `id` != ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$route, $description]);
+        $stmt->execute([$description, $route]);
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = "Error: Route already exists!";
