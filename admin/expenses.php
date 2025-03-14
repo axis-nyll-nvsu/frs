@@ -22,7 +22,7 @@
     public function getData(){       
       $expense_sql = "SELECT a.`id`, b.`description` AS `category`, a.`date`, a.`description`, a.`amount`, a.`category_id` " . 
                     "FROM `frs_expenses` AS a " .
-                    "INNER JOIN `frs_ecategories` AS b " .
+                    "INNER JOIN `frs_categories` AS b " .
                     "ON a.`category_id` = b.`id` " .
                     "WHERE a.`deleted` != b'1' " .
                     "ORDER BY a.`date` DESC, b.`id` ASC";

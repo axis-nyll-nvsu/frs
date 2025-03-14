@@ -17,7 +17,7 @@
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
       <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i><span>E-Jeepneys</span></a></li>
       <li><a href="drivers.php"><i class="bi bi-person-circle"></i><span>Drivers</span></a></li>
-      <li><a href="fares.php"><i class="bi bi-cash-stack"></i><span>Collections</span></a></li>
+      <li><a href="collections.php"><i class="bi bi-cash-stack"></i><span>Collections</span></a></li>
       <li><a href="salaries.php"><i class="bi bi-wallet2"></i><span>Salaries</span></a></li>
       <li><a href="expenses.php"><i class="bi bi-receipt"></i><span>Expenses</span></a></li>
       <li class="treeview">
@@ -34,7 +34,7 @@
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
       <li><a href="ejeeps.php"><i class="bi bi-truck-front"></i><span>E-Jeepneys</span></a></li>
       <li><a href="drivers.php"><i class="bi bi-person-circle"></i><span>Drivers</span></a></li>
-      <li><a href="fares.php"><i class="bi bi-cash-stack"></i><span>Collections</span></a></li>
+      <li><a href="collections.php"><i class="bi bi-cash-stack"></i><span>Collections</span></a></li>
       <li><a href="salaries.php"><i class="bi bi-wallet2"></i><span>Salaries</span></a></li>
       <li><a href="expenses.php"><i class="bi bi-receipt"></i><span>Expenses</span></a></li>
       <li class="treeview">
@@ -47,8 +47,7 @@
       </li>
 <?php elseif ($_SESSION['type'] == 2): // Cashier ?>
       <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
-      <li><a href="fares.php"><i class="bi bi-cash-stack"></i><span>Fare Collections</span></a></li>
-      <li><a href="collections.php"><i class="bi bi-wallet2"></i><span>Other Collections</span></a></li>
+      <li><a href="collections.php"><i class="bi bi-cash-stack"></i><span>Collections</span></a></li>
       <li><a href="expenses.php"><i class="bi bi-receipt"></i><span>Expenses</span></a></li>
 <?php endif; ?>
     </ul>

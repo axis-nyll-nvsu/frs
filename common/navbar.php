@@ -42,7 +42,6 @@ $row = $stmt->fetch();
                                 <a href="#profile" data-toggle="modal" class="btn btn-default btn-flat" id="admin_profile"
                                 data-user_id="<?php echo $_SESSION['user_id']; ?>"
                                 data-firstname="<?php echo $row['first_name']; ?>"
-                                data-middlename="<?php echo $row['middle_name']; ?>"
                                 data-lastname="<?php echo $row['last_name']; ?>"
                                 data-email="<?php echo $row['email']; ?>"
                                 data-address="<?php echo $row['address']; ?>"

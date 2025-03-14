@@ -1,14 +1,14 @@
 <?php
 /*
- * Collection Controller
- * Description: Collection Controller
+ * Fare Controller
+ * Description: Fare Controller
  * Author: Vernyll Jan P. Asis
  */
 
 session_start();
 require_once '../config/config.php';
 
-class CollectionController {
+class FareController {
     private $db;
 
     public function __construct() {
@@ -16,87 +16,85 @@ class CollectionController {
         $this->db = $conn->getConnection();
     }
 
-    public function addOtherCollection() {
+    public function addFareCollection() {
         $user = $_SESSION['user_id'];
         $date = date('Y-m-d',strtotime($_POST['date']));
-        $receipt = $_POST['receipt'];
-        $category = $_POST['category_id'];
+        $driver = $_POST['driver_id'];
+        $terminal = $_POST['terminal_id'];
         $amount = $_POST['amount'];
 
-        $sql = "SELECT * FROM `frs_collections` WHERE `date` = ? AND `category_id` = ? AND `deleted` != b'1'";
+        $sql = "SELECT * FROM `frs_fares` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$date, $category]);
+        $stmt->execute([$date, $driver]);
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = 'error';
-            echo "<script>window.location.href='../admin/collections.php';</script>";
+            echo "<script>window.location.href='../admin/fares.php';</script>";
         }
         else {
-            $sqlinsert = "INSERT INTO `frs_collections`(`date`, `receipt`, `category_id`, `amount`, `created_by`) VALUES (?,?,?,?,?)";
+            $sqlinsert = "INSERT INTO `frs_fares`(`date`, `driver_id`, `terminal_id`, `amount`, `created_by`) VALUES (?,?,?,?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
-            $statementinsert->execute([$date, $receipt, $category, $amount, $user]);
+            $statementinsert->execute([$date, $driver, $terminal, $amount, $user]);
 
-            $description = "Added a new other collection.";
+            $description = "Added a new fare collection.";
             $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
             $_SESSION['success'] = 'success';
-            echo "<script>window.location.href='../admin/collections.php';</script>";
+            echo "<script>window.location.href='../admin/fares.php';</script>";
         }
     }
 
-    public function editOtherCollection() {
+    public function editFareCollection() {
         $user = $_SESSION['user_id'];
-        $collection = $_POST['collection_id'];
+        $fare = $_POST['fare_id'];
         $date = date('Y-m-d',strtotime($_POST['date']));
-        $receipt = $_POST['receipt'];
-        $category = $_POST['category_id'];
         $amount = $_POST['amount'];
 
-        $sql = "SELECT * FROM `frs_collections` WHERE `date` = ? AND `category_id` = ? AND `deleted` != b'1' AND `id` != ?";
+        $sql = "SELECT * FROM `frs_fares` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1' AND `id` != ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$date, $category, $collection]);
+        $stmt->execute([$date, $driver, $fare]);
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = 'error';
-            echo "<script>window.location.href='../admin/collections.php';</script>";
+            echo "<script>window.location.href='../admin/fares.php';</script>";
         }
         else {
-            $sqlupdate = "UPDATE `frs_collections` SET `date` = ?, `receipt` = ?, `category_id` = ?, `amount` = ?, `updated_by` = ? WHERE `id` = ?";
+            $sqlupdate = "UPDATE `frs_fares` SET `date` = ?, `amount` = ?, `updated_by` = ? WHERE `id` = ?";
             $statementupdate = $this->db->prepare($sqlupdate);
-            $statementupdate->execute([$date, $receipt, $category, $amount, $user, $collection]);
+            $statementupdate->execute([$date, $amount, $user, $fare]);
 
-            $description = "Updated other collection.";
+            $description = "Updated fare collection.";
             $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
             $_SESSION['updated'] = 'updated';
-            echo "<script>window.location.href='../admin/collections.php';</script>";
+            echo "<script>window.location.href='../admin/fares.php';</script>";
         }
     }
 
-    public function deleteOtherCollection() {
+    public function deleteFareCollection() {
         $user = $_SESSION['user_id'];
-        $collection = $_POST['collection_id'];
+        $fare = $_POST['fare_id'];
 
-        $sqlupdate = "UPDATE `frs_collections` SET `deleted` = b'1', `updated_by` = ? WHERE `id` = ?";
+        $sqlupdate = "UPDATE `frs_fares` SET `deleted` = b'1', `updated_by` = ? WHERE `id` = ?";
         $statementupdate = $this->db->prepare($sqlupdate);
-        $statementupdate->execute([$user, $collection]);
+        $statementupdate->execute([$user, $fare]);
 
-        $description = "Deleted other collection.";
+        $description = "Deleted fare collection.";
         $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
         $_SESSION['deleted'] = 'deleted';
-        echo "<script>window.location.href='../admin/collections.php';</script>";
+        echo "<script>window.location.href='../admin/fares.php';</script>";
     }
 }
 
-$controller = new CollectionController();
+$controller = new FareController();
 
-if (isset($_POST['add'])) $controller->addOtherCollection();
-if (isset($_POST['edit'])) $controller->editOtherCollection();
-if (isset($_POST['delete'])) $controller->deleteOtherCollection();
+if (isset($_POST['add'])) $controller->addFareCollection();
+if (isset($_POST['edit'])) $controller->editFareCollection();
+if (isset($_POST['delete'])) $controller->deleteFareCollection();

@@ -68,12 +68,7 @@
       while ($row = $driver_stmt->fetch()) { ?>
                     <tr>
                       <td><?php echo $id; ?></td>
-                      <td>
-                        <?php
-                          echo $row['first_name'] . " ";
-                          echo ($row['middle_name'] != "") ? $row['middle_name'] . " " : "";
-                          echo $row['last_name'];
-                        ?>
+                      <td><?php echo $row['first_name'] . " " . $row['last_name']; ?>
                       </td>
                       <td><?php echo $row['address']; ?></td>
                       <td><?php echo $row['contact']; ?></td>
@@ -82,7 +77,6 @@
                         data-edit_driver_id='<?php echo $row['id']; ?>'
                         data-edit_firstname='<?php echo $row['first_name']; ?>'
                         data-edit_lastname='<?php echo $row['last_name']; ?>'
-                        data-edit_middlename='<?php echo $row['middle_name']; ?>'
                         data-edit_address='<?php echo $row['address']; ?>'
                         data-edit_contact='<?php echo $row['contact']; ?>'> Edit</button>
                         <button class='btn btn-danger btn-sm delete btn-flat' 
@@ -112,13 +106,11 @@
       var edit_driver_id = $(this).data('edit_driver_id');
       var edit_firstname = $(this).data('edit_firstname');
       var edit_lastname = $(this).data('edit_lastname');
-      var edit_middlename = $(this).data('edit_middlename');
       var edit_address = $(this).data('edit_address');
       var edit_contact = $(this).data('edit_contact');
       $('#edit_driver_id').val(edit_driver_id)
       $('#edit_firstname').val(edit_firstname)
       $('#edit_lastname').val(edit_lastname)
-      $('#edit_middlename').val(edit_middlename)
       $('#edit_address').val(edit_address)
       $('#edit_contact').val(edit_contact)
     });

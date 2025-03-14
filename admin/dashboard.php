@@ -28,27 +28,12 @@
       $row = $stmt->fetch();
       $revenue = $row['daily_revenue'];
       
-      /* Revenue from Fares */
-      $sql = "SELECT SUM(`amount`) AS `daily_revenue` FROM `frs_fares` WHERE date(`date`) = '" . $today . "' AND `deleted` != b'1'";
-      $stmt = $this->db->query($sql);
-      $row = $stmt->fetch();
-      $revenue += $row['daily_revenue'];
-      
       $sql = "SELECT SUM(`amount`) AS `daily_expenses` FROM `frs_expenses` WHERE date(`date`) = '" . $today . "' AND `deleted` != b'1'";
       $stmt = $this->db->query($sql);
       $row = $stmt->fetch();
       $expenses = $row['daily_expenses'];
 
       $dailyprofit = $revenue - $expenses;
-
-      //data para sa profitTrend 
-      $monthly_sql = "
-      SELECT 
-        DATE_FORMAT(date, '%Y-%m') AS month, 
-        SUM(amount) AS total_amount
-      FROM frs_fares 
-      WHERE deleted != b'1' 
-      GROUP BY month";
       
       $collection_sql = "
       SELECT 
@@ -66,19 +51,8 @@
       WHERE deleted != b'1' 
       GROUP BY month";
 
-      $fares_stmt = $this->db->query($monthly_sql);
       $collection_stmt = $this->db->query($collection_sql);
       $expenses_stmt = $this->db->query($expenses_sql);
-
-      // Collect all unique months and amounts
-      $monthly_data = [];
-      while ($fares_row = $fares_stmt->fetch()) {
-        $month = $fares_row['month'];
-        if (!isset($monthly_data[$month])) {
-          $monthly_data[$month] = ['total_amount' => 0, 'total_collection' => 0, 'total_expenses' => 0];
-        }
-        $monthly_data[$month]['total_amount'] += $fares_row['total_amount'];
-      }
 
       while ($collection_row = $collection_stmt->fetch()) {
         $month = $collection_row['month'];
@@ -120,12 +94,6 @@
       $row = $stmt->fetch();
       $monthly_revenue = $row['monthly_revenue'];
   
-      /* Revenue from Fares */
-      $sql = "SELECT SUM(`amount`) AS `monthly_revenue` FROM `frs_fares` WHERE DATE_FORMAT(`date`, '%Y-%m') = '" . $current_month . "' AND `deleted` != b'1'";
-      $stmt = $this->db->query($sql);
-      $row = $stmt->fetch();
-      $monthly_revenue += $row['monthly_revenue'];
-  
       /* Monthly Expenses */
       $sql = "SELECT SUM(`amount`) AS `monthly_expenses` FROM `frs_expenses` WHERE DATE_FORMAT(`date`, '%Y-%m') = '" . $current_month . "' AND `deleted` != b'1'";
       $stmt = $this->db->query($sql);
@@ -147,11 +115,6 @@ $stmt = $this->db->query($sql);
 $row = $stmt->fetch();
 $current_revenue = $row['monthly_revenue'];
 
-$sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_fares WHERE DATE_FORMAT(date, '%Y-%m') = '$current_month' AND deleted != b'1'";
-$stmt = $this->db->query($sql);
-$row = $stmt->fetch();
-$current_revenue += $row['monthly_revenue'];
-
 /* Get Current Month Expenses */
 $sql = "SELECT SUM(amount) AS monthly_expenses FROM frs_expenses WHERE DATE_FORMAT(date, '%Y-%m') = '$current_month' AND deleted != b'1'";
 $stmt = $this->db->query($sql);
@@ -163,11 +126,6 @@ $sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_collections WHERE DATE_FO
 $stmt = $this->db->query($sql);
 $row = $stmt->fetch();
 $previous_revenue = $row['monthly_revenue'];
-
-$sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_fares WHERE DATE_FORMAT(date, '%Y-%m') = '$previous_month' AND deleted != b'1'";
-$stmt = $this->db->query($sql);
-$row = $stmt->fetch();
-$previous_revenue += $row['monthly_revenue'];
 
 /* Get Previous Month Expenses */
 $sql = "SELECT SUM(amount) AS monthly_expenses FROM frs_expenses WHERE DATE_FORMAT(date, '%Y-%m') = '$previous_month' AND deleted != b'1'";

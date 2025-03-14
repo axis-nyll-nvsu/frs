@@ -35,16 +35,8 @@ class Report {
         $collectionLastYear_stmt->execute([$previous_year]);
         $collectionLastYear = $collectionLastYear_stmt->fetch(PDO::FETCH_ASSOC)['total_collections'];
 
-        // Fetch total revenue from frs_fares for the previous year
-        $fares_sql = "SELECT COALESCE(SUM(amount), 0) AS total_fares
-        FROM frs_fares
-        WHERE YEAR(date) = ? AND deleted != b'1'";  // Ensure deleted records are not counted
-        $fares_stmt = $this->db->prepare($fares_sql);
-        $fares_stmt->execute([$previous_year]);
-        $fares = $fares_stmt->fetch(PDO::FETCH_ASSOC)['total_fares'];
-
         // Compute total revenue
-        $total_revenueLastYear = $collectionLastYear + $fares;
+        $total_revenueLastYear = $collectionLastYear;
 
         // Fetch total expenses for last year
         $expensesLastYear_sql = "SELECT COALESCE(SUM(amount), 0) AS total_expenses
@@ -58,29 +50,13 @@ class Report {
         $profitLastYear = $total_revenueLastYear - $expensesLastYear;
 
         // Line Item Entries
-        $operating_fares = 0; // frs_collections 1-6 + frs_fares
+        $operating_collections = 0;
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total
-        FROM frs_fares
+        FROM frs_collections
         WHERE YEAR(date) = ? AND deleted != b'1'";
         $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
-        $operating_fares = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
-
-        $operating_fees = 0; // frs_collections 7-18
-        $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total
-        FROM frs_collections
-        WHERE YEAR(date) = ? AND (category_id BETWEEN 7 AND 18) AND deleted != b'1'";
-        $q_stmt = $this->db->prepare($q_sql);
-        $q_stmt->execute([$period]);
-        $operating_fees = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
-
-        $operating_otherCollections = 0; // frs_collections 20
-        $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total
-        FROM frs_collections
-        WHERE YEAR(date) = ? AND (category_id = 20) AND deleted != b'1'";
-        $q_stmt = $this->db->prepare($q_sql);
-        $q_stmt->execute([$period]);
-        $operating_otherCollections = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $operating_collections = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
         $operating_salaries = 0; // frs_expenses 1
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total

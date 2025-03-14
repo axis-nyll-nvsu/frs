@@ -41,12 +41,6 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="middlename" class="col-sm-3 control-label">Middle Name</label>
-            <div class="col-sm-8">
-              <input class="form-control" id="middlename" name="middlename" required>
-            </div>
-          </div>
-          <div class="form-group">
             <label for="lastname" class="col-sm-3 control-label">Last Name</label>
             <div class="col-sm-8">
               <input class="form-control" id="lastname" name="lastname" required>

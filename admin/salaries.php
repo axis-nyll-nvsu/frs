@@ -20,7 +20,7 @@
     }
 
     public function getData(){ 
-      $salary_sql = "SELECT a.`id`, b.`first_name`, b.`middle_name`, b.`last_name`, a.`start_date`, a.`end_date`, a.`collection`, a.`amount`, a.`paid`, a.`driver_id` " .
+      $salary_sql = "SELECT a.`id`, b.`first_name`, b.`last_name`, a.`start_date`, a.`end_date`, a.`collection`, a.`amount`, a.`paid`, a.`driver_id` " .
                     "FROM `frs_salaries` AS a " .
                     "INNER JOIN `frs_drivers` AS b " .
                     "ON a.`driver_id` = b.`id` " .
@@ -80,13 +80,7 @@
                           $dateEnd = date('M d, Y', strtotime($row['start_date'] . ' +6 days'));
                           echo $dateStart . " - " . $dateEnd;
                         ?>
-                      <td>
-                        <?php
-                          $name =   $row['first_name'] . " ";
-                          $name .=  ($row['middle_name'] != "") ? $row['middle_name'] . " " : "";
-                          $name .=  $row['last_name'];
-                          echo $name;
-                        ?>
+                      <td><?php echo $row['first_name'] . " " . $row['last_name']; ?>
                       </td>
                       </td>
                       <td style="text-align: right;">Php <?php echo number_format($row['collection'], 2); ?></td>

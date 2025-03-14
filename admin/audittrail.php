@@ -20,7 +20,7 @@ class Trail {
     }
 
     public function getData(){
-        $trail_sql = "SELECT * FROM `frs_audittrail` AS a JOIN `frs_users` AS b ON a.`user_id` = b.`id` ORDER BY a.`date` DESC";
+        $trail_sql = "SELECT * FROM `frs_trail` AS a JOIN `frs_users` AS b ON a.`user_id` = b.`id` ORDER BY a.`date` DESC";
         $trail_stmt = $this->db->query($trail_sql);
         return $trail_stmt->fetchAll();
     }
