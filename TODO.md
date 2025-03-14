@@ -1,21 +1,6 @@
 # TODO
 
-## March 5, 2025
-
-### Expenses
-
-Categories:
-
-1. Amortization
-2. Register per Unit
-3. Maintenance & Repair
-4. Insurance
-5. Driver's Salary
-6. Utilities - Electric Bill
-7. Utilities - Water Bill
-8. Office Supplies
-
----
+## March 14, 2025
 
 ### Remuneration
 
@@ -38,12 +23,6 @@ Daily Computation:
 Income Statement and Cash Flow Statement
 
 - Include: Month Option
-
----
-
-### Notes:
-
-E-Jeep: 13 running, at the moment.
 
 ---
 
