@@ -8,7 +8,7 @@
 
 
 <!-- Add Route -->
-<div class="modal fade" id="addnew">
+<div class="modal fade" id="addRoute">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="../controller/routeController.php">

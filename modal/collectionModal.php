@@ -4,6 +4,10 @@
  * Description: Collection Modal
  * Author: Vernyll Jan P. Asis
  */
+include '../modal/driverModal.php';
+include '../modal/routeModal.php';
+include '../modal/ejeepModal.php';
+
 ?>
 
 
@@ -39,7 +43,7 @@
                                 </option>
                                 <?php } ?>
                             </select>
-                            <a href="#addDriver" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
+                            <a href="#addDriver" data-dismiss="modal" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -56,7 +60,7 @@
                                 </option>
                                 <?php } ?>
                             </select>
-                            <a href="#addEjeep" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
+                            <a href="#addEjeep" data-dismiss="modal" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -73,7 +77,7 @@
                                 </option>
                                 <?php } ?>
                             </select>
-                            <a href="#addRoute" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
+                            <a href="#addRoute" data-dismiss="modal" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
                         </div>
                     </div>
                     <div class="form-group">

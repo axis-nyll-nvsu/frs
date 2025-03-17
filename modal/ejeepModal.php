@@ -8,7 +8,7 @@
 
 
 <!-- Add E-Jeep -->
-<div class="modal fade" id="addnew">
+<div class="modal fade" id="addEjeep">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="../controller/ejeepController.php">
