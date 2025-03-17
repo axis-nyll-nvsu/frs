@@ -18,7 +18,7 @@ class CategoryController {
 
     public function addCategory() {
         $user = $_SESSION['user_id'];
-        $category = $_POST['category'];
+        $category = $_POST['description'];
 
         $sql = "SELECT * FROM `frs_categories` WHERE `description` = ? AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);
@@ -26,7 +26,7 @@ class CategoryController {
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = 'Error: Category already exists! Use a different description.';
-            echo "<script>window.location.href='../admin/expensesCategory.php';</script>";
+            echo "<script>window.location.href='../admin/categories.php';</script>";
         }
         else {
             $sqlinsert = "INSERT INTO `frs_categories`(`description`, `created_by`) VALUES (?,?)";
@@ -39,14 +39,14 @@ class CategoryController {
             $statementinsert->execute([$user, $description]);
 
             $_SESSION['success'] = 'Success: Category added!';
-            echo "<script>window.location.href='../admin/expensesCategory.php';</script>";
+            echo "<script>window.location.href='../admin/categories.php';</script>";
         }
     }
 
     public function editCategory() {
         $user = $_SESSION['user_id'];
         $category_id = $_POST['category_id'];
-        $category = $_POST['category'];
+        $category = $_POST['description'];
        
 
         $sql = "SELECT * FROM `frs_categories` WHERE `description` = ?  AND `deleted` != b'1' AND `id` != ?";
@@ -55,7 +55,7 @@ class CategoryController {
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = "Error: Category already exists! Use a different description.";
-            echo "<script>window.location.href='../admin/expensesCategory.php';</script>";
+            echo "<script>window.location.href='../admin/categories.php';</script>";
         }
         else {
             $sqlupdate = "UPDATE `frs_categories` SET `description` = ?, `updated_by` = ? WHERE `id` = ?";
@@ -68,7 +68,7 @@ class CategoryController {
             $statementinsert->execute([$user, $description]);
 
             $_SESSION['updated'] = 'Success: Category updated!';
-            echo "<script>window.location.href='../admin/expensesCategory.php';</script>";
+            echo "<script>window.location.href='../admin/categories.php';</script>";
         }
     }
 
@@ -86,7 +86,7 @@ class CategoryController {
         $statementinsert->execute([$user, $description]);
 
         $_SESSION['deleted'] = 'Success: Category deleted!';
-        echo "<script>window.location.href='../admin/expensesCategory.php';</script>";
+        echo "<script>window.location.href='../admin/categories.php';</script>";
     }
 }
 

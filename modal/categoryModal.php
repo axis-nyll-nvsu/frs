@@ -20,9 +20,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="category" class="col-sm-3 control-label">Description</label>
+                        <label for="description" class="col-sm-3 control-label">Description</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="category" name="category" required>
+                            <input class="form-control" id="description" name="description" required>
                         </div>
                     </div>
                 </div>
@@ -48,9 +48,9 @@
                 <div class="modal-body">
                     <input type="hidden" id="edit_category_id" name="category_id">
                     <div class="form-group">
-                        <label for="category" class="col-sm-3 control-label">Description</label>
+                        <label for="edit_description" class="col-sm-3 control-label">Description</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="edit_category" name="category" required>
+                            <input class="form-control" id="edit_description" name="description" required>
                         </div>
                     </div>
                 </div>

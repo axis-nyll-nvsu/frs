@@ -40,7 +40,7 @@
                     <li><a href="accounts.php"><i class="bi bi-people"></i><span>Accounts</span></a></li>
                     <li><a href="route.php"><i class="bi bi-sign-turn-slight-right-fill"></i><span>Routes</span></a></li>
                     <li><a href="audittrail.php"><i class="bi bi-list-check"></i><span>Audit Trail</span></a></li>
-                    <li><a href="expensesCategory.php"><i class="bi bi-tags"></i><span>Expenses Categories</span></a></li>
+                    <li><a href="categories.php"><i class="bi bi-tags"></i><span>Expense Categories</span></a></li>
                 </ul>
             </li>
 <?php elseif ($_SESSION['type'] == 1): // Manager ?>
