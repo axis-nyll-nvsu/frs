@@ -4,6 +4,8 @@
  * Description: Expense Modal
  * Author: Vernyll Jan P. Asis
  */
+
+ include '../modal/categoryModal.php';
 ?>
 
 
@@ -30,14 +32,14 @@
                         <div class="col-sm-8" style="display: flex;">
                             <select class="form-control" id="category_id" name="category_id" style="width: 90%;" required>
                             <?php
-                            $sql = "SELECT * FROM `frs_categories`";
+                            $sql = "SELECT * FROM `frs_categories` WHERE `deleted` != b'1'";
                             $stmt = $this->db->query($sql);
                             while ($row = $stmt->fetch()) {
                             ?>
                                 <option value="<?php echo $row['id'] ?>"><?php echo $row['description'] ?></option>
                             <?php } ?>
                             </select>
-                            <a href="#addCategory" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
+                            <a href="#addCategory" data-dismiss="modal" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
                         </div>
                     </div>
                     <div class="form-group">

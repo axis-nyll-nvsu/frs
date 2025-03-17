@@ -1,58 +1,56 @@
 <?php
 /*
- * E-Jeep Modal
- * Description: E-Jeep Modal
- * Author: Vernyll Jan P. Asis
+ * Category Modal
+ * Description: Expenses Category Modal
+ * Author: DELA CRUZ, CHARLENE B.
  */
 ?>
 
 
-<!-- Add E-Jeep -->
-<div class="modal fade" id="addEjeep">
+<!-- Add Category -->
+<div class="modal fade" id="addCategory">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="../controller/ejeepController.php">
+            <form class="form-horizontal" method="POST" action="../controller/categoryController.php">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">Add E-Jeep</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Add Category</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="plate" class="col-sm-3 control-label">Plate No.</label>
+                        <label for="category" class="col-sm-3 control-label">Description</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="plate" name="plate" required>
+                            <input class="form-control" id="category" name="category" required>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-flat axis-btn-green" name="add">
-                        <i class="bi bi-floppy"></i> Save
-                    </button>
+                    <button type="submit" class="btn btn-flat axis-btn-green" name="add"><i class="bi bi-floppy"></i> Save</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!-- Edit E-Jeep -->
+<!-- Edit Category -->
 <div class="modal fade" id="edit">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="../controller/ejeepController.php">
+            <form class="form-horizontal" method="POST" action="../controller/categoryController.php">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">E-jeep</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Category</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="edit_plate_id" name="plate_id">
+                    <input type="hidden" id="edit_category_id" name="category_id">
                     <div class="form-group">
-                        <label for="category" class="col-sm-3 control-label">Plate No. </label>
+                        <label for="category" class="col-sm-3 control-label">Description</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="plate" name="plate" required>
+                            <input class="form-control" id="edit_category" name="category" required>
                         </div>
                     </div>
                 </div>
@@ -64,21 +62,21 @@
     </div>
 </div>
 
-<!-- Delete E-Jeep -->
+<!-- Delete Category -->
 <div class="modal fade" id="delete">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="../controller/ejeepController.php">
+            <form class="form-horizontal" method="POST" action="../controller/categoryController.php">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">Delete E-Jeep</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Delete Category</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="delete_ejeep_id" name="ejeep_id">
+                    <input type="hidden" id="delete_category_id" name="category_id">
                     <div class="text-center">
-                        <p>Are you sure you want to delete e-jeep?</p>
+                        <p>Are you sure you want to delete category?</p>
                     </div>
                 </div>
                 <div class="modal-footer">

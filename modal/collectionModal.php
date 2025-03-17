@@ -86,6 +86,17 @@ include '../modal/ejeepModal.php';
                             <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                     </div>
+                     <!-- For computation ng salary-->
+                    <div class="form-group">
+                        <label for="rate" class="col-sm-3 control-label">Commission Rate</label>
+                        <div class="col-sm-8" style="display: flex;">
+                            <input type="number" class="form-control" id="rate" name="rate" required>
+                        </div>
+                        <label for="basicSalary" class="col-sm-3 control-label">Basic Salary per Day</label>
+                        <div class="col-sm-8" style="display: flex;">
+                            <input type="number" class="form-control" id="basicSalary" name="basicSalary" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-flat axis-btn-green" name="add"><i class="bi bi-floppy"></i> Save</button>

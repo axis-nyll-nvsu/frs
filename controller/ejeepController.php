@@ -45,31 +45,33 @@ class EjeepController {
 
     public function editEjeep() {
         $user = $_SESSION['user_id'];
-        $ejeep = $_POST['ejeep_id'];
+        $ejeep_id = $_POST['plate_id'];
         $plate = $_POST['plate'];
+       
 
-        $sql = "SELECT * FROM `frs_ejeeps` WHERE `plate` = ? AND `deleted` != b'1' AND `id` != ?";
+        $sql = "SELECT * FROM `frs_ejeeps` WHERE `plate` = ?  AND `deleted` != b'1' AND `id` != ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$plate, $ejeep]);
+        $stmt->execute([$plate, $ejeep_id]);
 
         if ($stmt->rowcount() > 0) {
-            $_SESSION['error'] = "Error: E-Jeep already exists! Use a different plate number.";
+            $_SESSION['error'] = "Error: Ejeep already exists!";
             echo "<script>window.location.href='../admin/ejeeps.php';</script>";
         }
         else {
             $sqlupdate = "UPDATE `frs_ejeeps` SET `plate` = ?, `updated_by` = ? WHERE `id` = ?";
             $statementupdate = $this->db->prepare($sqlupdate);
-            $statementupdate->execute([$plate, $user, $ejeep]);
+            $statementupdate->execute([$plate, $user, $ejeep_id]);
 
-            $description = "Updated e-jeep.";
+            $description = "Updated Ejeep.";
             $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
-            $_SESSION['updated'] = 'Success: E-Jeep updated!';
+            $_SESSION['updated'] = 'Success: Category updated!';
             echo "<script>window.location.href='../admin/ejeeps.php';</script>";
         }
     }
+
 
     public function deleteEjeep() {
         $user = $_SESSION['user_id'];
@@ -77,7 +79,7 @@ class EjeepController {
 
         $sqlupdate = "UPDATE `frs_ejeeps` SET `deleted` = b'1', `updated_by` = ? WHERE `id` = ?";
         $statementupdate = $this->db->prepare($sqlupdate);
-        $statementupdate->execute([$user, $driver]);
+        $statementupdate->execute([$user, $ejeep]);
 
         $description = "Deleted e-jeep.";
         $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
