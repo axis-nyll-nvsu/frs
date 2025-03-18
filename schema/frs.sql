@@ -46,7 +46,7 @@ CREATE TABLE `frs_ejeeps` (
     `plate` varchar(20) NOT NULL,
     `deleted` bit(1) NOT NULL DEFAULT b'0',
     `created_by` int(11) NOT NULL,
-    `updated_by` int(11) NOT NULL
+    `updated_by` int(11) DEFAULT NULL
 );
 
 CREATE TABLE `frs_expenses` (
@@ -59,6 +59,21 @@ CREATE TABLE `frs_expenses` (
     `created_by` int(11) NOT NULL,
     `updated_by` int(11) DEFAULT NULL
 );
+
+CREATE TABLE `frs_rates` (
+    `id` int(11) NOT NULL,
+    `quota` double NOT NULL,
+    `base_salary` double NOT NULL,
+    `base_rate` double NOT NULL,
+    `excess_rate` double NOT NULL,
+    `is_default` bit(1) NOT NULL DEFAULT b'0',
+    `deleted` bit(1) NOT NULL DEFAULT b'0',
+    `created_by` int(11) NOT NULL,
+    `updated_by` int(11) DEFAULT NULL
+);
+
+INSERT INTO `frs_rates` (`id`, `quota`, `base_salary`, `base_rate`, `excess_rate`, `is_default`, `deleted`, `created_by`, `updated_by`)
+    VALUES (1, '2700', '450', '18', '4', b'1', b'0', '1', NULL);
 
 CREATE TABLE `frs_routes` (
     `id` int(11) NOT NULL,
@@ -74,11 +89,11 @@ INSERT INTO `frs_routes` (`id`, `description`, `deleted`, `created_by`) VALUES
 CREATE TABLE `frs_salaries` (
     `id` int(11) NOT NULL,
     `driver_id` int(11) NOT NULL,
-    `start_date` date NOT NULL,
-    `end_date` date NOT NULL,
+    `rate_id` int(11) NOT NULL,
+    `date` date NOT NULL,
     `collection` double NOT NULL,
-    `amount` double NOT NULL,
-    `paid` bit(1) NOT NULL DEFAULT b'0',
+    `salary` double NOT NULL,
+    `deleted` bit(1) NOT NULL DEFAULT b'0',
     `created_by` int(11) NOT NULL,
     `updated_by` int(11) DEFAULT NULL
 );
@@ -134,6 +149,11 @@ ALTER TABLE `frs_expenses`
     ADD KEY `fk_expenses_updatedby` (`updated_by`),
     ADD KEY `fk_expenses_categoryid` (`category_id`);
 
+ALTER TABLE `frs_rates`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `fk_rates_createdby` (`created_by`),
+    ADD KEY `fk_rates_updatedby` (`updated_by`);
+
 ALTER TABLE `frs_routes`
     ADD PRIMARY KEY (`id`),
     ADD KEY `fk_routes_createdby` (`created_by`),
@@ -143,7 +163,8 @@ ALTER TABLE `frs_salaries`
     ADD PRIMARY KEY (`id`),
     ADD KEY `fk_salaries_createdby` (`created_by`),
     ADD KEY `fk_salaries_updateby` (`updated_by`),
-    ADD KEY `fk_salaries_driverid` (`driver_id`);
+    ADD KEY `fk_salaries_driverid` (`driver_id`),
+    ADD KEY `fk_salaries_rateid` (`rate_id`);
 
 ALTER TABLE `frs_trail`
     ADD PRIMARY KEY (`id`),
@@ -166,6 +187,9 @@ ALTER TABLE `frs_ejeeps`
 
 ALTER TABLE `frs_expenses`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `frs_rates`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `frs_routes`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
@@ -203,6 +227,10 @@ ALTER TABLE `frs_expenses`
     ADD CONSTRAINT `fk_expenses_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_expenses_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
+ALTER TABLE `frs_rates`
+    ADD CONSTRAINT `fk_rates_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+    ADD CONSTRAINT `fk_rates_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
 ALTER TABLE `frs_routes`
     ADD CONSTRAINT `fk_routes_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_routes_updatedby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
@@ -210,6 +238,7 @@ ALTER TABLE `frs_routes`
 ALTER TABLE `frs_salaries`
     ADD CONSTRAINT `fk_salaries_createdby` FOREIGN KEY (`created_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_salaries_driverid` FOREIGN KEY (`driver_id`) REFERENCES `frs_drivers` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+    ADD CONSTRAINT `fk_salaries_rateid` FOREIGN KEY (`rate_id`) REFERENCES `frs_rates` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_salaries_updateby` FOREIGN KEY (`updated_by`) REFERENCES `frs_users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 ALTER TABLE `frs_trail`
