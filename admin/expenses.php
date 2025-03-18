@@ -79,7 +79,7 @@
                                             <td><?php echo $row['description']; ?></td>
                                             <td style="text-align: right;">Php <?php echo number_format($row['amount'], 2); ?></td>
                                             <td>
-                                                <button class='btn btn-success btn-sm edit btn-flat'
+                                                <button class='btn btn-success btn-sm editExpense btn-flat'
                                                 data-edit_expense_id='<?php echo $row['id']; ?>'
                                                 data-edit_date='<?php echo (new DateTime($row['date']))->format('m/d/Y'); ?>'
                                                 data-edit_category_id='<?php echo $row['category_id']; ?>'
@@ -113,7 +113,7 @@
             $("#category_id").select2();
         });
         
-        $(document).on('click', '.edit', function(e){
+        $(document).on('click', '.editExpense', function(e){
             e.preventDefault();
             $('#editExpense').modal('show');
             var edit_expense_id = $(this).data('edit_expense_id');

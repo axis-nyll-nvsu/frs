@@ -86,7 +86,7 @@
                                             <td><?php echo $row['description']; ?></td>
                                             <td style="text-align: right;">Php <?php echo number_format($row['amount'], 2); ?></td>
                                             <td>
-                                                <button class='btn btn-success btn-sm edit btn-flat' 
+                                                <button class='btn btn-success btn-sm editCollection btn-flat'
                                                 data-edit_collection_id='<?php echo $row['id']; ?>'
                                                 data-edit_date='<?php echo (new DateTime($row['date']))->format('m/d/Y'); ?>'
                                                 data-edit_driver_id='<?php echo $row['driver_id']; ?>'
@@ -113,6 +113,7 @@
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
 <?php include '../modal/collectionModal.php'; ?>
+<?php include '../modal/rateModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
 <script>
 $(document).ready(function() {
@@ -124,7 +125,7 @@ $(document).ready(function() {
     $("#rate_id").select2();
 });
 
-$(document).on('click', '.edit', function(e){
+$(document).on('click', '.editCollection', function(e){
     e.preventDefault();
     $('#editCollection').modal('show');
     var edit_collection_id = $(this).data('edit_collection_id');
