@@ -26,7 +26,7 @@
                     <span class="pull-right-container"><i class="bi bi-chevron-down pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="profits.php"><i class="bi bi-coin"></i>Profits</a></li>
+                    <li><a href="profits.php"><i class="bi bi-coin"></i>Monthly Reports</a></li>
                     <li><a href="income_statement.php"><i class="bi bi-coin"></i>Income Statement</a></li>
                     <li><a href="cashflow_statement.php"><i class="bi bi-coin"></i>Statement of Cash Flows</a></li>
                 </ul>
@@ -37,11 +37,12 @@
                     <span class="pull-right-container"><i class="bi bi-chevron-down pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="accounts.php"><i class="bi bi-people"></i><span>Accounts</span></a></li>
+                    <li><a href="accounts.php"><i class="bi bi-people"></i><span>User Accounts</span></a></li>
                     <li><a href="audittrail.php"><i class="bi bi-list-check"></i><span>Audit Trail</span></a></li>
-                    <li><a href="routes.php"><i class="bi bi-sign-turn-slight-right-fill"></i><span>Routes</span></a></li>
+                    <li><a href="routes.php"><i class="bi bi-sign-turn-slight-right-fill"></i><span>E-Jeep Routes</span></a></li>
                     <li><a href="rates.php"><i class="bi bi-percent"></i><span>Salary Rates</span></a></li>
                     <li><a href="categories.php"><i class="bi bi-tags"></i><span>Expense Categories</span></a></li>
+                    <li><a href="#"><i class="bi bi-database-fill-check"></i><span>Backup & Restore</span></a></li>
                 </ul>
             </li>
 <?php elseif ($_SESSION['type'] == 1): // Manager ?>

@@ -1,8 +1,8 @@
 <?php
 /*
-* Categories for Expenses
+* Categories
 * Description: Categories View
-* Author: YEEENNN
+* Author: Charlene B. Dela Cruz
 */
 
 session_start();
@@ -40,10 +40,10 @@ $categories = $category->getData();
 <?php include '../common/sidebar.php'; ?>
         <div class="content-wrapper">
             <section class="content-header">
-                <h1>Expenses Categories</h1>
+                <h1>Expense Categories</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="bi bi-speedometer2"></i> Home</a></li>
-                    <li class="active">Expenses Categories</li>
+                    <li class="active">Expense Categories</li>
                 </ol>
             </section>
             <section class="content">
@@ -51,13 +51,13 @@ $categories = $category->getData();
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <a href="#addCategory" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Expenses Category</a>
+                                <a href="#addCategory" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Category</a>
                             </div>
                             <div class="box-body table-responsive">
                                 <table id="example1" class="table table-bordered">
                                     <thead>
                                         <th style="width: 12px; max-width: 12px !important;">#</th>
-                                        <th>Expenses Category</th>
+                                        <th>Category</th>
                                         <th style="width: 78px; min-width: 78px !important;">Action</th>
                                     </thead>
                                     <tbody>
