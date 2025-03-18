@@ -174,16 +174,6 @@ include '../modal/ejeepModal.php';
                             <input type="number" class="form-control" id="edit_amount" name="amount" required>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-8" style="margin-left: 150px; font-size: 0.8em;">
-                            <code>A</code>: Amount, <code>Q</code>: Quota,
-                            <code>BS</code>: Base Salary, <code>BR</code>: Base Rate, <code>AR</code>: Add-On Rate<br>
-                            <strong>Formula if collection meets quota</strong>:
-                            <code>BS + (A x AR)</code><br>
-                            <strong>Formula if collection does not meet quota</strong>:
-                            <code>A x BR</code>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-flat axis-btn-green" name="edit"><i class="bi bi-floppy"></i> Update</button>
