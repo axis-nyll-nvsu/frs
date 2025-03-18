@@ -48,11 +48,11 @@
                     <h3 class="modal-title" style="color: #00693e;">E-jeep</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="edit_plate_id" name="plate_id">
+                    <input type="hidden" id="edit_ejeep_id" name="ejeep_id">
                     <div class="form-group">
-                        <label for="category" class="col-sm-3 control-label">Plate No. </label>
+                        <label for="edit_plate" class="col-sm-3 control-label">Plate No. </label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="plate" name="plate" required>
+                            <input class="form-control" id="edit_plate" name="plate" required>
                         </div>
                     </div>
                 </div>

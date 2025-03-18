@@ -45,7 +45,7 @@ class EjeepController {
 
     public function editEjeep() {
         $user = $_SESSION['user_id'];
-        $ejeep_id = $_POST['plate_id'];
+        $ejeep_id = $_POST['ejeep_id'];
         $plate = $_POST['plate'];
        
 
