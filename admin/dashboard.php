@@ -259,12 +259,11 @@ if ($previous_profit != 0) {
 </div>
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
-<?php include '../modal/collectionModal.php'; ?>
-<?php include '../modal/expenseModal.php'; ?>
+<?php include '../modal/addCollectionModal.php'; ?>
+<?php include '../modal/addExpenseModal.php'; ?>
 <script>
 $(document).ready(function() {
     $("#date").datepicker();
-    $("#edit_date").datepicker();
     $("#driver_id").select2();
     $("#ejeep_id").select2();
     $("#route_id").select2();

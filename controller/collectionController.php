@@ -31,7 +31,7 @@ class CollectionController {
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if($amount < $row['quota']) $salary = $amount * $row['base_rate'] / 100;
-        else $salary = $row['base_salary'] + ($amount * $row['excess_rate'] / 100);
+        else $salary = $row['base_salary'] + ($amount * $row['addon_rate'] / 100);
 
         $sql = "SELECT * FROM `frs_collections` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);
@@ -67,27 +67,42 @@ class CollectionController {
         $date = date('Y-m-d',strtotime($_POST['date']));
         $amount = $_POST['amount'];
 
-        $sql = "SELECT * FROM `frs_collections` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1' AND `id` != ?";
+        $sql = "SELECT * FROM `frs_salaries` WHERE `date` = ? AND `driver_id` = ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$date, $driver, $collection]);
+        $stmt->execute([$date, $driver]);
 
-        if ($stmt->rowcount() > 0) {
-            $_SESSION['error'] = 'error';
-            echo "<script>window.location.href='../admin/collections.php';</script>";
-        }
-        else {
-            $sqlupdate = "UPDATE `frs_collections` SET `date` = ?, `amount` = ?, `updated_by` = ? WHERE `id` = ?";
-            $statementupdate = $this->db->prepare($sqlupdate);
-            $statementupdate->execute([$date, $amount, $user, $collection]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $salary_id = $row['id'];
+        $rate = $row['rate_id'];
 
-            $description = "Updated collection.";
-            $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
-            $statementinsert = $this->db->prepare($sqlinsert);
-            $statementinsert->execute([$user, $description]);
+        $sql = "SELECT * FROM `frs_rates` WHERE `id` = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$rate]);
 
-            $_SESSION['updated'] = 'Success: Collection updated!';
-            echo "<script>window.location.href='../admin/collections.php';</script>";
-        }
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($amount < $row['quota']) $salary = $amount * $row['base_rate'] / 100;
+        else $salary = $row['base_salary'] + ($amount * $row['addon_rate'] / 100);
+
+        $sqlupdate = "UPDATE `frs_collections` SET `date` = ?, `amount` = ?, `updated_by` = ? WHERE `id` = ?";
+        $statementupdate = $this->db->prepare($sqlupdate);
+        $statementupdate->execute([$date, $amount, $user, $collection]);
+
+        $description = "Updated collection.";
+        $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
+        $statementinsert = $this->db->prepare($sqlinsert);
+        $statementinsert->execute([$user, $description]);
+
+        $sqlinsert = "UPDATE `frs_salaries` SET `collection` = ?, `salary` = ?, `updated_by` = ? WHERE `id` = ?";
+        $statementinsert = $this->db->prepare($sqlinsert);
+        $statementinsert->execute([$amount, $salary, $user, $salary_id]);
+
+        $description = "Updated salary.";
+        $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
+        $statementinsert = $this->db->prepare($sqlinsert);
+        $statementinsert->execute([$user, $description]);
+
+        $_SESSION['updated'] = 'Success: Collection updated!';
+        echo "<script>window.location.href='../admin/collections.php';</script>";
     }
 
     public function deleteCollection() {

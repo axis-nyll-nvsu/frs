@@ -87,6 +87,7 @@ foreach ($categories as $row) { ?>
     </div>
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/addCategoryModal.php'; ?>
 <?php include '../modal/categoryModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
 <script>

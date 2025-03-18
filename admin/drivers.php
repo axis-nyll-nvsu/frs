@@ -96,6 +96,7 @@
 
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/addDriverModal.php'; ?>
 <?php include '../modal/driverModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
 

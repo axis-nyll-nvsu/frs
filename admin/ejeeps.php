@@ -87,6 +87,7 @@ foreach ($ejeeps as $row) { ?>
     </div>
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/addEjeepModal.php'; ?>
 <?php include '../modal/ejeepModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
 <script>

@@ -103,6 +103,7 @@
 
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/addExpenseModal.php'; ?>
 <?php include '../modal/expenseModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
 

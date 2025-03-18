@@ -88,6 +88,7 @@ require_once '../config/config.php';
 
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/addRouteModal.php'; ?>
 <?php include '../modal/routeModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
 
