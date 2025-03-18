@@ -26,7 +26,7 @@ class RouteController {
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = 'Error: Route already exists!';
-            echo "<script>window.location.href='../admin/route.php';</script>";
+            echo "<script>window.location.href='../admin/routes.php';</script>";
         }
         else {
             $sqlinsert = "INSERT INTO `frs_routes`(`description`, `created_by`) VALUES (?,?)";
@@ -39,7 +39,7 @@ class RouteController {
             $statementinsert->execute([$user, $description]);
 
             $_SESSION['success'] = 'Success: Route added!';
-            echo "<script>window.location.href='../admin/route.php';</script>";
+            echo "<script>window.location.href='../admin/routes.php';</script>";
         }
     }
 
@@ -54,7 +54,7 @@ class RouteController {
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = "Error: Route already exists!";
-            echo "<script>window.location.href='../admin/route.php';</script>";
+            echo "<script>window.location.href='../admin/routes.php';</script>";
         }
         else {
             $sqlupdate = "UPDATE `frs_routes` SET `description` = ?, `updated_by` = ? WHERE `id` = ?";
@@ -67,7 +67,7 @@ class RouteController {
             $statementinsert->execute([$user, $description]);
 
             $_SESSION['updated'] = 'Success: Route updated!';
-            echo "<script>window.location.href='../admin/route.php';</script>";
+            echo "<script>window.location.href='../admin/routes.php';</script>";
         }
     }
 
@@ -85,7 +85,7 @@ class RouteController {
         $statementinsert->execute([$user, $description]);
 
         $_SESSION['deleted'] = 'Success: Route deleted!';
-        echo "<script>window.location.href='../admin/route.php';</script>";
+        echo "<script>window.location.href='../admin/routes.php';</script>";
     }
 }
 

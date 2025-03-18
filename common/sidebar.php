@@ -38,8 +38,9 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="accounts.php"><i class="bi bi-people"></i><span>Accounts</span></a></li>
-                    <li><a href="route.php"><i class="bi bi-sign-turn-slight-right-fill"></i><span>Routes</span></a></li>
                     <li><a href="audittrail.php"><i class="bi bi-list-check"></i><span>Audit Trail</span></a></li>
+                    <li><a href="routes.php"><i class="bi bi-sign-turn-slight-right-fill"></i><span>Routes</span></a></li>
+                    <li><a href="rates.php"><i class="bi bi-percent"></i><span>Salary Rates</span></a></li>
                     <li><a href="categories.php"><i class="bi bi-tags"></i><span>Expense Categories</span></a></li>
                 </ul>
             </li>
