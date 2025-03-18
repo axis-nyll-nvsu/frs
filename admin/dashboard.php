@@ -54,6 +54,7 @@
             $collection_stmt = $this->db->query($collection_sql);
             $expenses_stmt = $this->db->query($expenses_sql);
 
+            $monthly_data = [];
             while ($collection_row = $collection_stmt->fetch()) {
                 $month = $collection_row['month'];
                 if (!isset($monthly_data[$month])) {
@@ -262,12 +263,13 @@ if ($previous_profit != 0) {
 <?php include '../modal/expenseModal.php'; ?>
 <script>
 $(document).ready(function() {
-        $("#date").datepicker();
-        $("#edit_date").datepicker();
-        $("#driver_id").select2();
-        $("#ejeep_id").select2();
-        $("#route_id").select2();
-        $("#category_id").select2();
+    $("#date").datepicker();
+    $("#edit_date").datepicker();
+    $("#driver_id").select2();
+    $("#ejeep_id").select2();
+    $("#route_id").select2();
+    $("#rate_id").select2();
+    $("#category_id").select2();
 });
 
 </script>

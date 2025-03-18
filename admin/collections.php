@@ -121,6 +121,7 @@ $(document).ready(function() {
     $("#driver_id").select2();
     $("#ejeep_id").select2();
     $("#route_id").select2();
+    $("#rate_id").select2();
 });
 
 $(document).on('click', '.edit', function(e){

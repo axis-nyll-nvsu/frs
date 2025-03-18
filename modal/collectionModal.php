@@ -86,15 +86,37 @@ include '../modal/ejeepModal.php';
                             <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                     </div>
-                     <!-- For computation ng salary-->
+                    <hr>
                     <div class="form-group">
-                        <label for="rate" class="col-sm-3 control-label">Commission Rate</label>
+                        <label for="rate_id" class="col-sm-3 control-label">Salary Rates</label>
                         <div class="col-sm-8" style="display: flex;">
-                            <input type="number" class="form-control" id="rate" name="rate" required>
+                            <select id="rate_id" name="rate_id" style="width: 90%;" required>
+                                <?php
+                                $sql = "SELECT * FROM `frs_rates` WHERE `deleted` != b'1' ORDER BY `is_default` DESC";
+                                $stmt = $this->db->query($sql);
+                                while ($row = $stmt->fetch()) {
+                                ?>
+                                <option value="<?php echo $row['id'] ?>">
+                                    <?php
+                                        echo "Q: " . number_format($row['quota'], 2) . " | ";
+                                        echo "BS: " . number_format($row['base_salary'], 2) . " | ";
+                                        echo "BR: " . number_format(($row['base_rate'] / 100), 2) . " | ";
+                                        echo "ER: " . number_format(($row['excess_rate'] / 100), 2);
+                                    ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                            <a href="#addRate" data-dismiss="modal" data-toggle="modal" class="btn btn-sm axis-btn-green" style="width: 10%; padding: 5px 0 0 0; border-radius: 0 !important;"><i class="bi bi-plus-circle"></i></a>
                         </div>
-                        <label for="basicSalary" class="col-sm-3 control-label">Basic Salary per Day</label>
-                        <div class="col-sm-8" style="display: flex;">
-                            <input type="number" class="form-control" id="basicSalary" name="basicSalary" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8" style="margin-left: 150px; font-size: 0.8em;">
+                            <code>A</code>: Amount, <code>Q</code>: Quota,
+                            <code>BS</code>: Base Salary, <code>BR</code>: Base Rate, <code>ER</code>: Excess Rate<br>
+                            <strong>Formula if collection meets quota</strong>:
+                            <code>BS + (A - Q) x ER</code><br>
+                            <strong>Formula if collection does not meet quota</strong>:
+                            <code>A x BR</code>
                         </div>
                     </div>
                 </div>

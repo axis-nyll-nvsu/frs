@@ -20,21 +20,35 @@ class CollectionController {
         $user = $_SESSION['user_id'];
         $date = date('Y-m-d',strtotime($_POST['date']));
         $driver = $_POST['driver_id'];
+        $ejeep = $_POST['ejeep_id'];
         $route = $_POST['route_id'];
+        $rate = $_POST['rate_id'];
         $amount = $_POST['amount'];
+
+        $sql = "SELECT * FROM `frs_rates` WHERE `id` = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$rate]);
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($amount < $row['quota']) $salary = $amount * $row['base_rate'] / 100;
+        else $salary = $row['base_salary'] + ($amount - $row['quota']) * $row['excess_rate'] / 100;
 
         $sql = "SELECT * FROM `frs_collections` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$date, $driver]);
 
         if ($stmt->rowcount() > 0) {
-            $_SESSION['error'] = 'error';
+            $_SESSION['error'] = 'Error: Collection already exists! Change the driver or date.';
             echo "<script>window.location.href='../admin/collections.php';</script>";
         }
         else {
-            $sqlinsert = "INSERT INTO `frs_collections`(`date`, `driver_id`, `route_id`, `amount`, `created_by`) VALUES (?,?,?,?,?)";
+            $sqlinsert = "INSERT INTO `frs_collections`(`date`, `driver_id`, `ejeep_id`, `route_id`, `amount`, `created_by`) VALUES (?,?,?,?,?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
-            $statementinsert->execute([$date, $driver, $route, $amount, $user]);
+            $statementinsert->execute([$date, $driver, $ejeep, $route, $amount, $user]);
+
+            $sqlinsert = "INSERT INTO `frs_salaries`(`date`, `driver_id`, `rate_id`, `collection`, `salary`, `created_by`) VALUES (?,?,?,?,?,?)";
+            $statementinsert = $this->db->prepare($sqlinsert);
+            $statementinsert->execute([$date, $driver, $rate, $amount, $salary, $user]);
 
             $description = "Added a new collection.";
             $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
