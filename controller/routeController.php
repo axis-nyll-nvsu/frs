@@ -2,7 +2,7 @@
 /*
  * Route Controller
  * Description: Route Controller
- * Author: YEN
+ * Author: Charlene B. Dela Cruz
  */
 
 session_start();
@@ -61,7 +61,7 @@ class RouteController {
             $statementupdate = $this->db->prepare($sqlupdate);
             $statementupdate->execute([$description, $user, $route]);
 
-            $description = "Updated Route.";
+            $description = "Updated route.";
             $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
@@ -79,7 +79,7 @@ class RouteController {
         $statementupdate = $this->db->prepare($sqlupdate);
         $statementupdate->execute([$user, $route]);
 
-        $description = "Deleted Route.";
+        $description = "Deleted route.";
         $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);

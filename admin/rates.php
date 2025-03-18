@@ -1,8 +1,8 @@
 <?php
 /*
- * Route View
- * Description: Route View
- * Author: Charlene B. Dela Cruz
+ * E-Jeepneys' Route
+ * Description: Route for E-Jeepneys
+ * Author: YEN 
  */
 
 session_start();
@@ -38,7 +38,7 @@ require_once '../config/config.php';
         <div class="content-wrapper">
             <!-- Content Header -->
             <section class="content-header">
-                <h1>Routes</h1>
+                <h1>Routes for E-Jeepneys</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="bi bi-speedometer2"></i> Home</a></li>
                     <li class="active">Routes</li>
@@ -51,7 +51,7 @@ require_once '../config/config.php';
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <a href="#addRoute" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Route</a>
+                                <a href="#addRoute" data-toggle="modal" class="btn btn-sm btn-flat axis-btn-green">Add Routes</a> 
                             </div>
                             <div class="box-body table-responsive">
                                 <table id="example1" class="table table-bordered">
