@@ -109,7 +109,7 @@
     background-color: transparent !important;
 }
 .treeview>ul.treeview-menu>li>a {
-    color: #aaa !important;
+    color: #ddd !important;
 }
 .treeview>ul.treeview-menu>li>a:hover, .treeview>ul.treeview-menu>li.active>a {
     color: #fff !important;

@@ -271,78 +271,71 @@ $(document).ready(function() {
 });
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+var ctx = document.getElementById('revenueVSexpenses').getContext('2d');
+var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+        labels: [ "<?php echo number_format($revenue_percentage, 2); ?>% Revenue",
+            "<?php echo number_format($expenses_percentage, 2); ?>% Expenses"
+            ],
+        datasets: [{
+            data:[<?php echo number_format($revenue_percentage, 2); ?>, <?php echo number_format($expenses_percentage, 2); ?>],
+            backgroundColor: ['#00693e', '#eeff36']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true
+            }
+        }
+    }
+});
 
-    <!-- Active Script -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-                var ctx = document.getElementById('revenueVSexpenses').getContext('2d');
-                var myPieChart = new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                                labels: [ "<?php echo number_format($revenue_percentage, 2); ?>% Revenue", 
-        "<?php echo number_format($expenses_percentage, 2); ?>% Expenses"
-],
-                                datasets: [{
-                                        data:[<?php echo number_format($revenue_percentage, 2); ?>, <?php echo number_format($expenses_percentage, 2); ?>],
-                                        backgroundColor: ['#00693e', '#eeff36']
-                                }]
-                        },
-                        options: {
-                                responsive: true,
-                                plugins: {
-                                        legend: {
-                                                display: true 
-                                        }
-                                }
-                        }
-                        
-                });
+var ctx = document.getElementById('profitTrend').getContext('2d');
 
-                var ctx = document.getElementById('profitTrend').getContext('2d');
-
-        var myLineChart = new Chart(ctx, {
-                type: 'line',    // Chart type
-                data: {
-                        labels: <?php echo json_encode($months); ?>,    // X-axis labels
-                        datasets: [{
-                                label: 'Profit Over Time',
-                                data: <?php echo json_encode($monthlyProfits); ?>,    // Y-axis values
-                                borderColor: 'green',    // Line color
-                                backgroundColor: 'rgba(10, 136, 59, 0.2)', // Fill under the line
-                                borderWidth: 2,    // Line thickness
-                                pointRadius: 5, // Size of data points
-                                pointBackgroundColor: '#00693e', // Color of data points
-                                fill: true    // Enable fill under the line
-                        }]
-                },
-                options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                                x: {
-                                        title: {
-                                                display: true,
-                                                text: 'Months'
-                                        }
-                                },
-                                y: {
-                                        beginAtZero: true,
-                                        title: {
-                                                display: true,
-                                                text: 'Profit (in thousands)'
-                                        }
-                                }
-                        }
-                }
-        });
-        </script>
-
-
+var myLineChart = new Chart(ctx, {
+    type: 'line',    // Chart type
+    data: {
+        labels: <?php echo json_encode($months); ?>,    // X-axis labels
+        datasets: [{
+            label: 'Profit Over Time',
+            data: <?php echo json_encode($monthlyProfits); ?>,    // Y-axis values
+            borderColor: 'green',    // Line color
+            backgroundColor: 'rgba(10, 136, 59, 0.2)', // Fill under the line
+            borderWidth: 2,    // Line thickness
+            pointRadius: 5, // Size of data points
+            pointBackgroundColor: '#00693e', // Color of data points
+            fill: true    // Enable fill under the line
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+        x: {
+            title: {
+                display: true,
+                text: 'Months'
+            }
+        },
+        y: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Profit (in thousands)'
+            }
+        }
+    }
+}});
+</script>
 <?php
     }
 }
 $dashboard = new Dashboard(); $dashboard->getData();
 ?>
-
 </body>
 </html>

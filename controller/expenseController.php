@@ -28,7 +28,7 @@ class ExpenseController {
         $statementinsert->execute([$date, $category, $description, $amount, $user]);
 
         $description = "Added a new expense.";
-        $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+        $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
@@ -49,7 +49,7 @@ class ExpenseController {
         $statementupdate->execute([$date, $category, $description, $amount, $user, $expense]);
 
         $description = "Updated expense.";
-        $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+        $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
@@ -66,7 +66,7 @@ class ExpenseController {
         $statementupdate->execute([$user, $expense]);
 
         $description = "Deleted expense.";
-        $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+        $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
