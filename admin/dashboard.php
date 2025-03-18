@@ -302,35 +302,38 @@ var myLineChart = new Chart(ctx, {
     data: {
         labels: <?php echo json_encode($months); ?>,    // X-axis labels
         datasets: [{
-            label: 'Profit Over Time',
+            label: 'Monthly Profits',
             data: <?php echo json_encode($monthlyProfits); ?>,    // Y-axis values
             borderColor: 'green',    // Line color
             backgroundColor: 'rgba(10, 136, 59, 0.2)', // Fill under the line
             borderWidth: 2,    // Line thickness
-            pointRadius: 5, // Size of data points
+            pointRadius: 3, // Size of data points
             pointBackgroundColor: '#00693e', // Color of data points
-            fill: true    // Enable fill under the line
+            fill: true,    // Enable fill under the line
+            lineTension: 0.4
         }]
     },
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        bezierCurve: true,
         scales: {
-        x: {
-            title: {
-                display: true,
-                text: 'Months'
-            }
-        },
-        y: {
-            beginAtZero: true,
-            title: {
-                display: true,
-                text: 'Profit (in thousands)'
+            x: {
+                title: {
+                    display: true,
+                    text: 'Months'
+                }
+            },
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Profit (in thousands)'
+                }
             }
         }
     }
-}});
+});
 </script>
 <?php
     }
