@@ -1,14 +1,14 @@
 <?php
 /*
- * Route Controller
- * Description: Route Controller
- * Author: YEN
+ * Rate Controller
+ * Description: Rate Controller
+ * Author: Vernyll Jan P. Asis
  */
 
 session_start();
 require_once '../config/config.php';
 
-class RouteController {
+class RateController {
     private $db;
 
     public function __construct() {
@@ -16,81 +16,87 @@ class RouteController {
         $this->db = $conn->getConnection();
     }
 
-    public function addRoute() {
+    public function addRate() {
         $user = $_SESSION['user_id'];
-        $route = $_POST['description'];
+        $quota = $_POST['quota'];
+        $base_salary = $_POST['quota'];
+        $base_rate = $_POST['base_rate'];
+        $addon_rate = $_POST['addon_rate'];
 
-        $sql = "SELECT * FROM `frs_routes` WHERE `description` = ? AND `deleted` != b'1'";
+        $sql = "SELECT * FROM `frs_rates` WHERE `quota` = ? AND `base_salary` = ? AND `base_rate` = ? AND `excess_rate` = ? AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$route]);
+        $stmt->execute([$quota, $base_salary, $base_rate, $addon_rate]);
 
         if ($stmt->rowcount() > 0) {
-            $_SESSION['error'] = 'Error: Route already exists!';
+            $_SESSION['error'] = 'Error: Rate values already exists!';
             echo "<script>window.location.href='../admin/route.php';</script>";
         }
         else {
-            $sqlinsert = "INSERT INTO `frs_routes`(`description`, `created_by`) VALUES (?,?)";
+            $sqlinsert = "INSERT INTO `frs_rates`(`quota`, `base_salary`, `base_rate`, `excess_rate`, `created_by`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
-            $statementinsert->execute([$route, $user]);
+            $statementinsert->execute([$quota, $base_salary, $base_rate, $addon_rate, $user]);
 
-            $description = "Added a new route.";
+            $description = "Added a new rate.";
             $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
-            $_SESSION['success'] = 'Success: Route added!';
+            $_SESSION['success'] = 'Success: Rate values added!';
             echo "<script>window.location.href='../admin/route.php';</script>";
         }
     }
 
-    public function editRoute() {
+    public function editRate() {
         $user = $_SESSION['user_id'];
-        $route = $_POST['route_id'];
-        $description = $_POST['description'];
+        $rate = $_POST['rate_id'];
+        $quota = $_POST['quota'];
+        $base_salary = $_POST['quota'];
+        $base_rate = $_POST['base_rate'];
+        $addon_rate = $_POST['addon_rate'];
 
-        $sql = "SELECT * FROM `frs_routes` WHERE `description` = ? AND `deleted` != b'1' AND `id` != ?";
+        $sql = "SELECT * FROM `frs_rates` WHERE `quota` = ? AND `base_salary` = ? AND `base_rate` = ? AND `excess_rate` = ? AND  AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$description, $route]);
+        $stmt->execute([$quota, $base_salary, $base_rate, $addon_rate, $rate]);
 
         if ($stmt->rowcount() > 0) {
-            $_SESSION['error'] = "Error: Route already exists!";
-            echo "<script>window.location.href='../admin/route.php';</script>";
+            $_SESSION['error'] = "Error: Rate values already exist!";
+            echo "<script>window.location.href='../admin/rates.php';</script>";
         }
         else {
-            $sqlupdate = "UPDATE `frs_routes` SET `description` = ?, `updated_by` = ? WHERE `id` = ?";
+            $sqlupdate = "UPDATE `frs_rates` SET `quota` = ?, `base_salary` = ?, `base_rate` = ?, `excess_rate` = ?, `updated_by` = ? WHERE `id` = ?";
             $statementupdate = $this->db->prepare($sqlupdate);
-            $statementupdate->execute([$description, $user, $route]);
+            $statementupdate->execute([$quota, $base_salary, $base_rate, $addon_rate, $user, $rate]);
 
-            $description = "Updated Route.";
+            $description = "Updated rate.";
             $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
-            $_SESSION['updated'] = 'Success: Route updated!';
-            echo "<script>window.location.href='../admin/route.php';</script>";
+            $_SESSION['updated'] = 'Success: Rate values updated!';
+            echo "<script>window.location.href='../admin/rates.php';</script>";
         }
     }
 
-    public function deleteRoute() {
+    public function deleteRate() {
         $user = $_SESSION['user_id'];
-        $route = $_POST['route_id'];
+        $rate = $_POST['rate_id'];
 
-        $sqlupdate = "UPDATE `frs_routes` SET `deleted` = b'1', `updated_by` = ? WHERE `id` = ?";
+        $sqlupdate = "UPDATE `frs_rates` SET `deleted` = b'1', `updated_by` = ? WHERE `id` = ?";
         $statementupdate = $this->db->prepare($sqlupdate);
-        $statementupdate->execute([$user, $route]);
+        $statementupdate->execute([$user, $rate]);
 
-        $description = "Deleted Route.";
+        $description = "Deleted rate.";
         $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
-        $_SESSION['deleted'] = 'Success: Route deleted!';
-        echo "<script>window.location.href='../admin/route.php';</script>";
+        $_SESSION['deleted'] = 'Success: Rate deleted!';
+        echo "<script>window.location.href='../admin/rates.php';</script>";
     }
 }
 
-$controller = new RouteController();
+$controller = new RateController();
 
-if (isset($_POST['add'])) $controller->addRoute();
-if (isset($_POST['edit'])) $controller->editRoute();
-if (isset($_POST['delete'])) $controller->deleteRoute();
+if (isset($_POST['add'])) $controller->addRate();
+if (isset($_POST['edit'])) $controller->editRate();
+if (isset($_POST['delete'])) $controller->deleteRate();

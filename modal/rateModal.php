@@ -1,13 +1,13 @@
 <?php
 /*
- * Route Modal
- * Description: Route Modal
- * Author: Charlene
+ * Rate Modal
+ * Description: Rate Modal
+ * Author: Vernyll Jan P. Asis
  */
 ?>
 
 
-<!-- Add Route -->
+<!-- Add Rate -->
 <div class="modal fade" id="addRoute">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -16,15 +16,32 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">Add Route</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Add Rate</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="description" class="col-sm-3 control-label">Route</label>
+                        <label for="quota" class="col-sm-3 control-label">Quota</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="description" name="description" required>
+                            <input class="form-control" id="quota" name="quota" required>
                         </div>
-
+                    </div>
+                    <div class="form-group">
+                        <label for="base_salary" class="col-sm-3 control-label">Base Salary</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="base_salary" name="base_salary" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="base_rate" class="col-sm-3 control-label">Base Rate</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="base_rate" name="base_rate" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addon_rate" class="col-sm-3 control-label">Add-On Rate</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="addon_rate" name="addon_rate" required>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -39,7 +56,7 @@
 
 
 
-<!-- Edit Route -->
+<!-- Edit Rate -->
 <div class="modal fade" id="edit">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -48,14 +65,32 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">Edit Route</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Edit Rate</h3>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="edit_driver_id" name="driver_id">
                     <div class="form-group">
-                        <label for="description" class="col-sm-3 control-label">Route</label>
+                        <label for="edit_quota" class="col-sm-3 control-label">Quota</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="description" name="description" required>
+                            <input class="form-control" id="edit_quota" name="quota" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_base_salary" class="col-sm-3 control-label">Base Salary</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="edit_base_salary" name="base_salary" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_base_rate" class="col-sm-3 control-label">Base Rate</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="edit_base_rate" name="base_rate" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_addon_rate" class="col-sm-3 control-label">Add-On Rate</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="edit_addon_rate" name="addon_rate" required>
                         </div>
                     </div>
                 </div>
@@ -67,7 +102,7 @@
     </div>
 </div>
 
-<!-- Delete Route -->
+<!-- Delete Rate -->
 <div class="modal fade" id="delete">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -76,12 +111,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title" style="color: #00693e;">Delete Route</h3>
+                    <h3 class="modal-title" style="color: #00693e;">Delete Rate</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="delete_route_id" name="route_id">
+                    <input type="hidden" id="delete_rate_id" name="rate_id">
                     <div class="text-center">
-                        <p>Are you sure you want to delete Route?</p>
+                        <p>Are you sure you want to delete rate?</p>
                     </div>
                 </div>
                 <div class="modal-footer">
