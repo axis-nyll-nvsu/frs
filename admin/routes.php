@@ -68,11 +68,11 @@ require_once '../config/config.php';
                                             <td><?php echo $id; ?></td>
                                             <td><?php echo $row['description']; ?></td>
                                             <td>
-                                                <button class='btn btn-success btn-sm edit btn-flat' 
-                                                data-edit_route_id='<?php echo $row['id']; ?>'
-                                                data-edit_description='<?php echo $row['description']; ?>'> Edit</button>
-                                                <button class='btn btn-danger btn-sm delete btn-flat' 
-                                                data-delete_route_id='<?php echo $row['id']; ?>'> Delete</button>
+                                                <button class="btn btn-success btn-sm edit btn-flat"
+                                                data-edit_route_id="<?php echo $row['id']; ?>"
+                                                data-edit_description="<?php echo $row['description']; ?>"> Edit</button>
+                                                <button class="btn btn-danger btn-sm delete btn-flat"
+                                                data-delete_route_id="<?php echo $row['id']; ?>"> Delete</button>
                                             </td>
                                         </tr>
             <?php $id++; } ?>

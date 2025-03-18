@@ -2,7 +2,7 @@
 /*
  * Route Modal
  * Description: Route Modal
- * Author: Charlene B. Dela Cruz
+ * Author: Charlene
  */
 ?>
 
@@ -53,9 +53,9 @@
                 <div class="modal-body">
                     <input type="hidden" id="edit_driver_id" name="driver_id">
                     <div class="form-group">
-                        <label for="edit_description" class="col-sm-3 control-label">Route</label>
+                        <label for="description" class="col-sm-3 control-label">Route</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="edit_description" name="description" required>
+                            <input class="form-control" id="description" name="description" required>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                 <div class="modal-body">
                     <input type="hidden" id="delete_route_id" name="route_id">
                     <div class="text-center">
-                        <p>Are you sure you want to delete route?</p>
+                        <p>Are you sure you want to delete Route?</p>
                     </div>
                 </div>
                 <div class="modal-footer">
