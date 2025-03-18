@@ -71,15 +71,15 @@ while ($row = $routes_stmt->fetch()) { ?>
     <td><?php echo $id; ?></td>
     <td><?php echo $row['quota']; ?></td>
     <td><?php echo $row['base_salary']; ?></td>
-    <td><?php echo $row['base_rate']; ?></td>
-    <td><?php echo $row['excess_rate']; ?></td>
+    <td><?php echo $row['base_rate']; ?>%</td>
+    <td><?php echo $row['addon_rate']; ?>%</td>
     <td>
         <button class="btn btn-success btn-sm edit btn-flat"
         data-edit_rate_id="<?php echo $row['id']; ?>"
         data-edit_quota="<?php echo $row['quota']; ?>"
         data-edit_base_salary="<?php echo $row['base_salary']; ?>"
         data-edit_base_rate="<?php echo $row['base_rate']; ?>"
-        data-edit_addon_rate="<?php echo $row['excess_rate']; ?>"> Edit</button>
+        data-edit_addon_rate="<?php echo $row['addon_rate']; ?>"> Edit</button>
         <button class="btn btn-danger btn-sm delete btn-flat"
         data-delete_route_id="<?php echo $row['id']; ?>"> Delete</button>
     </td>
@@ -143,7 +143,7 @@ $('#deleted').modal('show');
 <?php
     }
 }
-$route = new Route(); $route->getData();
+$rate = new Rate(); $rate->getData();
 ?>
 
 </body>

@@ -23,7 +23,7 @@ class RateController {
         $base_rate = $_POST['base_rate'];
         $addon_rate = $_POST['addon_rate'];
 
-        $sql = "SELECT * FROM `frs_rates` WHERE `quota` = ? AND `base_salary` = ? AND `base_rate` = ? AND `excess_rate` = ? AND `deleted` != b'1'";
+        $sql = "SELECT * FROM `frs_rates` WHERE `quota` = ? AND `base_salary` = ? AND `base_rate` = ? AND `addon_rate` = ? AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$quota, $base_salary, $base_rate, $addon_rate]);
 
@@ -32,7 +32,7 @@ class RateController {
             echo "<script>window.location.href='../admin/route.php';</script>";
         }
         else {
-            $sqlinsert = "INSERT INTO `frs_rates`(`quota`, `base_salary`, `base_rate`, `excess_rate`, `created_by`) VALUES (?,?)";
+            $sqlinsert = "INSERT INTO `frs_rates`(`quota`, `base_salary`, `base_rate`, `addon_rate`, `created_by`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$quota, $base_salary, $base_rate, $addon_rate, $user]);
 
@@ -54,7 +54,7 @@ class RateController {
         $base_rate = $_POST['base_rate'];
         $addon_rate = $_POST['addon_rate'];
 
-        $sql = "SELECT * FROM `frs_rates` WHERE `quota` = ? AND `base_salary` = ? AND `base_rate` = ? AND `excess_rate` = ? AND  AND `deleted` != b'1'";
+        $sql = "SELECT * FROM `frs_rates` WHERE `quota` = ? AND `base_salary` = ? AND `base_rate` = ? AND `addon_rate` = ? AND  AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$quota, $base_salary, $base_rate, $addon_rate, $rate]);
 
@@ -63,7 +63,7 @@ class RateController {
             echo "<script>window.location.href='../admin/rates.php';</script>";
         }
         else {
-            $sqlupdate = "UPDATE `frs_rates` SET `quota` = ?, `base_salary` = ?, `base_rate` = ?, `excess_rate` = ?, `updated_by` = ? WHERE `id` = ?";
+            $sqlupdate = "UPDATE `frs_rates` SET `quota` = ?, `base_salary` = ?, `base_rate` = ?, `addon_rate` = ?, `updated_by` = ? WHERE `id` = ?";
             $statementupdate = $this->db->prepare($sqlupdate);
             $statementupdate->execute([$quota, $base_salary, $base_rate, $addon_rate, $user, $rate]);
 
