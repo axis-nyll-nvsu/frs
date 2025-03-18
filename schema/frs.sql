@@ -65,14 +65,14 @@ CREATE TABLE `frs_rates` (
     `quota` double NOT NULL,
     `base_salary` double NOT NULL,
     `base_rate` double NOT NULL,
-    `excess_rate` double NOT NULL,
+    `addon_rate` double NOT NULL,
     `is_default` bit(1) NOT NULL DEFAULT b'0',
     `deleted` bit(1) NOT NULL DEFAULT b'0',
     `created_by` int(11) NOT NULL,
     `updated_by` int(11) DEFAULT NULL
 );
 
-INSERT INTO `frs_rates` (`id`, `quota`, `base_salary`, `base_rate`, `excess_rate`, `is_default`, `deleted`, `created_by`, `updated_by`)
+INSERT INTO `frs_rates` (`id`, `quota`, `base_salary`, `base_rate`, `addon_rate`, `is_default`, `deleted`, `created_by`, `updated_by`)
     VALUES (1, '2700', '450', '18', '4', b'1', b'0', '1', NULL);
 
 CREATE TABLE `frs_routes` (
