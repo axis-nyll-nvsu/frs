@@ -92,11 +92,11 @@ include '../modal/ejeepModal.php';
                         <div class="col-sm-8" style="display: flex;">
                             <select id="rate_id" name="rate_id" style="width: 90%;" required>
                                 <?php
-                                $sql = "SELECT * FROM `frs_rates` WHERE `deleted` != b'1' ORDER BY `is_default` DESC";
+                                $sql = "SELECT * FROM `frs_rates` WHERE `deleted` != b'1'";
                                 $stmt = $this->db->query($sql);
                                 while ($row = $stmt->fetch()) {
                                 ?>
-                                <option value="<?php echo $row['id'] ?>">
+                                <option value="<?php echo $row['id'] ?>" <?php if($row['is_default'] == 1) echo 'selected';?>>
                                     <?php
                                         echo "Q: " . number_format($row['quota'], 2) . " | ";
                                         echo "BS: " . number_format($row['base_salary'], 2) . " | ";

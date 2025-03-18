@@ -74,14 +74,12 @@ while ($row = $routes_stmt->fetch()) { ?>
     <td><?php echo $row['base_rate']; ?>%</td>
     <td><?php echo $row['addon_rate']; ?>%</td>
     <td>
+        <?php if($row['is_default'] == 0): ?>
         <button class="btn btn-success btn-sm edit btn-flat"
-        data-edit_rate_id="<?php echo $row['id']; ?>"
-        data-edit_quota="<?php echo $row['quota']; ?>"
-        data-edit_base_salary="<?php echo $row['base_salary']; ?>"
-        data-edit_base_rate="<?php echo $row['base_rate']; ?>"
-        data-edit_addon_rate="<?php echo $row['addon_rate']; ?>"> Edit</button>
-        <button class="btn btn-danger btn-sm delete btn-flat"
-        data-delete_route_id="<?php echo $row['id']; ?>"> Delete</button>
+        data-edit_rate_id="<?php echo $row['id']; ?>"> Set Default</button>
+        <?php else: ?>
+        <button class="btn btn-warning btn-sm edit btn-flat" disabled> Default</button>
+        <?php endif; ?>
     </td>
 </tr>
 <?php $id++; } ?>
@@ -103,15 +101,7 @@ $(document).on('click', '.edit', function(e){
     e.preventDefault();
     $('#edit').modal('show');
     var edit_rate_id = $(this).data('edit_rate_id');
-    var edit_quota = $(this).data('edit_quota');
-    var edit_base_salary = $(this).data('edit_base_salary');
-    var edit_base_rate = $(this).data('edit_base_rate');
-    var edit_addon_rate = $(this).data('edit_addon_rate');
-    $('#edit_route_id').val(edit_route_id)
-    $('#edit_quota').val(edit_route_id)
-    $('#edit_base_salary').val(edit_quota)
-    $('#edit_base_rate').val(edit_base_rate)
-    $('#edit_addon_rate').val(edit_addon_rate)
+    $('#edit_rate_id').val(edit_rate_id)
 });
 
 $(document).on('click', '.delete', function(e){
