@@ -172,7 +172,7 @@ $period = date('M Y');
                                     <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
                                 </form>
                                 <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Monthly Profits</h3>
-                                <a href="income_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Monthly Profits</a>
+                                <!--<a href="income_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Monthly Profits</a>-->
                                 <h4 style="text-align: center; font-size: 1em;">For the Month of <?php echo $period; ?></h4>
                             </div>
                         </div>
