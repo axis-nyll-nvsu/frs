@@ -43,6 +43,7 @@ $trails = $trail->getData();
                 <h1>Audit Trail</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="bi bi-speedometer2"></i> Home</a></li>
+                    <li>Administration</li>
                     <li class="active">Audit Trail</li>
                 </ol>
             </section>

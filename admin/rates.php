@@ -41,7 +41,8 @@ require_once '../config/config.php';
                 <h1>Salary Rates</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="bi bi-speedometer2"></i> Home</a></li>
-                    <li class="active">Rates</li>
+                    <li>Administration</li>
+                    <li class="active">Salary Rates</li>
                 </ol>
             </section>
 

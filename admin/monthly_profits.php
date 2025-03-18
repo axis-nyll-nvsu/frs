@@ -1,6 +1,6 @@
 <?php
 /*
-* Profit 
+* Profits
 * Description: Profits View
 * Author: Charlene B. Dela Cruz
 */

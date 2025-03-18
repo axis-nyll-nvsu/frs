@@ -26,7 +26,7 @@
                     <span class="pull-right-container"><i class="bi bi-chevron-down pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="profits.php"><i class="bi bi-coin"></i>Monthly Reports</a></li>
+                    <li><a href="profits.php"><i class="bi bi-coin"></i>Monthly Profits</a></li>
                     <li><a href="income_statement.php"><i class="bi bi-coin"></i>Income Statement</a></li>
                     <li><a href="cashflow_statement.php"><i class="bi bi-coin"></i>Statement of Cash Flows</a></li>
                 </ul>

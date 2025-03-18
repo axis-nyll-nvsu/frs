@@ -43,7 +43,8 @@ $accounts = $account->getData();
                 <h1>User Accounts</h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="bi bi-speedometer2"></i> Home</a></li>
-                    <li class="active">Accounts</li>
+                    <li>Administration</li>
+                    <li class="active">User Accounts</li>
                 </ol>
             </section>
             <section class="content">
