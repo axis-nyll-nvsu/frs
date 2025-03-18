@@ -32,7 +32,7 @@ class Salary {
                             c.`quota`,
                             c.`base_salary`,
                             c.`base_rate`,
-                            c.`excess_rate` " .
+                            c.`addon_rate` " .
                         "FROM `frs_salaries` AS a " .
                         "INNER JOIN `frs_drivers` AS b " .
                         "ON a.`driver_id` = b.`id` " .
@@ -99,7 +99,7 @@ while ($row = $salary_stmt->fetch()) { ?>
     echo "Quota: " . number_format($row['quota'], 2) . " | ";
     echo "Base Salary: " . number_format($row['base_salary'], 2) . " | ";
     echo "Base Rate: " . $row['base_rate'] . "% | ";
-    echo "Add-On Rate: " . $row['excess_rate'] . "%";
+    echo "Add-On Rate: " . $row['addon_rate'] . "%";
 ?>
     </td>
     <td style="text-align: right;">Php <?php echo number_format($row['collection'], 2); ?></td>

@@ -101,7 +101,7 @@ include '../modal/ejeepModal.php';
                                         echo "Q: " . number_format($row['quota'], 2) . " | ";
                                         echo "BS: " . number_format($row['base_salary'], 2) . " | ";
                                         echo "BR: " . $row['base_rate'] . "% | ";
-                                        echo "AR: " . $row['excess_rate'] . "%";
+                                        echo "AR: " . $row['addon_rate'] . "%";
                                     ?>
                                 </option>
                                 <?php } ?>
