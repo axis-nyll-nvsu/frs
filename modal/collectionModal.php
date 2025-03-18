@@ -100,8 +100,8 @@ include '../modal/ejeepModal.php';
                                     <?php
                                         echo "Q: " . number_format($row['quota'], 2) . " | ";
                                         echo "BS: " . number_format($row['base_salary'], 2) . " | ";
-                                        echo "BR: " . number_format(($row['base_rate'] / 100), 2) . " | ";
-                                        echo "ER: " . number_format(($row['excess_rate'] / 100), 2);
+                                        echo "BR: " . $row['base_rate'] . "% | ";
+                                        echo "AR: " . $row['excess_rate'] . "%";
                                     ?>
                                 </option>
                                 <?php } ?>
@@ -112,9 +112,9 @@ include '../modal/ejeepModal.php';
                     <div class="form-group">
                         <div class="col-sm-8" style="margin-left: 150px; font-size: 0.8em;">
                             <code>A</code>: Amount, <code>Q</code>: Quota,
-                            <code>BS</code>: Base Salary, <code>BR</code>: Base Rate, <code>ER</code>: Excess Rate<br>
+                            <code>BS</code>: Base Salary, <code>BR</code>: Base Rate, <code>AR</code>: Add-On Rate<br>
                             <strong>Formula if collection meets quota</strong>:
-                            <code>BS + (A x ER)</code><br>
+                            <code>BS + (A x AR)</code><br>
                             <strong>Formula if collection does not meet quota</strong>:
                             <code>A x BR</code>
                         </div>
@@ -177,9 +177,9 @@ include '../modal/ejeepModal.php';
                     <div class="form-group">
                         <div class="col-sm-8" style="margin-left: 150px; font-size: 0.8em;">
                             <code>A</code>: Amount, <code>Q</code>: Quota,
-                            <code>BS</code>: Base Salary, <code>BR</code>: Base Rate, <code>ER</code>: Excess Rate<br>
+                            <code>BS</code>: Base Salary, <code>BR</code>: Base Rate, <code>AR</code>: Add-On Rate<br>
                             <strong>Formula if collection meets quota</strong>:
-                            <code>BS + (A x ER)</code><br>
+                            <code>BS + (A x AR)</code><br>
                             <strong>Formula if collection does not meet quota</strong>:
                             <code>A x BR</code>
                         </div>

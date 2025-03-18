@@ -71,7 +71,7 @@ class Salary {
                         <div class="box-header with-border">
                             <p>
                                 <strong>FORMULAS</strong><br>
-                                For collections meeting the quota: <span style="font-family: 'Courier New';">Base Salary + (Collection - Quota) x Excess Rate</span><br>
+                                For collections meeting the quota: <span style="font-family: 'Courier New';">Base Salary + (Collection x Add-On Rate)</span><br>
                                 For collections not meeting the quota: <span style="font-family: 'Courier New';">Collection x Base Rate</span>
                             </p>
                         </div>
@@ -98,8 +98,8 @@ while ($row = $salary_stmt->fetch()) { ?>
 <?php
     echo "Quota: " . number_format($row['quota'], 2) . " | ";
     echo "Base Salary: " . number_format($row['base_salary'], 2) . " | ";
-    echo "Base Rate: " . number_format(($row['base_rate'] / 100), 2) . " | ";
-    echo "Excess Rate: " . number_format(($row['excess_rate'] / 100), 2);
+    echo "Base Rate: " . $row['base_rate'] . "% | ";
+    echo "Add-On Rate: " . $row['excess_rate'] . "%";
 ?>
     </td>
     <td style="text-align: right;">Php <?php echo number_format($row['collection'], 2); ?></td>
