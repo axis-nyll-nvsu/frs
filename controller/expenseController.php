@@ -32,7 +32,7 @@ class ExpenseController {
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
-        $_SESSION['success'] = 'success';
+        $_SESSION['success'] = 'Success: Expense added!';
         echo "<script>window.location.href='../admin/expenses.php';</script>";
     }
 
@@ -53,7 +53,7 @@ class ExpenseController {
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
-        $_SESSION['updated'] = 'updated';
+        $_SESSION['updated'] = 'Success: Expense updated!';
         echo "<script>window.location.href='../admin/expenses.php';</script>";
     }
 
@@ -70,7 +70,7 @@ class ExpenseController {
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
-        $_SESSION['deleted'] = 'deleted';
+        $_SESSION['deleted'] = 'Success: Expense deleted!';
         echo "<script>window.location.href='../admin/expenses.php';</script>";
     }
 }
