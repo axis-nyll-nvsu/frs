@@ -6,7 +6,7 @@
 Weekly Salary of Drivers  
 Daily Computation:
 
-- quota P2,700 > P450
+- quota P2,700 > P450 + 4% of total collections.
 - did not meet quota > 18% of total collections.
 
 ### Dashboard
@@ -26,7 +26,7 @@ Income Statement and Cash Flow Statement
   ~~Date | Driver | Unit # | Route | Amount~~
 2. ~~add option wherein users can add no. of E-Jeep.~~
 3. add a table that shows monthly expenses, revenue, and profit. `Is this per category or per driver?`
-4. add expenses: include a button where users can add new category.
+4. ~~add expenses: include a button where users can add new category.~~
 5. add a function where users can modify the computation. `Is this ADHOC change? what parts of the computation can be changed?`
 6. add a function that allows data to be backed-up to Google Drive. `Is this automatic?`
 7. remove recompute, it should automatically be recomputed if data is updated.
