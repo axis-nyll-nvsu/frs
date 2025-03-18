@@ -31,7 +31,7 @@ class CollectionController {
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if($amount < $row['quota']) $salary = $amount * $row['base_rate'] / 100;
-        else $salary = $row['base_salary'] + ($amount - $row['quota']) * $row['excess_rate'] / 100;
+        else $salary = $row['base_salary'] + ($amount * $row['excess_rate'] / 100);
 
         $sql = "SELECT * FROM `frs_collections` WHERE `date` = ? AND `driver_id` = ? AND `deleted` != b'1'";
         $stmt = $this->db->prepare($sql);

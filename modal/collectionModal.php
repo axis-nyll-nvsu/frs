@@ -114,7 +114,7 @@ include '../modal/ejeepModal.php';
                             <code>A</code>: Amount, <code>Q</code>: Quota,
                             <code>BS</code>: Base Salary, <code>BR</code>: Base Rate, <code>ER</code>: Excess Rate<br>
                             <strong>Formula if collection meets quota</strong>:
-                            <code>BS + (A - Q) x ER</code><br>
+                            <code>BS + (A x ER)</code><br>
                             <strong>Formula if collection does not meet quota</strong>:
                             <code>A x BR</code>
                         </div>
@@ -172,6 +172,16 @@ include '../modal/ejeepModal.php';
                         <label for="amount" class="col-sm-3 control-label">Amount</label>
                         <div class="col-sm-8">
                             <input type="number" class="form-control" id="edit_amount" name="amount" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8" style="margin-left: 150px; font-size: 0.8em;">
+                            <code>A</code>: Amount, <code>Q</code>: Quota,
+                            <code>BS</code>: Base Salary, <code>BR</code>: Base Rate, <code>ER</code>: Excess Rate<br>
+                            <strong>Formula if collection meets quota</strong>:
+                            <code>BS + (A x ER)</code><br>
+                            <strong>Formula if collection does not meet quota</strong>:
+                            <code>A x BR</code>
                         </div>
                     </div>
                 </div>
