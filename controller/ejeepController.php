@@ -62,7 +62,7 @@ class EjeepController {
             $statementupdate = $this->db->prepare($sqlupdate);
             $statementupdate->execute([$plate, $user, $ejeep_id]);
 
-            $description = "Updated Ejeep.";
+            $description = "Updated e-jeep.";
             $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);

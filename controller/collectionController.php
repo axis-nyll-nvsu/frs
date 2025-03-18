@@ -80,7 +80,7 @@ class CollectionController {
             $statementupdate = $this->db->prepare($sqlupdate);
             $statementupdate->execute([$date, $amount, $user, $collection]);
 
-            $description = "Updated collection collection.";
+            $description = "Updated collection.";
             $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
