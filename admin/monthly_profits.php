@@ -1,19 +1,17 @@
 <?php
 /*
-* Profits
-* Description: Profits View
-* Author: Charlene B. Dela Cruz
-*/
+ * Monthly Profits
+ * Description: Monthly Profits View
+ * Author: Charlene B. Dela Cruz
+ */
 
 session_start();
-if (!isset($_SESSION['type'])) {
+if(!isset($_SESSION['type'])) {
     header('location: ./');
-    exit();
 }
 
 require_once '../config/config.php';
-
-class Profits {
+class Report {
     private $db;
     public function __construct() {
         $conn = new Connection();
@@ -95,7 +93,7 @@ class Profits {
     }
 }
 
-$profit = new Profits();
+$profit = new Report();
 
 // Get year and month filters from the form
 $filter_year = isset($_GET['filter_year']) ? $_GET['filter_year'] : null;
@@ -120,6 +118,8 @@ foreach ($collections as $collection) {
 
 // Calculate profit
 $total_profit = $total_collections - $total_expenses;
+
+$period = date('M Y');
 ?>
 
 <!DOCTYPE html>
@@ -140,21 +140,45 @@ $total_profit = $total_collections - $total_expenses;
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
-    <?php include '../common/navbar.php'; ?>
-    <?php include '../common/sidebar.php'; ?>
-
-    <!-- Content Wrapper -->
+<?php include '../common/navbar.php'; ?>
+<?php include '../common/sidebar.php'; ?>
     <div class="content-wrapper">
-
-        <!-- Content Header -->
         <section class="content-header">
-            <h1>Monthly Profits</h1>
+            <h1>Reports &mdash; Monthly Profits</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="bi bi-speedometer2"></i> Home</a></li>
-                <li class="active">Profits</li>
+                <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> Home</a></li>
+                <li>Reports</li>
+                <li class="active">Monthly Profits</li>
             </ol>
-
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <div style="position: relative">
+                                <form method="GET" action="" style="display: flex; width: 245px; position: absolute; top: 0; left: 0; z-index: 10;">
+                                    <select name="period" class="form-control axis-form-control" style="margin-right: 3px">
+                                        <?php
+                                            $year = date('Y');
+                                            for($i = 1; $i <= 5; $i++) {
+                                                echo '<option value="' . $year . '" ';
+                                                if($year == $period) echo 'selected';
+                                                echo '>Fiscal Year: ' . $year . '</option>';
+                                                $year--;
+                                            }
+                                        ?>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
+                                </form>
+                                <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Monthly Profits</h3>
+                                <a href="income_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Monthly Profits</a>
+                                <h4 style="text-align: center; font-size: 1em;">For the Month of <?php echo $period; ?></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- Filter Form -->
         <section class="content">
