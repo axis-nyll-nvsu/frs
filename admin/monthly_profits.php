@@ -139,10 +139,12 @@ $period = date('M Y');
     </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-<?php include '../common/navbar.php'; ?>
-<?php include '../common/sidebar.php'; ?>
-    <div class="content-wrapper">
+    <div class="wrapper">
+        <?php include '../common/navbar.php'; ?>
+        <?php include '../common/sidebar.php'; ?>
+        <!-- Content Header -->
+
+        <div class="content-wrapper">
         <section class="content-header">
             <h1>Reports &mdash; Monthly Profits</h1>
             <ol class="breadcrumb">
@@ -151,177 +153,157 @@ $period = date('M Y');
                 <li class="active">Monthly Profits</li>
             </ol>
         </section>
+        <!-- Filter Form -->
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <div style="position: relative">
-                                <form method="GET" action="" style="display: flex; width: 245px; position: absolute; top: 0; left: 0; z-index: 10;">
-                                    <select name="period" class="form-control axis-form-control" style="margin-right: 3px">
+                            <div style="position: relative;">
+                                <form method="GET" action="" class="filter-container" style="display: flex; width:245px; position: absolute; top: 0; left: 0; z-index: 10;">
+                                <!-- Year Filter -->
+                                    <select id="filter_year" name="filter_year" class="axis-form-control" style="margin-right: 3px; ">
+                                        <option value="">Year</option>
                                         <?php
-                                            $year = date('Y');
-                                            for($i = 1; $i <= 5; $i++) {
-                                                echo '<option value="' . $year . '" ';
-                                                if($year == $period) echo 'selected';
-                                                echo '>Fiscal Year: ' . $year . '</option>';
-                                                $year--;
+                                            $current_year = date('Y');
+                                            for ($i = $current_year; $i >= $current_year - 10; $i--) {
+                                                $selected = (isset($_GET['filter_year']) && $_GET['filter_year'] == $i) ? 'selected' : '';
+                                                echo "<option value='$i' $selected>$i</option>"; }
+                                        ?>
+                                    </select>
+                                    <!-- Month Filter -->
+                                    <select id="filter_month" name="filter_month" class="axis-form-control" style="width: 150px;">
+                                        <option value="">Month</option>
+                                        <?php
+                                            for ($i = 1; $i <= 12; $i++) {
+                                                $month_value = str_pad($i, 2, '0', STR_PAD_LEFT);
+                                                $month_name = date('F', mktime(0, 0, 0, $i, 1));
+                                                $selected = (isset($_GET['filter_month']) && $_GET['filter_month'] == $month_value) ? 'selected' : '';
+                                                echo "<option value='$month_value' $selected>$month_name</option>";
                                             }
                                         ?>
                                     </select>
-                                    <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
+                                    <!-- Filter and Reset Buttons -->
+                                    <button type="submit" class="btn btn-sm btn-flat axis-btn-green">Filter</button>
+                                    <button type="reset" class="btn btn-sm btn-flat axis-btn-green">Reset</button>
+
                                 </form>
-                                <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Monthly Profits</h3>
-                                <!--<a href="income_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Monthly Profits</a>-->
-                                <h4 style="text-align: center; font-size: 1em;">For the Month of <?php echo $period; ?></h4>
-                            </div>
-                        </div>
-                    </div>
+                    
+                                    <h3 style="text-align: center; font-weight: bold; margin-top: 30px;">Monthly Profits</h3>
+                                    <h4 style="text-align: center; font-size: 1em;">
+                                        For the Month of 
+                                        <?php 
+                                            if (isset($_GET['filter_month']) && isset($_GET['filter_year']) && $_GET['filter_year'] && $_GET['filter_month']) {
+                                                echo date('F Y', mktime(0, 0, 0, $_GET['filter_month'], 1, $_GET['filter_year']));
+                                            } else {
+                                                echo "All Periods";
+                                            }
+                                        ?>
+                                    </h4>
+                                        <!-- profit table -->
+                                        <table class="table">
+                                            <thead>
+                                                <tr style="line-height: 1; padding: 5px 0;">
+                                                    <th>Total Collection</th>
+                                                    <th>Total Expenses</th>
+                                                    <th>Total Profit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="line-height: 1; padding: 5px 0;">
+                                                    <td style="font-size: 20px;">Php <?= number_format($total_collections, 2); ?></td>
+                                                    <td style="font-size: 20px;">Php <?= number_format($total_expenses, 2); ?></td>
+                                                        <?php $total_profit = $total_collections - $total_expenses; ?>
+                                                    <td style="font-size: 20px; font-weight:bold;">Php <?= number_format($total_profit, 2); ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                            <h4>Monthly Expenses</h4>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="box">
+                                                        <div class="box-body table-responsive">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>Month</th>
+                                                                        <th>Category</th>
+                                                                        <th>Total Expenses</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php 
+                                                                        $id = 1; 
+                                                                        $total_expenses = 0; 
+                                                                    ?>
+                                                                    <?php foreach ($expenses as $row): ?>
+                                                                    <tr>
+                                                                        <td><?= $id++; ?></td>
+                                                                        <td><?= $row['month']; ?></td>
+                                                                        <td><?= $row['category']; ?></td>
+                                                                        <td style="text-align: right;">Php <?= number_format($row['total_expense'], 2); ?></td>
+                                                                    </tr>
+                                                                        <?php $total_expenses += $row['total_expense']; ?>
+                                                                        <?php endforeach; ?>
+                                                                    <tr style="font-weight: bold; background-color: #f2f2f2;">
+                                                                        <td colspan="3" style="text-align: right;">Grand Total:</td>
+                                                                        <td style="text-align: right;">Php <?= number_format($total_expenses, 2); ?></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <h4>Monthly Collection</h4>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="box">
+                                                                <div class="box-body table-responsive">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Month</th>
+                                                                                <th>Plate Number</th>
+                                                                                <th>Total Collection</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php 
+                                                                            $id = 1; 
+                                                                            $total_collections = 0; 
+                                                                            ?>
+                                                                            <?php foreach ($collections as $row): ?>
+                                                                            <tr>
+                                                                                <td><?= $id++; ?></td>
+                                                                                <td><?= $row['month']; ?></td>
+                                                                                <td><?= $row['plate_number']; ?></td>
+                                                                                <td style="text-align: right;">Php <?= number_format($row['total_collection'], 2); ?></td>
+                                                                            </tr>
+                                                                                <?php $total_collections += $row['total_collection']; ?>
+                                                                                <?php endforeach; ?>
+                                                                            <tr style="font-weight: bold; background-color: #f2f2f2;">
+                                                                                <td colspan="3" style="text-align: right;">Grand Total:</td>
+                                                                                <td style="text-align: right;">Php <?= number_format($total_collections, 2); ?></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                </div>
                 </div>
-            </div>
-        </section>
-        <!-- Filter Form -->
-        <section class="content">
-            <form method="GET" action="" class="filter-container">
-                <label for="filter_year">Year:</label>
-                <select id="filter_year" name="filter_year" class="form-control">
-                    <option value="">All Years</option>
-                    <?php
-                    $current_year = date('Y');
-                    for ($i = $current_year; $i >= $current_year - 10; $i--) {
-                        $selected = ($filter_year == $i) ? 'selected' : '';
-                        echo "<option value='$i' $selected>$i</option>";
-                    }
-                    ?>
-                </select>
-
-                <label for="filter_month">Month:</label>
-                <select id="filter_month" name="filter_month" class="form-control">
-                    <option value="">All Months</option>
-                    <?php
-                    for ($i = 1; $i <= 12; $i++) {
-                        $month_value = str_pad($i, 2, '0', STR_PAD_LEFT);
-                        $month_name = date('F', mktime(0, 0, 0, $i, 1));
-                        $selected = ($filter_month == $month_value) ? 'selected' : '';
-                        echo "<option value='$month_value' $selected>$month_name</option>";
-                    }
-                    ?>
-                </select>
-
-                <button type="submit" class="btn btn-sm btn-flat axis-btn-green" style="width: 200px;">Filter</button>
-               <button type="reset" class ="btn btn-sm" style="border-color: #04AA6D; color: green; width: 200px;">Reset</button>
-            
-            </form>
-          
-             <!-- profit table -->
-             <table class="table">
-                    <thead>
-                        <tr style="line-height: 1; padding: 5px 0;">
-                            <th>Total Collection</th>
-                            <th>Total Expenses</th>
-                            <th>Total Profit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="line-height: 1; padding: 5px 0;">
-                            
-                            <td style="font-size: 20px;">Php <?= number_format($total_collections, 2); ?></td>
-                            <td style="font-size: 20px;">Php <?= number_format($total_expenses, 2); ?></td>
-                            <?php $total_profit = $total_collections - $total_expenses; ?>
-                            <td style="font-size: 20px; font-weight:bold;">Php <?= number_format($total_profit, 2); ?></td>
-                        </tr>
-                    </tbody>
-                </table>
-      
-     
-
-        <!-- Monthly Expenses -->
-<h4>Monthly Expenses</h4>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-body table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Month</th>
-                            <th>Category</th>
-                            <th>Total Expenses</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                    $id = 1; 
-                    $total_expenses = 0; 
-                    ?>
-                    <?php foreach ($expenses as $row): ?>
-                        <tr>
-                            <td><?= $id++; ?></td>
-                            <td><?= $row['month']; ?></td>
-                            <td><?= $row['category']; ?></td>
-                            <td style="text-align: right;">Php <?= number_format($row['total_expense'], 2); ?></td>
-                        </tr>
-                        <?php $total_expenses += $row['total_expense']; ?>
-                    <?php endforeach; ?>
-
-                    <!-- Grand Total Row -->
-                    <tr style="font-weight: bold; background-color: #f2f2f2;">
-                        <td colspan="3" style="text-align: right;">Grand Total:</td>
-                        <td style="text-align: right;">Php <?= number_format($total_expenses, 2); ?></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+             </div>              
+        </section>  
 </div>
+        
+    
 
-<!-- Monthly Collection -->
-<h4>Monthly Collection</h4>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-body table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Month</th>
-                            <th>Plate Number</th>
-                            <th>Total Collection</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                    $id = 1; 
-                    $total_collections = 0; 
-                    ?>
-                    <?php foreach ($collections as $row): ?>
-                        <tr>
-                            <td><?= $id++; ?></td>
-                            <td><?= $row['month']; ?></td>
-                            <td><?= $row['plate_number']; ?></td>
-                            <td style="text-align: right;">Php <?= number_format($row['total_collection'], 2); ?></td>
-                        </tr>
-                        <?php $total_collections += $row['total_collection']; ?>
-                    <?php endforeach; ?>
-
-                    <!-- Grand Total Row -->
-                    <tr style="font-weight: bold; background-color: #f2f2f2;">
-                        <td colspan="3" style="text-align: right;">Grand Total:</td>
-                        <td style="text-align: right;">Php <?= number_format($total_collections, 2); ?></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
 
     </div>
-</div>
 
 <?php include '../common/footer.php'; ?>
 </body>
