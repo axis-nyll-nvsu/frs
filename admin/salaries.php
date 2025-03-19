@@ -89,7 +89,12 @@ class Salary {
                                 <tbody>
 <?php
 $id = 1;
-while ($row = $salary_stmt->fetch()) { ?>
+while ($row = $salary_stmt->fetch()) {
+    $rate = "Q: " . number_format($row['quota'], 2) . " | " .
+            "BS: " . number_format($row['base_salary'], 2) . " | " .
+            "BR: " . $row['base_rate'] . "% | " .
+            "AR: " . $row['addon_rate'] . "%";
+?>
 <tr>
     <td><?php echo $id; ?></td>
     <td><?php echo $row['date']; ?></td>
@@ -105,9 +110,9 @@ while ($row = $salary_stmt->fetch()) { ?>
     <td style="text-align: right;">Php <?php echo number_format($row['collection'], 2); ?></td>
     <td style="text-align: right;">Php <?php echo number_format($row['salary'], 2); ?></td>
     <td>
-        <button class="btn btn-success btn-sm edit btn-flat"
+        <button class="btn btn-success btn-sm changeComputation btn-flat"
         data-edit_salary_id="<?php echo $row['id']; ?>"
-        data-edit_rate_id="<?php echo $row['rate_id']; ?>"> Change Rates</button>
+        data-edit_rate_value="<?php echo $rate; ?>"> Change Computation</button>
     </td>
 </tr>
 <?php $id++; } ?>
@@ -124,44 +129,32 @@ while ($row = $salary_stmt->fetch()) { ?>
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
 <?php include '../modal/salaryModal.php'; ?>
+<?php include '../modal/addRateModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
 
 <script>
     $(document).ready(function() {
-        $("#start_date").select2();
+        $("#rate_id").select2();
     });
 
-    $(document).on('click', '.recompute', function(e){
+    $(document).on('click', '.changeComputation', function(e){
         e.preventDefault();
-        $('#recompute').modal('show');
-        var compute_salary_id = $(this).data('compute_salary_id');
-        $('#compute_salary_id').val(compute_salary_id)
-    });
-
-    $(document).on('click', '.pay', function(e){
-        e.preventDefault();
-        $('#pay').modal('show');
-        var pay_salary_id = $(this).data('pay_salary_id');
-        $('#pay_salary_id').val(pay_salary_id)
+        $('#changeComputation').modal('show');
+        var edit_salary_id = $(this).data('edit_salary_id');
+        var edit_rate_value = $(this).data('edit_rate_value');
+        $('#edit_salary_id').val(edit_salary_id);
+        $('#edit_rate_value').val(edit_rate_value);
     });
 </script>
 
 <script>
-    <?php if (isset($_SESSION['computed'])) { ?>
-    $('#computed').modal('show');
-    <?php unset($_SESSION['computed']); } ?>
+    <?php if (isset($_SESSION['success'])) { ?>
+    $('#success').modal('show');
+    <?php unset($_SESSION['success']); } ?>
 
     <?php if (isset($_SESSION['error'])) { ?>
     $('#error').modal('show')
     <?php unset($_SESSION['error']); } ?>
-
-    <?php if (isset($_SESSION['recomputed'])) { ?>
-    $('#recomputed').modal('show');
-    <?php unset($_SESSION['recomputed']); } ?>
-
-    <?php if (isset($_SESSION['paid'])) { ?>
-    $('#paid').modal('show');
-    <?php unset($_SESSION['paid']); } ?>
 </script>
 
 <?php
