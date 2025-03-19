@@ -2,21 +2,22 @@
 
 CREATE TABLE `frs_categories` (
     `id` int(11) NOT NULL,
+    `type` enum('O','I','F','') NOT NULL,
     `description` varchar(50) NOT NULL,
     `deleted` bit(1) NOT NULL DEFAULT b'0',
     `created_by` int(11) NOT NULL,
     `updated_by` int(11) DEFAULT NULL
 );
 
-INSERT INTO `frs_categories` (`id`, `description`, `deleted`, `created_by`, `updated_by`) VALUES
-(1, 'Amortization', b'0', 1, NULL),
-(2, 'Register per Unit', b'0', 1, NULL),
-(3, 'Maintenance & Repair', b'0', 1, NULL),
-(4, 'Insurance', b'0', 1, NULL),
-(5, 'Driver Salary', b'0', 1, NULL),
-(6, 'Utilities - Electric Bill', b'0', 1, NULL),
-(7, 'Utilities - Water Bill', b'0', 1, NULL),
-(8, 'Office Supplies', b'0', 1, NULL);
+INSERT INTO `frs_categories` (`id`, `type`, `description`, `deleted`, `created_by`, `updated_by`) VALUES
+(1, 'I', 'Amortization', b'0', 1, NULL),
+(2, 'O', 'Register per Unit', b'0', 1, NULL),
+(3, 'O', 'Maintenance & Repair', b'0', 1, NULL),
+(4, 'I', 'Insurance', b'0', 1, NULL),
+(5, 'O', 'Driver Salary', b'0', 1, NULL),
+(6, 'O', 'Utilities - Electric Bill', b'0', 1, NULL),
+(7, 'O', 'Utilities - Water Bill', b'0', 1, NULL),
+(8, 'O', 'Office Supplies', b'0', 1, NULL);
 
 CREATE TABLE `frs_collections` (
     `id` int(11) NOT NULL,
