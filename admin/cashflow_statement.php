@@ -1,7 +1,7 @@
 <?php
 /*
- * Cashflow Statement
- * Description: Cashflow Statement View
+ * Cash Flow Statement
+ * Description: Cash Flow Statement View
  * Author: Vernyll Jan P. Asis
  */
 
@@ -47,58 +47,58 @@ class Report {
         $profitsLastYear = $revenuesLastYear - $expensesLastYear;
 
         // Line Item Entries
-        $operating_collections = 0;
+        $operating_revenues = 0;
         $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total
         FROM frs_collections
         WHERE YEAR(date) = ? AND deleted != b'1'";
         $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
-        $operating_collections = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $operating_revenues = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
-        $operating_salaries = 0; // frs_expenses 5
-        $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total
-        FROM frs_expenses
-        WHERE YEAR(date) = ? AND (category_id = 5) AND deleted != b'1'";
+        $operating_expenses = [];
+        $q_sql =    "SELECT a.`description`, b.`total`
+                    FROM `frs_categories` AS a
+                    LEFT JOIN (
+                        SELECT `category_id`, SUM(`amount`) AS total
+                        FROM `frs_expenses` WHERE `deleted` != b'1' AND YEAR(`date`) = ? GROUP BY `category_id`
+                    ) AS b
+                    ON a.`id` = b.`category_id`
+                    WHERE a.`type` = 'O'
+                    GROUP BY a.`type`, a.`description`";
         $q_stmt = $this->db->prepare($q_sql);
         $q_stmt->execute([$period]);
-        $operating_salaries = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
-
-        $operating_utilities = 0; // frs_expenses 6&7
-        $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total
-        FROM frs_expenses
-        WHERE YEAR(date) = ? AND (category_id = 6 OR category_id = 7) AND deleted != b'1'";
-        $q_stmt = $this->db->prepare($q_sql);
-        $q_stmt->execute([$period]);
-        $operating_utilities = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
-
-        $operating_supplies = 0; // frs_expenses 8
-        $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total
-        FROM frs_expenses
-        WHERE YEAR(date) = ? AND (category_id = 8) AND deleted != b'1'";
-        $q_stmt = $this->db->prepare($q_sql);
-        $q_stmt->execute([$period]);
-        $operating_supplies = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
-
-        $operating_maintenance = 0; // frs_expenses 3
-        $q_sql = "SELECT COALESCE(SUM(amount), 0) AS total
-        FROM frs_expenses
-        WHERE YEAR(date) = ? AND (category_id = 3) AND deleted != b'1'";
-        $q_stmt = $this->db->prepare($q_sql);
-        $q_stmt->execute([$period]);
-        $operating_maintenance = $q_stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $operating_expenses = $q_stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $net_operating = 0;
-        $net_operating += $operating_collections;
-        $net_operating -= $operating_salaries + $operating_utilities;
-        $net_operating -= $operating_supplies + $operating_maintenance;
+        $net_operating += $operating_revenues;
+        foreach($operating_expenses as $expense) {
+            $net_operating -= $expense['total'];
+        }
+
+        $investing_expenses = [];
+        $q_sql =    "SELECT a.`description`, b.`total`
+                    FROM `frs_categories` AS a
+                    LEFT JOIN (
+                        SELECT `category_id`, SUM(`amount`) AS total
+                        FROM `frs_expenses` WHERE `deleted` != b'1' AND YEAR(`date`) = ? GROUP BY `category_id`
+                    ) AS b
+                    ON a.`id` = b.`category_id`
+                    WHERE a.`type` = 'I'
+                    GROUP BY a.`type`, a.`description`";
+        $q_stmt = $this->db->prepare($q_sql);
+        $q_stmt->execute([$period]);
+        $investing_expenses = $q_stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $net_investing = 0;
-        $net_investing += 0;
-        $net_investing -= 0;
+        foreach($investing_expenses as $expense) {
+            $net_investing -= $expense['total'];
+        }
 
+        $financing_expenses = [];
         $net_financing = 0;
-        $net_financing += 0;
-        $net_financing -= 0;
+        foreach($financing_expenses as $expense) {
+            $net_financing -= $expense['total'];
+        }
 
         $net_change = 0;
         $net_change += $net_operating + $net_investing + $net_financing;
@@ -108,13 +108,12 @@ class Report {
         $data = [
             'period' => $period,
             'profitsLastYear' => $profitsLastYear,
-            'operating_collections' => $operating_collections,
-            'operating_salaries' => $operating_salaries,
-            'operating_utilities' => $operating_utilities,
-            'operating_supplies' => $operating_supplies,
-            'operating_maintenance' => $operating_maintenance,
+            'operating_revenues' => $operating_revenues,
+            'operating_expenses' => $operating_expenses,
             'net_operating' => $net_operating,
+            'investing_expenses' => $investing_expenses,
             'net_investing' => $net_investing,
+            'financing_expenses' => $financing_expenses,
             'net_financing' => $net_financing,
             'net_change' => $net_change,
             'profitsThisYear' => $profitsThisYear
@@ -165,8 +164,8 @@ for($i = 1; $i <= 5; $i++) {
                                         </select>
                                         <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
                                     </form>
-                                    <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Statement of Cash Flow</h3>
-                                    <!--<a href="cashflow_statement_print.php?period=<?php echo $period; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Statement of Cash Flows</a>-->
+                                    <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Statement of Cash Flows</h3>
+                                    <a href="cashflow_statement_print.php?period=<?php echo $reports['period']; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Statement of Cash Flows</a>
                                     <h4 style="text-align: center; font-size: 1em;">For the Year Ending <?php echo "Dec 31, " . $reports['period']; ?></h4>
                                 </div>
                             </div>
@@ -175,19 +174,23 @@ for($i = 1; $i <= 5; $i++) {
                                     <thead>
                                         <tr>
                                             <th style="width: 30px; max-width: 30px !important;"></th>
-                                            <th style="text-align: right;">Cash at Beginning of Year</th>
-                                            <th style="text-align: right; width: 150px; max-width: 150px !important;">
-
+                                            <th></th>
+                                            <th style="width: 150px; max-width: 150px !important;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="text-align: right; font-weight: bold;">
+                                            <td></td>
+                                            <td>Cash at Beginning of Year</td>
+                                            <td>
 <?php
 if($reports['profitsLastYear'] < 0)
     echo "( Php " . number_format(abs($reports['profitsLastYear']), 2) . " )";
 else
     echo "Php " . number_format($reports['profitsLastYear'], 2);
 ?>
-                                            </th>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
                                         <!-- Operating Activities -->
                                         <tr style="background-color: #00693e; font-weight: bold;">
                                             <td colspan="3" style="color: #fff;">Operating Activities</td>
@@ -198,30 +201,25 @@ else
                                         <tr>
                                             <td></td>
                                             <td>Collections</td>
-                                            <td style="text-align: right;"><?php echo number_format($reports['operating_collections'], 2); ?></td>
+                                            <td style="text-align: right;"><?php echo number_format($reports['operating_revenues'], 2); ?></td>
                                         </tr>
                                         <tr>
                                             <td colspan="3">Cash paid for</td>
                                         </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>Salaries</td>
-                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_salaries'], 2) . " )"; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>Utilities</td>
-                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_utilities'], 2) . " )"; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>Office Supplies</td>
-                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_supplies'], 2) . " )"; ?></td>
-                                        </tr>
-                                        <td></td>
-                                            <td>Maintenance Fees</td>
-                                            <td style="text-align: right;"><?php echo "( " . number_format($reports['operating_maintenance'], 2) . " )"; ?></td>
-                                        </tr>
+<?php foreach($reports['operating_expenses'] as $expense) { ?>
+<tr>
+    <td></td>
+    <td><?php echo $expense['description']; ?></td>
+    <td style="text-align: right;">
+<?php
+if($expense['total'] > 0)
+    echo "( " . number_format(abs($expense['total']), 2) . " )";
+else
+    echo number_format($expense['total'], 2);
+?>
+    </td>
+</tr>
+<?php } ?>
                                         <tr style="background-color: #fafafa; font-weight: bold;">
                                             <td colspan="2">Net Cash Flow from Operating Activities</td>
                                             <td style="text-align: right;">
@@ -237,6 +235,30 @@ else
                                         <tr style="background-color: #00693e; font-weight: bold;">
                                             <td colspan="3" style="color: #fff;">Investing Activities</td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="3">Cash paid for</td>
+                                        </tr>
+<?php if(!$reports['investing_expenses']): ?>
+<tr>
+    <td></td>
+    <td><em>None.</em></td>
+    <td style="text-align: right;">0.00</td>
+</tr>
+<?php endif; ?>
+<?php foreach($reports['investing_expenses'] as $expense) { ?>
+<tr>
+    <td></td>
+    <td><?php echo $expense['description']; ?></td>
+    <td style="text-align: right;">
+<?php
+if($expense['total'] > 0)
+    echo "( " . number_format(abs($expense['total']), 2) . " )";
+else
+    echo number_format($expense['total'], 2);
+?>
+    </td>
+</tr>
+<?php } ?>
                                         <tr style="background-color: #fafafa; font-weight: bold;">
                                             <td colspan="2">Net Cash Flow from Investing Activities</td>
                                             <td style="text-align: right;">
@@ -252,6 +274,30 @@ else
                                         <tr style="background-color: #00693e; font-weight: bold;">
                                             <td colspan="3" style="color: #fff;">Financing Activities</td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="3">Cash paid for</td>
+                                        </tr>
+<?php if(!$reports['financing_expenses']): ?>
+<tr>
+    <td></td>
+    <td><em>None.</em></td>
+    <td style="text-align: right;">0.00</td>
+</tr>
+<?php endif; ?>
+<?php foreach($reports['financing_expenses'] as $expense) { ?>
+<tr>
+    <td></td>
+    <td><?php echo $expense['description']; ?></td>
+    <td style="text-align: right;">
+<?php
+if($expense['total'] > 0)
+    echo "( " . number_format(abs($expense['total']), 2) . " )";
+else
+    echo number_format($expense['total'], 2);
+?>
+    </td>
+</tr>
+<?php } ?>
                                         <tr style="background-color: #fafafa; font-weight: bold;">
                                             <td colspan="2">Net Cash Flow from Financing Activities</td>
                                             <td style="text-align: right;">

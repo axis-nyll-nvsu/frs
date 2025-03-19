@@ -2,7 +2,6 @@
 *Updated as of March 18, 2025*  
 
 1. ~~add fare collection / add booking collection~~  
-  ~~Example:~~
 
    | Date       | Driver         | Plate No. | Route              |  Amount |
    |------------|----------------|-----------|--------------------|--------:|
@@ -14,7 +13,7 @@
 5. add a function where users can modify the computation. `Is this ADHOC change? what parts of the computation can be changed?`
 6. add a function that allows data to be backed-up to Google Drive. `Is this automatic?`
 7. ~~remove recompute, it should automatically be recomputed if data is updated.~~
-8. label profits as "Net Income" or "Net Loss" if negative.
+8. ~~label profits as "Net Income" or "Net Loss" if negative.~~
 9. ~~add collection: include a button where users can add new driver.~~
 10. include "week" option for revenues, expenses, profits in dashboard. 
 11. include "month" option for income and cash flow statements.
