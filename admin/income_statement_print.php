@@ -1,6 +1,6 @@
 <?php
 /*
- * Income Statement Print
+ * Income Statement
  * Description: Income Statement Print
  * Author: Vernyll Jan P. Asis
  */
@@ -99,9 +99,11 @@ class Report {
                         <div class="box-body table-responsive">
                             <table class="table">
                                 <thead>
-                                <th style="width: 30px; max-width: 30px !important;"></th>
-                                <th></th>
-                                <th style="width: 200px; max-width: 200px !important;"></th>
+                                <tr>
+                                    <th style="width: 30px; max-width: 30px !important;"></th>
+                                    <th></th>
+                                    <th style="width: 200px; max-width: 200px !important;"></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 <tr style="background-color: #00693e; font-weight: bold;">
@@ -142,15 +144,15 @@ else
                                     </td>
                                 </tr>
                                 </tbody>
-                            </table><br>
+                            </table>
                             <p>
                                 <small>
                                 Report generated on <?php echo date('M d, Y h:iA', strtotime(date('Y-m-d h:iA') . ' +7 hours')); ?>.<br>
                                     Disclaimer: The data presented is based on the information available in the system at the time of generation and may be subject to change.
-                                </small><br>
+                                </small>
                             </p>
                         </div>
-                    </div> <!-- /.box -->
+                    </div>
                 </div>
             </div>
         </section>
