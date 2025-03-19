@@ -173,9 +173,19 @@ for($i = 1; $i <= 5; $i++) {
                             <div class="box-body table-responsive">
                                 <table class="table">
                                     <thead>
-                                        <th style="width: 30px; max-width: 30px !important;"></th>
-                                        <th style="text-align: right;">Cash at Beginning of Year</th>
-                                        <th style="text-align: right; width: 150px; max-width: 150px !important;"><?php echo "Php " . number_format($reports['profitsLastYear'], 2); ?></th>
+                                        <tr>
+                                            <th style="width: 30px; max-width: 30px !important;"></th>
+                                            <th style="text-align: right;">Cash at Beginning of Year</th>
+                                            <th style="text-align: right; width: 150px; max-width: 150px !important;">
+
+<?php
+if($reports['profitsLastYear'] < 0)
+    echo "( Php " . number_format(abs($reports['profitsLastYear']), 2) . " )";
+else
+    echo "Php " . number_format($reports['profitsLastYear'], 2);
+?>
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <!-- Operating Activities -->
