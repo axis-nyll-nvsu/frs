@@ -32,7 +32,7 @@ class Payroll {
           $d->modify("-6 days");
         }
         else {
-          $dfs = ((6 - $dow) % 7) - 13;
+          $dfs = ((6 - $dow) % 7) - 6;
           $d->modify("{$dfs} days");
         }
         $ns = $d->format('Y-m-d');
@@ -72,6 +72,23 @@ class Payroll {
 
 $payroll = new Payroll();
 $reports = $payroll->getData();
+
+$givenDate = $reports['period'];
+$date = new DateTime($givenDate);
+$dayOfWeek = $date->format('w');
+if ($dayOfWeek == 6) {
+  $date->modify("-6 days");
+}
+else {
+  $daysFromSaturday = ((6 - $dayOfWeek) % 7) - 6;
+  $date->modify("{$daysFromSaturday} days");
+}
+$nearestSaturday = $date->format('Y-m-d');
+
+$dateStart = new DateTime($nearestSaturday);
+$dateEnd = new DateTime($nearestSaturday);
+$dateEnd->modify("+6 days");
+$reportCoverage = $dateStart->format('F d, Y') . " - " . $dateEnd->format('F d, Y');
 ?>
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
@@ -98,30 +115,12 @@ $reports = $payroll->getData();
                             <div class="box-header with-border">
                                 <div style="position: relative">
                                     <form method="GET" action="" id="periodForm" style="display: flex; width: 200px; position: absolute; top: 0; left: 0; z-index: 10;">
-<?php
-$givenDate = $reports['period'];
-$date = new DateTime($givenDate);
-$dayOfWeek = $date->format('w');
-if ($dayOfWeek == 6) {
-  $date->modify("-6 days");
-}
-else {
-  $daysFromSaturday = ((6 - $dayOfWeek) % 7) - 13;
-  $date->modify("{$daysFromSaturday} days");
-}
-$nearestSaturday = $date->format('Y-m-d');
-
-$dateStart = new DateTime($nearestSaturday);
-$dateEnd = new DateTime($nearestSaturday);
-$dateEnd->modify("+6 days");
-$reportCoverage = $dateStart->format('F d, Y') . " - " . $dateEnd->format('F d, Y');
-?>
                                         <input id="period" name="period" value="<?php echo $reports['period']; ?>" hidden>
-                                        <input class="form-control axis-form-control" id="date" name="date" value="<?php echo $date->format('m/d/Y'); ?>" style="margin-right: 3px; text-align: center;" readonly>
+                                        <input class="form-control axis-form-control" id="date" name="date" value="<?php echo $date->format('m/d/Y'); ?>" style="margin-right: 3px; background-color: #fff; text-align: center;" readonly>
                                         <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
                                     </form>
                                     <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Weekly Payroll</h3>
-                                    <a href="cashflow_statement_print.php?period=<?php echo $reports['period']; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Weekly Payroll</a>
+                                    <a href="payroll_print.php?period=<?php echo $reports['period']; ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Weekly Payroll</a>
                                     <h4 style="text-align: center; font-size: 1em;">For <?php echo $reportCoverage; ?></h4>
                                 </div>
                             </div>
@@ -132,8 +131,8 @@ $reportCoverage = $dateStart->format('F d, Y') . " - " . $dateEnd->format('F d, 
                                             <th>#</th>
                                             <th>Driver</th>
                                             <th>Week</th>
-                                            <th style="width: 150px; min-width: 100px !important; text-align: right;">Collections</th>
-                                            <th style="width: 150px; min-width: 100px !important; text-align: right;">Salary</th>
+                                            <th style="width: 150px; min-width: 100px !important;">Collections</th>
+                                            <th style="width: 150px; min-width: 100px !important;">Salary</th>
                                             <th style="width: 75px; min-width: 75px !important;">Action</th>
                                         </tr>
                                     </thead>
