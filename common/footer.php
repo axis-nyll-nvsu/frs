@@ -39,20 +39,20 @@ $(document).on('click', '#admin_profile', function(e){
 
 $(function(){
     /** add active class and stay opened when selected */
-    var url = window.location;
+    var url = window.location.origin + window.location.pathname;
 
     // for sidebar menu entirely but not cover treeview
     $('ul.sidebar-menu a').filter(function() {
-            return this.href == url;
+        return this.href == url;
     }).parent().addClass('active');
 
     // for treeview
     $('ul.treeview-menu a').filter(function() {
-            return this.href == url;
+        return this.href == url;
     }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
 
     $('#example1').DataTable({ responsive: true })
-    $('#example2').DataTable({ responsive: true })
+    //$('#example2').DataTable({ responsive: true })
     $(document).on('click', '.edit', function(e){
         e.preventDefault();
         $('#edit').modal('show');

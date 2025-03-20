@@ -129,7 +129,7 @@ while ($row = $salary_stmt->fetch()) {
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
 <?php include '../modal/salaryModal.php'; ?>
-<?php include '../modal/addRateModal.php'; ?>
+<?php include '../modal/rateModal.php'; ?>
 <?php include '../modal/messageModal.php'; ?>
 
 <script>
