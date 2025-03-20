@@ -19,7 +19,6 @@
             <li><a href="drivers.php"><i class="bi bi-person-circle"></i><span>Drivers</span></a></li>
             <li><a href="collections.php"><i class="bi bi-cash-stack"></i><span>Collections</span></a></li>
             <li><a href="salaries.php"><i class="bi bi-wallet2"></i><span>Salaries</span></a></li>
-            <li><a href="payroll.php"><i class="bi bi-cash-coin"></i><span>Payroll</span></a></li>
             <li><a href="expenses.php"><i class="bi bi-receipt"></i><span>Expenses</span></a></li>
             <li class="treeview">
                 <a href="#">
@@ -27,9 +26,10 @@
                     <span class="pull-right-container"><i class="bi bi-chevron-down pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="monthly_profits.php"><i class="bi bi-coin"></i>Monthly Profits</a></li>
-                    <li><a href="income_statement.php"><i class="bi bi-coin"></i>Income Statement</a></li>
-                    <li><a href="cashflow_statement.php"><i class="bi bi-coin"></i>Statement of Cash Flows</a></li>
+                    <li><a href="payroll.php"><i class="bi bi-cash-coin"></i><span>Weekly Payroll</span></a></li>
+                    <li><a href="monthly_profits.php"><i class="bi bi-cash-coin"></i><span>Monthly Profits</span></a></li>
+                    <li><a href="income_statement.php"><i class="bi bi-cash-coin"></i><span>Income Statement</span></a></li>
+                    <li><a href="cashflow_statement.php"><i class="bi bi-cash-coin"></i><span>Statement of Cash Flows</span></a></li>
                 </ul>
             </li>
             <li class="treeview">

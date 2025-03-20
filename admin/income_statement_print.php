@@ -147,7 +147,7 @@ else
                             </table>
                             <p>
                                 <small>
-                                Report generated on <?php echo date('M d, Y h:iA', strtotime(date('Y-m-d h:iA') . ' +7 hours')); ?>.<br>
+                                Report generated on <?php echo date('F d, Y h:iA', strtotime(date('Y-m-d h:iA') . ' +7 hours')); ?>.<br>
                                     Disclaimer: The data presented is based on the information available in the system at the time of generation and may be subject to change.
                                 </small>
                             </p>
