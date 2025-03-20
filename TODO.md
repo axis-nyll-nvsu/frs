@@ -1,5 +1,5 @@
 # TODO
-*Updated as of March 18, 2025*  
+*Updated as of March 20, 2025*  
 
 1. ~~add fare collection / add booking collection~~  
 
@@ -10,7 +10,7 @@
 2. ~~add option wherein users can add no. of E-Jeep.~~
 3. add a table that shows monthly expenses, revenue, and profit. `Is this per category or per driver?`
 4. ~~add expenses: include a button where users can add new category.~~
-5. add a function where users can modify the computation. `Is this ADHOC change? what parts of the computation can be changed?`
+5. ~~add a function where users can modify the computation. `Is this ADHOC change? what parts of the computation can be changed?`~~
 6. add a function that allows data to be backed-up to Google Drive. `Is this automatic?`
 7. ~~remove recompute, it should automatically be recomputed if data is updated.~~
 8. ~~label profits as "Net Income" or "Net Loss" if negative.~~
