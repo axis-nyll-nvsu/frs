@@ -1,7 +1,7 @@
 <?php
 /*
-* Monthly Profit
-* Description: Monthly Profit View
+* Monthly Report
+* Description: Monthly Report View
 */
 
 session_start();
@@ -22,11 +22,11 @@ class Profit {
     // Get expenses with optional year and month filters
     public function getExpenses($filter_year = null, $filter_month = null) {
         $query = "
-        SELECT DATE_FORMAT(a.`date`, '%Y-%m') AS `month`, 
+        SELECT DATE_FORMAT(a.`date`, '%Y-%m') AS `month`,
                b.`description` AS `category`,
                SUM(a.`amount`) AS `total_expense`
         FROM `frs_expenses` AS a
-        INNER JOIN `frs_categories` AS b 
+        INNER JOIN `frs_categories` AS b
             ON a.`category_id` = b.`id`
         WHERE a.`deleted` != b'1'";
 
@@ -57,15 +57,15 @@ class Profit {
     // Get collections with optional year and month filters
     public function getCollections($filter_year = null, $filter_month = null) {
         $query = "
-        SELECT DATE_FORMAT(a.`date`, '%Y-%m') AS `month`, 
+        SELECT DATE_FORMAT(a.`date`, '%Y-%m') AS `month`,
                c.`plate` AS `plate_number`,
                SUM(a.`amount`) AS `total_collection`
         FROM `frs_collections` AS a
-        INNER JOIN `frs_drivers` AS b 
+        INNER JOIN `frs_drivers` AS b
             ON a.`driver_id` = b.`id`
-        INNER JOIN `frs_ejeeps` AS c 
+        INNER JOIN `frs_ejeeps` AS c
             ON a.`ejeep_id` = c.`id`
-        INNER JOIN `frs_routes` AS d 
+        INNER JOIN `frs_routes` AS d
             ON a.`route_id` = d.`id`
         WHERE a.`deleted` != b'1'";
 
@@ -137,11 +137,11 @@ $period = ($filter_year ? $month_name . ' ' . $filter_year : 'All Time');
     <?php include '../common/sidebar.php'; ?>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>Reports &mdash; Monthly Profit</h1>
+            <h1>Reports &mdash; Monthly Report</h1>
             <ol class="breadcrumb">
                 <li><a href="dashboard.php"><i class="bi bi-speedometer2"></i> Home</a></li>
                 <li>Reports</li>
-                <li class="active">Monthly Profit</li>
+                <li class="active">Monthly Report</li>
             </ol>
         </section>
 
@@ -178,8 +178,8 @@ $period = ($filter_year ? $month_name . ' ' . $filter_year : 'All Time');
                                     <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
                                 </form>
 
-                                <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Monthly Profit</h3>
-                                <a href="monthlyProfits_print.php?filter_year=<?= $filter_year ?>&filter_month=<?= $filter_month ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Monthly Profit</a>
+                                <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Monthly Report</h3>
+                                <a href="report_print.php?filter_year=<?= $filter_year ?>&filter_month=<?= $filter_month ?>" class="btn btn-sm btn-flat axis-btn-green" style="position: absolute; top: 0; right: 0;" target="_blank"><i class="bi bi-printer"></i> Print Monthly Report</a>
                                 <h4 style="text-align: center; font-size: 1em;">For <?= $period ?></h4>
                             </div>
                         </div>
@@ -209,16 +209,16 @@ $period = ($filter_year ? $month_name . ' ' . $filter_year : 'All Time');
                                         <th colspan="4">Monthly Collection</th>
                                     </tr>
                                     <tr>
-                                        <th>#</th>
+                                        <th style="min-width: 50px;">#</th>
                                         <th>Month</th>
                                         <th>Plate Number</th>
-                                        <th>Total Collection</th>
+                                        <th style="min-width: 200px;">Total Collection</th>
                                     </tr>
                                 </thead>
                                     <tbody>
-                                        <?php 
-                                            $id = 1; 
-                                            $total_collections = 0; 
+                                        <?php
+                                            $id = 1;
+                                            $total_collections = 0;
                                         ?>
                                         <?php foreach ($collections as $row): ?>
                                         <tr>
@@ -241,16 +241,16 @@ $period = ($filter_year ? $month_name . ' ' . $filter_year : 'All Time');
                                             <th colspan="4">Monthly Expenses</th>
                                         </tr>
                                         <tr>
-                                            <th>#</th>
+                                            <th style="min-width: 50px;">#</th>
                                             <th>Month</th>
                                             <th>Category</th>
-                                            <th>Total Expenses</th>
+                                            <th style="min-width: 200px;">Total Expenses</th>
                                         </tr>
                                     </thead>
                                     <tbody >
-                                        <?php 
-                                            $id = 1; 
-                                            $total_expenses = 0; 
+                                        <?php
+                                            $id = 1;
+                                            $total_expenses = 0;
                                         ?>
                                         <?php foreach ($expenses as $row): ?>
                                         <tr>

@@ -27,7 +27,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="payroll.php"><i class="bi bi-cash-coin"></i><span>Weekly Payroll</span></a></li>
-                    <li><a href="monthly_profits.php"><i class="bi bi-cash-coin"></i><span>Monthly Profits</span></a></li>
+                    <li><a href="report.php"><i class="bi bi-cash-coin"></i><span>Monthly Report</span></a></li>
                     <li><a href="income_statement.php"><i class="bi bi-cash-coin"></i><span>Income Statement</span></a></li>
                     <li><a href="cashflow_statement.php"><i class="bi bi-cash-coin"></i><span>Statement of Cash Flows</span></a></li>
                 </ul>

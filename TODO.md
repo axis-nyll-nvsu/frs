@@ -8,7 +8,7 @@
    | 2023-10-01 | Juan Dela Cruz | ABC 123   | Bayombong - Solano | 1500.00 |
 
 2. ~~add option wherein users can add no. of E-Jeep.~~
-3. add a table that shows monthly expenses, revenue, and profit. `Is this per category or per driver?`
+3. ~~add a table that shows monthly expenses, revenue, and profit. `Is this per category or per driver?`~~
 4. ~~add expenses: include a button where users can add new category.~~
 5. ~~add a function where users can modify the computation. `Is this ADHOC change? what parts of the computation can be changed?`~~
 6. add a function that allows data to be backed-up to Google Drive. `Is this automatic?`

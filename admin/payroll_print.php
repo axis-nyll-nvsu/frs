@@ -193,8 +193,8 @@ foreach($reports['salaries'] as $row) {
 </div>
 <?php include '../common/footer.php'; ?>
 <script>
-    //window.print();
-    //window.onafterprint = window.close;
+    window.print();
+    window.onafterprint = window.close;
 </script>
 </body>
 </html>

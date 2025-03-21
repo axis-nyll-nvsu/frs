@@ -1,8 +1,7 @@
 <?php
 /*
- * Monthly Profit
- * Description: Monthly Profit View
- * Author: Vernyll Jan P. Asis
+ * Monthly Report
+ * Description: Monthly Report Print
  */
 
 session_start();
@@ -129,6 +128,10 @@ $data = $profit->getData($filter_year, $filter_month);
                 width: 100%;
                 box-shadow: none;
             }
+            thead {
+                background-color: green;
+                color: white;
+            }
         }
     </style>
 </head>
@@ -147,19 +150,19 @@ $data = $profit->getData($filter_year, $filter_month);
                                 <p style="font-size: 1.2em;">First Novo Vizcayano Travellers Transport Cooperative</p>
                                 <h4 style="font-size: 1em;">Solano, Nueva Vizcaya</h4>
                             </div>
-                            <h3 style="text-align: center; font-weight: bold;">Monthly Profit Statement</h3>
+                            <h3 style="text-align: center; font-weight: bold;">Monthly Report</h3>
                             <h4 style="text-align: center;"><?= $data['period'] ?></h4>
                         </div>
 
                         <div class="box-body table-responsive">
                             <!-- Collection Table -->
                             <h4>Monthly Collection</h4>
-                            <table class="table table-bordered">
+                            <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th style="width: 50px; min-width: 50px;">#</th>
                                         <th>E-jeep</th>
-                                        <th>Total Collection</th>
+                                        <th style="width: 200px; min-width: 200px;">Total Collection</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -179,12 +182,12 @@ $data = $profit->getData($filter_year, $filter_month);
 
                             <!-- Expense Table -->
                             <h4>Monthly Expenses</h4>
-                            <table class="table table-bordered">
+                            <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th style="width: 50px; min-width: 50px;">#</th>
                                         <th>Category</th>
-                                        <th>Total Expense</th>
+                                        <th style="width: 200px; min-width: 200px;">Total Expense</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -201,28 +204,25 @@ $data = $profit->getData($filter_year, $filter_month);
                                     </tr>
                                 </tbody>
                             </table>
+                            <br>
                             <!-- summary table -->
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th  style="text-align: right;">Summary</th>
-                                        <th  style="text-align: right;">Amount</th>
+                                        <th  style="text-align: right; width: 200px; min-width: 200px;">Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
                                         <td style="text-align: right;">Total Collection</td>
                                         <td style="text-align: right;">Php <?= number_format($data['total_collections'], 2) ?></td>
                                     </tr>
                                     <tr>
-                                        <td></td>
                                         <td style="text-align: right;">Total Expenses</td>
                                         <td style="text-align: right;">Php <?= number_format($data['total_expenses'], 2) ?></td>
                                     </tr>
                                     <tr>
-                                        <td></td>
                                         <td style="text-align: right;">Balance</td>
                                         <td style="text-align: right;">Php <?= number_format($data['total_profit'], 2) ?></td>
                                     </tr>
