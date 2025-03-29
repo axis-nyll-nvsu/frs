@@ -222,7 +222,7 @@ if ($previous_profit != 0) {
                 <p>Daily Profit</p>
                 </div>
                 <div class="icon"><i class="bi bi-cash-coin" style="color: #00693e;"></i></div>
-                <a href="monthly_profits.php" class="small-box-footer" style="background-color: #00693e;">More Info<i class="bi bi-arrow-right-circle" style="margin-left: 5px;"></i></a>
+                <a href="report.php" class="small-box-footer" style="background-color: #00693e;">More Info<i class="bi bi-arrow-right-circle" style="margin-left: 5px;"></i></a>
             </div>
             </div>
         </div>
