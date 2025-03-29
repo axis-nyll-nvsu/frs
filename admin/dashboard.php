@@ -20,130 +20,26 @@
         }
 
         public function getData(){ 
-            $today = date('Y-m-d');
             
-            /* Revenue from Collections */
-            $sql = "SELECT SUM(`amount`) AS `daily_revenue` FROM `frs_collections` WHERE date(`date`) = '" . $today . "' AND `deleted` != b'1'";
-            $stmt = $this->db->query($sql);
-            $row = $stmt->fetch();
-            $revenue = $row['daily_revenue'];
             
-            $sql = "SELECT SUM(`amount`) AS `daily_expenses` FROM `frs_expenses` WHERE date(`date`) = '" . $today . "' AND `deleted` != b'1'";
-            $stmt = $this->db->query($sql);
-            $row = $stmt->fetch();
-            $expenses = $row['daily_expenses'];
-
-            $dailyprofit = $revenue - $expenses;
-            
-            $collection_sql = "
-            SELECT 
-                DATE_FORMAT(date, '%Y-%m') AS month, 
-                SUM(amount) AS total_collection
-            FROM frs_collections 
-            WHERE deleted != b'1' 
-            GROUP BY month";
-
-            $expenses_sql = "
-            SELECT 
-                DATE_FORMAT(date, '%Y-%m') AS month, 
-                SUM(amount) AS total_expenses
-            FROM frs_expenses 
-            WHERE deleted != b'1' 
-            GROUP BY month";
-
-            $collection_stmt = $this->db->query($collection_sql);
-            $expenses_stmt = $this->db->query($expenses_sql);
-
-            $monthly_data = [];
-            while ($collection_row = $collection_stmt->fetch()) {
-                $month = $collection_row['month'];
-                if (!isset($monthly_data[$month])) {
-                    $monthly_data[$month] = ['total_amount' => 0, 'total_collection' => 0, 'total_expenses' => 0];
-                }
-                $monthly_data[$month]['total_collection'] += $collection_row['total_collection'];
-            }
-
-            while ($expenses_row = $expenses_stmt->fetch()) {
-                $month = $expenses_row['month'];
-                if (!isset($monthly_data[$month])) {
-                    $monthly_data[$month] = ['total_amount' => 0, 'total_collection' => 0, 'total_expenses' => 0];
-                }
-                $monthly_data[$month]['total_expenses'] += $expenses_row['total_expenses'];
-            }
-
-            // Calculate the total amount by adding fares and collections
-            foreach ($monthly_data as $month => $amounts) {
-                $monthly_data[$month]['total_amount'] += $amounts['total_collection'];
-            }
-            ksort($monthly_data);
-
-            $months = [];
-            $monthlyProfits = [];
-            
-            foreach ($monthly_data as $month => $amounts) {
-                $profit = $amounts['total_amount'] - $amounts['total_expenses'];
-                $months[] = $month;
-                $monthlyProfits[] = $profit;         
-            }
-
-            //para naman sa revenue vs expenses
             $current_month = date('Y-m');
 
-            /* Revenue from Collections */
-            $sql = "SELECT SUM(`amount`) AS `monthly_revenue` FROM `frs_collections` WHERE DATE_FORMAT(`date`, '%Y-%m') = '" . $current_month . "' AND `deleted` != b'1'";
-            $stmt = $this->db->query($sql);
+            // Get the Total Revenue for the Current Month
+            $sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_collections WHERE DATE_FORMAT(date, '%Y-%m') = ? AND deleted != b'1'";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$current_month]);
             $row = $stmt->fetch();
-            $monthly_revenue = $row['monthly_revenue'];
-    
-            /* Monthly Expenses */
-            $sql = "SELECT SUM(`amount`) AS `monthly_expenses` FROM `frs_expenses` WHERE DATE_FORMAT(`date`, '%Y-%m') = '" . $current_month . "' AND `deleted` != b'1'";
-            $stmt = $this->db->query($sql);
+            $current_revenue = $row['monthly_revenue'] ?? 0;
+
+            // Get the Total Expenses for the Current Month
+            $sql = "SELECT SUM(amount) AS monthly_expenses FROM frs_expenses WHERE DATE_FORMAT(date, '%Y-%m') = ? AND deleted != b'1'";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$current_month]);
             $row = $stmt->fetch();
-            $monthly_expenses = $row['monthly_expenses'];
-    
-            /* Compute the percentages */
-            $total = $monthly_revenue + $monthly_expenses;
-            $revenue_percentage = ($total > 0) ? ($monthly_revenue / $total) * 100 : 0;
-            $expenses_percentage = ($total > 0) ? ($monthly_expenses / $total) * 100 : 0;
+            $current_expenses = $row['monthly_expenses'] ?? 0;
 
-            //Computation ng profit increase
-            $current_month = date('Y-m');
-            $previous_month = date('Y-m', strtotime('-1 month'));
-
-/* Get Current Month Revenue */
-$sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_collections WHERE DATE_FORMAT(date, '%Y-%m') = '$current_month' AND deleted != b'1'";
-$stmt = $this->db->query($sql);
-$row = $stmt->fetch();
-$current_revenue = $row['monthly_revenue'];
-
-/* Get Current Month Expenses */
-$sql = "SELECT SUM(amount) AS monthly_expenses FROM frs_expenses WHERE DATE_FORMAT(date, '%Y-%m') = '$current_month' AND deleted != b'1'";
-$stmt = $this->db->query($sql);
-$row = $stmt->fetch();
-$current_expenses = $row['monthly_expenses'];
-
-/* Get Previous Month Revenue */
-$sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_collections WHERE DATE_FORMAT(date, '%Y-%m') = '$previous_month' AND deleted != b'1'";
-$stmt = $this->db->query($sql);
-$row = $stmt->fetch();
-$previous_revenue = $row['monthly_revenue'];
-
-/* Get Previous Month Expenses */
-$sql = "SELECT SUM(amount) AS monthly_expenses FROM frs_expenses WHERE DATE_FORMAT(date, '%Y-%m') = '$previous_month' AND deleted != b'1'";
-$stmt = $this->db->query($sql);
-$row = $stmt->fetch();
-$previous_expenses = $row['monthly_expenses'];
-
-/* Calculate Profit */
-$current_profit = $current_revenue - $current_expenses;
-$previous_profit = $previous_revenue - $previous_expenses;
-
-/* Compute Profit Increase Percentage */
-if ($previous_profit != 0) {
-        $profit_increase = (($current_profit - $previous_profit) / abs($previous_profit)) * 100;
-} else {
-        $profit_increase = ($current_profit > 0) ? 100 : 0; // If previous profit is 0, assume full increase
-}
+            // Calculate Monthly Profit
+            $current_profit = $current_revenue - $current_expenses;
 
 ?>
 <!DOCTYPE html>
@@ -189,7 +85,7 @@ if ($previous_profit != 0) {
             <div class="col-lg-4 col-12">
             <div class="small-box" style="color:#00693e; border-top: 3px solid rgba(0, 0, 0, 0.1); background-color: #fff;">
                 <div class="inner">
-                <h3>₱ <?php echo number_format($revenue, 2); ?></h3>
+                <h3>₱ <?php echo number_format($current_revenue, 2); ?></h3>
                 <p>Monthly Revenue</p>
                 </div>
                 <div class="icon"><i class="bi bi-cash-stack" style="color: #00693e;"></i></div>
@@ -200,7 +96,7 @@ if ($previous_profit != 0) {
             <div class="col-lg-4 col-12">
             <div class="small-box" style="color:#00693e; border-top: 3px solid rgba(0, 0, 0, 0.1); background-color: #fff;">
                 <div class="inner">
-                <h3>₱ <?php echo number_format($expenses, 2); ?></h3>
+                <h3>₱ <?php echo number_format($current_expenses, 2); ?></h3>
                 <p>Monthly Expenses</p>
                 </div>
                 <div class="icon"><i class="bi bi-credit-card" style="color: #00693e;"></i></div>
@@ -213,10 +109,10 @@ if ($previous_profit != 0) {
                 <div class="inner">
                 <h3>
                     <?php
-                        if($dailyprofit < 0)
-                            echo "( ₱ " . number_format(abs($dailyprofit), 2) . " )";
+                        if($current_profit < 0)
+                            echo "( ₱ " . number_format(abs($current_profit), 2) . " )";
                         else
-                            echo "₱ " . number_format($dailyprofit, 2); 
+                            echo "₱ " . number_format($current_profit, 2); 
                     ?>
                 </h3>
                 <p>Monthly Profit</p>
