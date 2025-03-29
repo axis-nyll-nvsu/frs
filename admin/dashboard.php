@@ -190,7 +190,7 @@ if ($previous_profit != 0) {
             <div class="small-box" style="color:#00693e; border-top: 3px solid rgba(0, 0, 0, 0.1); background-color: #fff;">
                 <div class="inner">
                 <h3>₱ <?php echo number_format($revenue, 2); ?></h3>
-                <p>Daily Revenue</p>
+                <p>Monthly Revenue</p>
                 </div>
                 <div class="icon"><i class="bi bi-cash-stack" style="color: #00693e;"></i></div>
                 <a href="#addCollection" data-toggle="modal" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Collection</a>
@@ -201,7 +201,7 @@ if ($previous_profit != 0) {
             <div class="small-box" style="color:#00693e; border-top: 3px solid rgba(0, 0, 0, 0.1); background-color: #fff;">
                 <div class="inner">
                 <h3>₱ <?php echo number_format($expenses, 2); ?></h3>
-                <p>Daily Expenses</p>
+                <p>Monthly Expenses</p>
                 </div>
                 <div class="icon"><i class="bi bi-credit-card" style="color: #00693e;"></i></div>
                 <a href="#addExpense" data-toggle="modal" class="small-box-footer" style="background-color: #00693e;"><i class="bi bi-plus-circle" style="margin-right: 5px;"></i>Add Expense</a>
@@ -219,7 +219,7 @@ if ($previous_profit != 0) {
                             echo "₱ " . number_format($dailyprofit, 2); 
                     ?>
                 </h3>
-                <p>Daily Profit</p>
+                <p>Monthly Profit</p>
                 </div>
                 <div class="icon"><i class="bi bi-cash-coin" style="color: #00693e;"></i></div>
                 <a href="report.php" class="small-box-footer" style="background-color: #00693e;">More Info<i class="bi bi-arrow-right-circle" style="margin-left: 5px;"></i></a>
