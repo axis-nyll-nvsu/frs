@@ -106,6 +106,27 @@ class Dashboard
         $stmt->execute([$current_month]);
         $top_drivers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $last_month = date('Y-m', strtotime('-1 month'));
+        // Get the Total Revenue for the Last Month
+        $sql = "SELECT SUM(amount) AS monthly_revenue FROM frs_collections WHERE DATE_FORMAT(date, '%Y-%m') = ? AND deleted != b'1'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$last_month]);
+        $row = $stmt->fetch();
+        $last_month_revenue = $row['monthly_revenue'] ?? 0;
+
+        // Get the Total Expenses for the Last Month
+        $sql = "SELECT SUM(amount) AS monthly_expenses FROM frs_expenses WHERE DATE_FORMAT(date, '%Y-%m') = ? AND deleted != b'1'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$last_month]);
+        $row = $stmt->fetch();
+        $last_month_expenses = $row['monthly_expenses'] ?? 0;
+
+        // Calculate Last Month's Profit
+         $last_month_profit = $last_month_revenue - $last_month_expenses;
+         $percentage = ($current_profit - $last_month_profit) / abs($last_month_profit) * 100;
+        $percentage = number_format($percentage, 2);
+
+
 ?>
     
 <!DOCTYPE html>
@@ -211,7 +232,7 @@ class Dashboard
                                     </select>
                                     <button type="submit" class="btn btn-sm btn-flat axis-btn-green"> Set Period</button>
                                 </form>
-                                <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Profit Trend</h3>
+                                <h3 style="text-align: center; font-weight: bold; margin-top: 0;">Cashflow Trend</h3>
                                 <h4 style="text-align: center; font-size: 1em;">For <?= $period ?></h4>
                             </div>
             
@@ -225,7 +246,6 @@ class Dashboard
                     <div class="col-lg-4 col-12">
                         <div class="small-box" style="color:#00693e; background-color: #fff; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; border: 1px solid #e0e0e0;">
                             <div class="inner" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                                <i class="bi bi-person-arms-up" style="font-size: 50px; color: #00693e;"></i>
                                 <div>
                                     <h4 style="font-weight: bold; color: #00693e; margin: 0;">Top 3 Performing Driver</h4>
                                     <p style="color: #666;">For the month of April</p>
@@ -250,13 +270,55 @@ class Dashboard
                                     <?php endforeach; ?>
                                 </div>
                             </div>
+                            <!-- Profit Increase na lang ditu -->
+                            <div class="inner" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                <div>
+                                    <h4 style="font-weight: bold; color: #00693e; margin: 0;">Profit Tracker</h4>
+                                </div>
+                            </div>
+                            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                                <!-- current Profit -->
+                                <div style="border-left: 1px solid #00693e; padding-left: 10px; text-align: left; flex: 1;">
+                                    <p>Current's Profit</p>
+                                    <p style="font-weight: bold; font-size: 18px; color: #00693e; margin: 5px 0;">
+                                    <?php
+                                    if ($current_profit < 0)
+                                        echo "( ₱ " . number_format(abs($current_profit), 2) . " )";
+                                    else
+                                        echo "₱ " . number_format($current_profit, 2);
+                                    ?>
+                                    </p>
+                                    <!-- last month profit itis -->
+                                     <p>Last Month's Profit</p>
+                                    <p style="font-size: 15px; color: #00693e; margin: 5px 0;">
+                                        <?php
+                                        if ($last_month_profit < 0)
+                                            echo "( ₱ " . number_format(abs($last_month_profit), 2) . " )";
+                                        else
+                                            echo "₱ " . number_format($last_month_profit, 2);
+                                        ?>
+                                    </p>
+                                </div>
+                                <div style="text-align: right; flex: 1;">
+                                    <p style="font-size: 25px; color: #00693e; margin: 5px 0;">
+                                        <?php
+                                        if ($percentage > 0) {
+                                            echo "<span style='color: green;'>+" . $percentage . "%</span>";
+                                        } else {
+                                            echo "<span style='color: red;'>" . $percentage . "%</span>";
+                                        }
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-            </section>
-        </div>
+
+            </div>
+        </section>
     </div>
+</div>
 
     <?php include '../common/footer.php'; ?>
 
