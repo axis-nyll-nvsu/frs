@@ -78,10 +78,27 @@ class Dashboard
             $profit = $revenue - $expenses;
             $monthlyProfits[] = $profit;
         }
-        $current_month = date('F');
+        $current_month = date('Y-m');
         $period = isset($_GET['filter_year']) && !empty($_GET['filter_year']) ? $_GET['filter_year'] : date('Y');
-?>
 
+        // Get the Top 3 Performing Drivers for the Current Month
+       
+        $sql = "SELECT d.id, CONCAT(d.first_name, ' ', d.last_name) AS driver_name, 
+               SUM(c.amount) AS total_amount 
+        FROM frs_collections c 
+        JOIN frs_drivers d ON c.driver_id = d.id
+        WHERE DATE_FORMAT(c.date, '%Y-%m') = ? 
+          AND c.deleted != 1 
+          AND d.deleted != 1 
+        GROUP BY d.id 
+        ORDER BY total_amount DESC 
+        LIMIT 3";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$current_month]);
+        $top_drivers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+    
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 
@@ -197,20 +214,37 @@ class Dashboard
 
                     <!-- Top Performing Driver Section -->
                     <div class="col-lg-4 col-12">
-                    <div class="small-box" style="color:#00693e; background-color: #fff; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;">
-                        <div class="inner" style="display: flex; align-items: center; justify-content: center;">
-                            <i class="bi bi-person-arms-up" style="font-size: 50px; color: #00693e;"></i>
-                            <h4 style="font-size: 18px; font-weight: bold; color: #00693e; margin: 0;">Top 3 Performing Driver</h4>
-                        </div>
-                        <p>For the month of <?= $current_month ?></p>
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <p style="font-size: 18px; font-weight: bold; color: #00693e; margin: 0;">Juan Santos</p>
-                            <p style="font-size: 18px; font-weight: bold; color: #00693e; margin: 0;">Jose Dela Cruz</p>
-                            <p style="font-size: 18px; font-weight: bold; color: #00693e; margin: 0;">Pedro Reyes</p>
+                        <div class="small-box" style="color:#00693e; background-color: #fff; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; border: 1px solid #e0e0e0;">
+                            <div class="inner" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                <i class="bi bi-person-arms-up" style="font-size: 50px; color: #00693e;"></i>
+                                <div>
+                                    <h4 style="font-weight: bold; color: #00693e; margin: 0;">Top 3 Performing Driver</h4>
+                                    <p style="color: #666;">For the month of April</p>
+                                </div>
+                            </div>
+                            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="border-left: 1px solid #00693e; padding-left: 10px; text-align: left; flex: 1;">
+                                    <p style="font-size: 18px; color: #00693e; margin: 5px 0;">Driver Name</p>
+                                    <?php foreach ($top_drivers as $index => $driver): ?>
+                                        <p style="font-size: 15px; font-weight: bold; color: #00693e; margin: 5px 0;">
+                                            <?= ($index + 1) . '. ' . htmlspecialchars($driver['driver_name']); ?>
+                                        </p>
+                                    <?php endforeach; ?>
+                                </div>
+            
+                                <div style="text-align: right; flex: 1;">
+                                    <p style="font-size: 18px; color: #00693e; margin: 5px 0;">Total Collection</p>
+                                    <?php foreach ($top_drivers as $driver): ?>
+                                        <p style="font-size: 15px; color: #00693e; margin: 5px 0;">
+                                            P <?= number_format($driver['total_amount'], 2); ?>
+                                        </p>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-            </div>
             </section>
         </div>
     </div>
