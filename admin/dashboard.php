@@ -2,7 +2,7 @@
 /*
  * Dashboard
  * Description: Dashboard View
- * Author: Vernyll Jan P. Asis
+ * Author: Vernyll Jan P. Asis, hindi na ito vernyll kasi ako na ang nagcode. :P
  */
 
 session_start();
@@ -51,33 +51,41 @@ class Dashboard
             "July", "August", "September", "October", "November", "December"
         ];
 
-        $monthlyProfits = [];
+        $monthlyRevenues = [];
+        $monthlyExpenses = [];
 
-        // Loop through each month to calculate the profit
         for ($i = 1; $i <= 12; $i++) {
             $month = str_pad($i, 2, "0", STR_PAD_LEFT);
             $current_month = "$filter_year-$month";
 
             // Get revenue
             $sql = "SELECT SUM(amount) AS monthly_revenue 
-                    FROM frs_collections 
-                    WHERE DATE_FORMAT(date, '%Y-%m') = ? AND deleted != b'1'";
+                FROM frs_collections 
+                WHERE DATE_FORMAT(date, '%Y-%m') = ? AND deleted != b'1'";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$current_month]);
             $revenue = $stmt->fetch()['monthly_revenue'] ?? 0;
 
             // Get expenses
             $sql = "SELECT SUM(amount) AS monthly_expenses 
-                    FROM frs_expenses 
-                    WHERE DATE_FORMAT(date, '%Y-%m') = ? AND deleted != b'1'";
+                FROM frs_expenses 
+                WHERE DATE_FORMAT(date, '%Y-%m') = ? AND deleted != b'1'";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$current_month]);
             $expenses = $stmt->fetch()['monthly_expenses'] ?? 0;
 
-            // Calculate profit
+             // Calculate profit
             $profit = $revenue - $expenses;
+
             $monthlyProfits[] = $profit;
+            $monthlyRevenues[] = $revenue;
+            $monthlyExpenses[] = $expenses;
         }
+        $profitData = json_encode($monthlyProfits);
+        $revenueData = json_encode($monthlyRevenues);
+        $expenseData = json_encode($monthlyExpenses);
+        $monthsData = json_encode($months);
+
         $current_month = date('Y-m');
         $period = isset($_GET['filter_year']) && !empty($_GET['filter_year']) ? $_GET['filter_year'] : date('Y');
 
@@ -97,6 +105,7 @@ class Dashboard
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$current_month]);
         $top_drivers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
     
 <!DOCTYPE html>
@@ -253,23 +262,56 @@ class Dashboard
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
         var ctx = document.getElementById('profitTrend').getContext('2d');
-        var myLineChart = new Chart(ctx, {
+
+        var profitData = <?php echo $profitData; ?>;
+        var revenueData = <?php echo $revenueData; ?>;
+        var expenseData = <?php echo $expenseData; ?>;
+        var months = <?php echo $monthsData; ?>;
+
+        new Chart(ctx, {
             type: 'line',
             data: {
-                labels: <?php echo json_encode($months); ?>,
-                datasets: [{
-                    label: 'Monthly Profit',
-                    data: <?php echo json_encode($monthlyProfits); ?>,
-                    borderColor: 'green',
-                    backgroundColor: 'rgba(10, 136, 59, 0.2)',
-                    borderWidth: 2,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#00693e',
-                    fill: true
-                }]
+                labels: months,
+                datasets: [
+                    {
+                        label: 'Revenue',
+                        data: revenueData,
+                        borderColor: 'blue',
+                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                        borderWidth: 2,
+                        fill: true
+                    },
+                    {
+                        label: 'Expenses',
+                        data: expenseData,
+                        borderColor: 'red',
+                        backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                        borderWidth: 2,
+                        fill: true
+                    },
+                    {
+                        label: 'Profit',
+                        data: profitData,
+                        borderColor: 'green',
+                        backgroundColor: 'rgba(0, 128, 0, 0.2)',
+                        borderWidth: 2,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
         });
+    });
     </script>
 <?php
     }
