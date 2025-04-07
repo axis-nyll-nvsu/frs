@@ -44,20 +44,22 @@ class Payroll {
 
         // Query to group by driver and week with date range
         $payroll_sql = "SELECT
-                            a.`driver_id`,
-                            b.`first_name`,
-                            b.`last_name`,
-                            SUM(a.`collection`) AS collections,
-                            SUM(a.`salary`) AS salaries " .
-                        "FROM `frs_salaries` AS a " .
-                        "INNER JOIN `frs_drivers` AS b " .
-                        "ON a.`driver_id` = b.`id` " .
-                        "WHERE a.`date` BETWEEN ? AND ? " .
-                        "GROUP BY a.`driver_id`, b.`first_name`, b.`last_name` " .
-                        "ORDER BY a.`date` DESC, b.`first_name` ASC";
+                            a.driver_id,
+                            b.first_name,
+                            b.last_name,
+                            SUM(a.collection) AS collections,
+                            SUM(a.salary) AS salaries " .
+                        "FROM frs_salaries AS a " .
+                        "INNER JOIN frs_drivers AS b " .
+                        "ON a.driver_id = b.id " .
+                        "WHERE a.date BETWEEN ? AND ? " .
+                        "GROUP BY a.driver_id, b.first_name, b.last_name " .
+                        "ORDER BY a.date DESC, b.first_name ASC";
         $payroll_stmt = $this->db->prepare($payroll_sql);
         $payroll_stmt->execute([$start, $end]);
         $salaries = $payroll_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
         $data = [
             'start' => $start,
@@ -68,6 +70,9 @@ class Payroll {
 
         return $data;
     }
+
+
+    
 }
 
 $payroll = new Payroll();
@@ -90,10 +95,17 @@ $dateEnd = new DateTime($nearestSaturday);
 $dateEnd->modify("+6 days");
 $reportCoverage = $dateStart->format('F d, Y') . " - " . $dateEnd->format('F d, Y');
 ?>
+
 <!DOCTYPE html>
 <html style="background-color: #00693e;">
 <head>
-<?php include '../common/head.php'; ?>
+    <style>
+        button[disabled] {
+            background-color: #ccc !important;
+            cursor: not-allowed;
+        }
+    </style>
+    <?php include '../common/head.php'; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -141,12 +153,25 @@ $reportCoverage = $dateStart->format('F d, Y') . " - " . $dateEnd->format('F d, 
 $id = 1;
 $total_collections = 0;
 $total_salaries = 0;
-foreach($reports['salaries'] as $row) {
-    $dateStart = date('F d, Y', strtotime($reports['start']));
-    $dateEnd = date('F d, Y', strtotime($reports['end']));
-    $dateRange = $dateStart . " - " . $dateEnd;
+
+// Get the selected date range from report
+$dateStart = date('F d, Y', strtotime($reports['start']));
+$dateEnd = date('F d, Y', strtotime($reports['end']));
+$dateRange = $dateStart . " - " . $dateEnd;
+
+$salary_category_id = 5;
+
+foreach ($reports['salaries'] as $row) {
     $total_collections += $row['collections'];
     $total_salaries += $row['salaries'];
+
+    // Create description used in frs_expenses
+    $description = 'Payout for Driver: ' . $row['first_name'] . ' ' . $row['last_name'] . ' (Week: ' . $dateStart . ' - ' . $dateEnd . ')';
+
+    // Check if the salary payout already exists in frs_expenses
+    $check_stmt = $payroll->db->prepare("SELECT COUNT(*) FROM frs_expenses WHERE description = ? AND category_id = ? AND deleted = 0");
+    $check_stmt->execute([$description, $salary_category_id]);
+    $already_disbursed = $check_stmt->fetchColumn() > 0;
 ?>
 <tr>
     <td><?php echo $id; ?></td>
@@ -156,11 +181,16 @@ foreach($reports['salaries'] as $row) {
     <td style="text-align: right;">Php <?php echo number_format($row['salaries'], 2); ?></td>
     <td>
         <button class="btn btn-success btn-sm disburseSalary btn-flat"
-        data-edit_driver_id="<?php echo $row['driver_id']; ?>"
-        data-edit_salaries="<?php echo $row['salaries']; ?>"> Disburse Salary</button>
+            data-driver_name="<?php echo $row['first_name'] . ' ' . $row['last_name']; ?>"
+            data-pay_week="<?php echo $dateRange; ?>"
+            data-total_salary="<?php echo number_format($row['salaries'], 2, '.', ''); ?>"
+            <?php echo $already_disbursed ? 'disabled' : ''; ?>>
+            <?php echo $already_disbursed ? 'Disbursed' : 'Disburse Salary'; ?>
+        </button>
     </td>
 </tr>
 <?php $id++; } ?>
+
                                     <tr style="background-color: #fafafa; font-weight: bold;">
                                         <td colspan="3" style="text-align: right;">Total</td>
                                         <td style="text-align: right;">Php <?php echo number_format($total_collections, 2); ?></td>
@@ -184,6 +214,8 @@ foreach($reports['salaries'] as $row) {
     </div>
 <?php include '../common/footer.php'; ?>
 <?php include '../modal/profileModal.php'; ?>
+<?php include '../modal/messageModal.php'; ?>
+<?php include '../modal/payrollModal.php'; ?>
 <script>
 $(document).ready(function() {
     $("#date").datepicker();
@@ -199,7 +231,34 @@ $(document).ready(function() {
         $('input[name="date"]').remove();
         this.submit();
     });
+
+});
+$(document).ready(function() {
+    $(document).ready(function() {
+    $(".disburseSalary").click(function() {
+        let driverName = $(this).data("driver_name");
+        let payWeek = $(this).data("pay_week");
+        let totalSalary = $(this).data("total_salary");
+
+        $("#driver_name").val(driverName);
+        $("#pay_week").val(payWeek);
+        $("#total_salary").val(totalSalary);
+
+        $("#modal_driver_name").text(driverName);
+        $("#modal_week").text(payWeek);
+        $("#modal_salary").text(totalSalary);
+
+        $("#payout").modal("show");
+    });
+});
+
 });
 </script>
+<script>
+<?php if (isset($_SESSION['success'])) { ?>
+$('#success').modal('show');
+<?php unset($_SESSION['success']); } ?>
+</script>
+
 </body>
 </html>

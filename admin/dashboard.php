@@ -260,7 +260,6 @@ class Dashboard
                                         </p>
                                     <?php endforeach; ?>
                                 </div>
-            
                                 <div style="text-align: right; flex: 1;">
                                     <p style="font-size: 18px; color: #00693e; margin: 5px 0;">Total Collection</p>
                                     <?php foreach ($top_drivers as $driver): ?>
@@ -271,50 +270,40 @@ class Dashboard
                                 </div>
                             </div>
                             <!-- Profit Increase na lang ditu -->
-                            <div class="inner" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                                <div>
-                                    <h4 style="font-weight: bold; color: #00693e; margin: 0;">Profit Tracker</h4>
-                                </div>
-                            </div>
-                            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-                                <!-- current Profit -->
+
+                             <!--  singit mo dito -->
+                             <h4 style="font-weight: bold; color: #00693e; text-align: center; margin: 0 0 10px 0;">Profit Tracker</h4>
+                             <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
                                 <div style="border-left: 1px solid #00693e; padding-left: 10px; text-align: left; flex: 1;">
-                                    <p>Current's Profit</p>
-                                    <p style="font-weight: bold; font-size: 18px; color: #00693e; margin: 5px 0;">
-                                    <?php
-                                    if ($current_profit < 0)
-                                        echo "( ₱ " . number_format(abs($current_profit), 2) . " )";
-                                    else
-                                        echo "₱ " . number_format($current_profit, 2);
-                                    ?>
-                                    </p>
-                                    <!-- last month profit itis -->
-                                     <p>Last Month's Profit</p>
-                                    <p style="font-size: 15px; color: #00693e; margin: 5px 0;">
+                                    <p style="color: #00693e; margin: 5px 0;">This month's profit:</p>
+                                    <p style="font-weight: bold; font-size: 24px; color: #00693e; margin: 0;">
                                         <?php
-                                        if ($last_month_profit < 0)
-                                            echo "( ₱ " . number_format(abs($last_month_profit), 2) . " )";
-                                        else
-                                            echo "₱ " . number_format($last_month_profit, 2);
+                                            if ($current_profit < 0)
+                                                echo "( ₱ " . number_format(abs($current_profit), 2) . " )";
+                                            else
+                                                echo "₱ " . number_format($current_profit, 2);
                                         ?>
                                     </p>
+                                    <p style="color: #00693e; margin: 5px 0;">Last month's profit:</p>
+                                    <p style="font-size: 15px; color: #00693e; margin: 0; padding-bottom: 20px;">
+                                            <?php
+                                                if ($last_month_profit < 0)
+                                                    echo "( ₱ " . number_format(abs($last_month_profit), 2) . " )";
+                                                else
+                                                    echo "₱ " . number_format($last_month_profit, 2);
+                                            ?>
+                                        </p>
                                 </div>
                                 <div style="text-align: right; flex: 1;">
-                                    <p style="font-size: 25px; color: #00693e; margin: 5px 0;">
-                                        <?php
-                                        if ($percentage > 0) {
-                                            echo "<span style='color: green;'>+" . $percentage . "%</span>";
-                                        } else {
-                                            echo "<span style='color: red;'>" . $percentage . "%</span>";
-                                        }
-                                        ?>
+                                    <p style="font-size: 28px; font-weight: bold; padding-bottom: 32px;
+                                        <?php echo ($percentage < 0) ? 'color: red;' : 'color: green;'; ?>">
+                                        <?php echo ($percentage > 0) ? "+" . $percentage . "%" : $percentage . "%"; ?>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
