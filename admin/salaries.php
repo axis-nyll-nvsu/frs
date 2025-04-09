@@ -11,6 +11,7 @@ header('location: ./');
 }
 
 require_once '../config/config.php';
+date_default_timezone_set('Asia/Manila');
 class Salary {
     private $db;
 

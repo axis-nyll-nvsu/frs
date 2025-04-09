@@ -9,7 +9,9 @@ session_start();
 if(isset($_SESSION['type'])) {
     header('location: ./dashboard.php');
 }
+date_default_timezone_set('Asia/Manila');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
