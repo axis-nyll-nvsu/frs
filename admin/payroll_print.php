@@ -10,6 +10,7 @@ if (!isset($_SESSION['type'])) {
 }
 
 require_once '../config/config.php';
+date_default_timezone_set('Asia/Manila');
 
 class Payroll {
     private $db;
