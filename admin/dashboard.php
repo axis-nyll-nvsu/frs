@@ -122,8 +122,8 @@ class Dashboard
         $last_month_expenses = $row['monthly_expenses'] ?? 0;
 
         // Calculate Last Month's Profit
-         $last_month_profit = $last_month_revenue - $last_month_expenses;
-         $percentage = ($current_profit - $last_month_profit) / abs($last_month_profit) * 100;
+        $last_month_profit = ($last_month_revenue - $last_month_expenses) || 1;
+        $percentage = ($current_profit - $last_month_profit) / abs($last_month_profit) * 100;
         $percentage = number_format($percentage, 2);
 
 
