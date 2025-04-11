@@ -61,17 +61,23 @@ class Payroll {
     
         // Loop and check if already disbursed
         foreach ($salaries as &$row) {
-            $description = "Payout for Driver: " . $row['first_name'] . " " . $row['last_name'] .
-                           " (Week: " . $start . " - " . $end . ")";
-            $check_sql = "SELECT id FROM frs_expenses 
-                          WHERE description = ? AND amount = ? AND category_id = 1 AND deleted = 0 
+            $dateStart = date('F d, Y', strtotime($start));
+            $dateEnd = date('F d, Y', strtotime($end));
+            $dateRange = $dateStart . " - " . $dateEnd;
+            $description = sprintf(
+                                   "Payout for Driver: %s %s (Week: %s)",
+                                   $row['first_name'],
+                                   $row['last_name'],
+                                   $dateRange
+                               );
+            $check_sql = "SELECT 1 FROM frs_expenses
+                          WHERE description = ?
+                          AND deleted = b'0'
                           LIMIT 1";
             $check_stmt = $this->db->prepare($check_sql);
-            $check_stmt->execute([$description, $row['salaries']]);
-            $exists = $check_stmt->fetch(PDO::FETCH_ASSOC);
-            $row['alreadyDisbursed'] = $exists ? true : false;
+            $check_stmt->execute([$description]);
+            $row['disbursed'] = (bool) $check_stmt->fetch();
         }
-        
     
         $data = [
             'start' => $start,
@@ -171,7 +177,7 @@ foreach($reports['salaries'] as $row) {
     <td style="text-align: right;">Php <?php echo number_format($row['salaries'], 2); ?></td>
     <td>
         
-        <?php if ($row['alreadyDisbursed']) { ?>
+        <?php if ($row['disbursed']) { ?>
             <button class="btn btn-secondary btn-sm btn-flat" disabled>Already Disbursed</button>
         <?php } else { ?>
             <button class="btn btn-success btn-sm disburseSalary btn-flat"
