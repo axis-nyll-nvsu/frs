@@ -315,7 +315,22 @@ class Dashboard
 </div>
 
     <?php include '../common/footer.php'; ?>
-
+    <?php include '../modal/addCollectionModal.php' ?>
+    <?php include '../modal/addDriverModal.php' ?>
+    <?php include '../modal/addEjeepModal.php' ?>
+    <?php include '../modal/addRouteModal.php' ?>
+    <?php include '../modal/addExpenseModal.php' ?>
+    <?php include '../modal/addCategoryModal.php' ?>
+    <script>
+    $(document).ready(function() {
+        $("#date").datepicker();
+        $("#driver_id").select2();
+        $("#ejeep_id").select2();
+        $("#route_id").select2();
+        $("#rate_id").select2();
+        $("#category_id").select2();
+    });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
