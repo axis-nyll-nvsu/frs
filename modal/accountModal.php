@@ -8,7 +8,7 @@
 
 
 <!-- Add Account -->
-<div class="modal fade" id="addnew">
+<div class="modal fade" id="add">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="../controller/accountController.php" enctype="multipart/form-data">

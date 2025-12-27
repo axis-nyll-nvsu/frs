@@ -9,7 +9,9 @@ session_start();
 if(isset($_SESSION['type'])) {
     header('location: ./dashboard.php');
 }
+date_default_timezone_set('Asia/Manila');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +46,7 @@ if(isset($_SESSION['type'])) {
                                     <input id="password-field" type="password" name="password" placeholder="Password" class="rounded w-100 h-100 border-0 bg-transparent" style="outline: none;">
                                 </div>
                             </div>
-                            <p><a href="forgotpassword.php" class="axis-link">Forgot Password?</a></p>
+                            <p style = "font-size: 12px;">Forgot Password? Contact your system administrator.</p>
                             <div class="form-group">
                                 <div class="form-control p-0 border-0">
                                     <input type="submit" name="login" class="signin btn-lg text-white w-100 border-0" value="Login" style="outline: none;background-color: #00693e;border-radius: 8px;font-size: 1rem;" onclick="lsRememberMe()">

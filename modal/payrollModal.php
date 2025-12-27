@@ -1,4 +1,4 @@
-<!-- Payout -->
+<!-- Payout Modal -->
 <div class="modal fade" id="payout">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -10,15 +10,21 @@
                     <h3 class="modal-title" style="color: #00693e;">Payout</h3>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="delete_expense_id" name="expense_id">
+                    <input type="hidden" id="driver_name" name="driver_name">
+                    <input type="hidden" id="pay_week" name="pay_week">
+                    <input type="hidden" id="total_salary" name="total_salary">
+                    
                     <div class="text-center">
-                        <p>Magpapasahod na you?</p>
+                        <p>You are about to payout the salary of <b id="modal_driver_name"></b> for <b id="modal_week"></b></p>
+                        <p>Total Salary: <b>₱<span id="modal_salary"></span></b></p>
                     </div>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-flat axis-btn-red" name="delete"><i class="bi bi-trash3"></i> Delete</button>
+                    <button type="submit" class="btn btn-flat axis-btn-green" name="add" ><i class="bi bi-floppy"></i> Payout</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+

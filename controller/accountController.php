@@ -22,7 +22,6 @@ class AccountController {
         $email = $_POST['email'];
         $password = MD5($_POST['password']);
         $firstname = $_POST['firstname'];
-        $middlename = $_POST['middlename'];
         $lastname = $_POST['lastname'];
         $address = $_POST['address'];
         $contact = $_POST['contact'];
@@ -33,25 +32,25 @@ class AccountController {
             move_uploaded_file($_FILES['img']['tmp_name'], "../images/".$img);
         }
 
-        $sql = "SELECT * FROM `frs_users` WHERE (`first_name` = ? AND `middle_name` = ? AND `last_name` = ? AND `deleted` != b'1') OR `email` = ?";
+        $sql = "SELECT * FROM `frs_users` WHERE (`first_name` = ? AND `last_name` = ? AND `deleted` != b'1') OR `email` = ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$firstname, $middlename, $lastname, $email]);
+        $stmt->execute([$firstname, $lastname, $email]);
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = 'error';
             echo "<script>window.location.href='../admin/accounts.php';</script>";
         }
         else {
-            $sqlinsert = "INSERT INTO `frs_users`(`first_name`, `middle_name`, `last_name`, `email`, `password`, `type`, `image`, `address`, `contact`) VALUES (?,?,?,?,?,?,?,?,?)";
+            $sqlinsert = "INSERT INTO `frs_users`(`first_name`,  `last_name`, `email`, `password`, `type`, `image`, `address`, `contact`) VALUES (?,?,?,?,?,?,?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
-            $statementinsert->execute([$firstname, $middlename, $lastname, $email, $password, $type, $img, $address, $contact]);
+            $statementinsert->execute([$firstname, $lastname, $email, $password, $type, $img, $address, $contact]);
 
             $description = "Added a new account.";
-            $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+            $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
-            $_SESSION['success'] = 'success';
+            $_SESSION['success'] = 'Account Successfully Created';
             echo "<script>window.location.href='../admin/accounts.php';</script>";
         }
     }
@@ -69,7 +68,6 @@ class AccountController {
         $email = $_POST['email'];
         $password = ($_POST['password'] != "") ? MD5($_POST['password']) : $row['password'];
         $firstname = $_POST['firstname'];
-        $middlename = $_POST['middlename'];
         $lastname = $_POST['lastname'];
         $address = $_POST['address'];
         $contact = $_POST['contact'];
@@ -80,25 +78,25 @@ class AccountController {
             move_uploaded_file($_FILES['img']['tmp_name'], "../images/".$img);
         }
 
-        $sql = "SELECT * FROM `frs_users` WHERE ((`first_name` = ? AND `middle_name` = ? AND `last_name` = ? AND `deleted` != b'1') OR `email` = ?) AND `id` != ?";
+        $sql = "SELECT * FROM `frs_users` WHERE ((`first_name` = ?  AND `last_name` = ? AND `deleted` != b'1') OR `email` = ?) AND `id` != ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$firstname, $middlename, $lastname, $email, $account]);
+        $stmt->execute([$firstname, $lastname, $email, $account]);
 
         if ($stmt->rowcount() > 0) {
             $_SESSION['error'] = 'error';
             echo "<script>window.location.href='../admin/accounts.php';</script>";
         }
         else {
-            $sqlupdate = "UPDATE `frs_users` SET `first_name` = ?, `middle_name` = ?, `last_name` = ?, `email` = ?, `password` = ?, `type` = ?, `image` = ?, `address` = ?, `contact` = ? WHERE `id` = ?";
+            $sqlupdate = "UPDATE `frs_users` SET `first_name` = ?,  `last_name` = ?, `email` = ?, `password` = ?, `type` = ?, `image` = ?, `address` = ?, `contact` = ? WHERE `id` = ?";
             $statementupdate = $this->db->prepare($sqlupdate);
-            $statementupdate->execute([$firstname, $middlename, $lastname, $email, $password, $type, $img, $address, $contact, $account]);
+            $statementupdate->execute([$firstname,  $lastname, $email, $password, $type, $img, $address, $contact, $account]);
 
             $description = "Updated account.";
-            $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+            $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
             $statementinsert = $this->db->prepare($sqlinsert);
             $statementinsert->execute([$user, $description]);
 
-            $_SESSION['updated'] = 'updated';
+            $_SESSION['updated'] = 'Account Successfully Updated';
             echo "<script>window.location.href='../admin/accounts.php';</script>";
         }
     }
@@ -112,11 +110,11 @@ class AccountController {
         $statementupdate->execute([$account]);
 
         $description = "Deleted account.";
-        $sqlinsert = "INSERT INTO `frs_audittrail` (`user_id`, `description`) VALUES (?,?)";
+        $sqlinsert = "INSERT INTO `frs_trail` (`user_id`, `description`) VALUES (?,?)";
         $statementinsert = $this->db->prepare($sqlinsert);
         $statementinsert->execute([$user, $description]);
 
-        $_SESSION['deleted'] = 'deleted';
+        $_SESSION['deleted'] = 'Account Successfully Deleted';
         echo "<script>window.location.href='../admin/accounts.php';</script>";
     }
 }
